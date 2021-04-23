@@ -31,6 +31,11 @@ public class RoomGeneration : MonoBehaviour
         doorLeft = Random.value > 0.5f;
     }
 
+    public Vector2 GetSize()
+    {
+        return new Vector2(width * unitSize, height * unitSize);
+    }
+
     private void CreateWalls()
     {
         for (int i = 0; i <= width; i++)
