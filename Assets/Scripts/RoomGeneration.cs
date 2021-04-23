@@ -11,29 +11,14 @@ public class RoomGeneration : MonoBehaviour
     [SerializeField] GameObject origin;
     [SerializeField] GameObject wall;
 
-    private bool doorUp;
-    private bool doorDown;
-    private bool doorRight;
-    private bool doorLeft;
+    private Room room;
 
     // Start is called before the first frame update
     void Start()
     {
-        SelectDoors();
+        room = GetComponent<Room>();
+        room.SelectDoors();
         CreateWalls();
-    }
-
-    private void SelectDoors()
-    {
-        doorUp = Random.value > 0.5f;
-        doorDown = Random.value > 0.5f;
-        doorRight = Random.value > 0.5f;
-        doorLeft = Random.value > 0.5f;
-    }
-
-    public Vector2 GetSize()
-    {
-        return new Vector2(width * unitSize, height * unitSize);
     }
 
     private void CreateWalls()
@@ -44,11 +29,11 @@ public class RoomGeneration : MonoBehaviour
             float y1 = origin.transform.position.y;
             float y2 = origin.transform.position.y + width * unitSize;
             
-            if (Mathf.Abs(width / 2 - doorSize*i) > doorSize || !doorDown)
+            if (Mathf.Abs(width / 2 - doorSize*i) > doorSize || !room.hasDoorDown())
             {
                 Instantiate(wall, new Vector3(x, y1, 0f), Quaternion.identity);
             }
-            if (Mathf.Abs(width / 2 - doorSize * i) > doorSize || !doorUp)
+            if (Mathf.Abs(width / 2 - doorSize * i) > doorSize || !room.hasDoorUp())
             {
                 Instantiate(wall, new Vector3(x, y2, 0f), Quaternion.identity);
             }
@@ -59,11 +44,11 @@ public class RoomGeneration : MonoBehaviour
             float y = origin.transform.position.y + unitSize * i;
             float x1 = origin.transform.position.x;
             float x2 = origin.transform.position.x + height * unitSize;
-            if (Mathf.Abs(height / 2 - doorSize * i) > doorSize || !doorLeft)
+            if (Mathf.Abs(height / 2 - doorSize * i) > doorSize || !room.hasDoorLeft())
             {
                 Instantiate(wall, new Vector3(x1, y, 0f), Quaternion.identity);
             }
-            if (Mathf.Abs(height / 2 - doorSize * i) > doorSize || !doorRight)
+            if (Mathf.Abs(height / 2 - doorSize * i) > doorSize || !room.hasDoorRight())
             {
                 Instantiate(wall, new Vector3(x2, y, 0f), Quaternion.identity);
             }

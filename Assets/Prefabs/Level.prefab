@@ -48,6 +48,6 @@ MonoBehaviour:
   cameraOffset: {x: 0, y: 0, z: -10}
   world1Origin: {x: 0, y: 0, z: 0}
   world2Origin: {x: 100, y: 0, z: 0}
-  room: {fileID: 8571485781107144171, guid: 3de7864e54c9b7d4f9585e1acb8c6545, type: 3}
+  room: {fileID: 8571485781107144164, guid: 3de7864e54c9b7d4f9585e1acb8c6545, type: 3}
   levelWidth: 4
   levelHeight: 4

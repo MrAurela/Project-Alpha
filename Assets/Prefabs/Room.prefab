@@ -40,6 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8571485781107144170}
   - component: {fileID: 8571485781107144171}
+  - component: {fileID: -7447777904001162327}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -73,6 +74,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 637d5b3919ea9014d8ea384a25ddcc7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 10
+  height: 10
+  unitSize: 1
+  doorSize: 1
+  origin: {fileID: 8571485780181517691}
+  wall: {fileID: 4065717727726724012, guid: 92c93ca79f84e934db1781180e477b79, type: 3}
+--- !u!114 &-7447777904001162327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8571485781107144164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f65514098a54d047b61dc266245dc92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   width: 10
