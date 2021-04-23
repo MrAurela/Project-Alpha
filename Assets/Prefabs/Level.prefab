@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera1: {fileID: 7501791112764932997, guid: 592dce0ce08f84d4d9494c0841820597, type: 3}
-  camera2: {fileID: 5269826255150891248, guid: f2a17e93822d8b2468cec1c48e2494d0, type: 3}
+  camera2: {fileID: 7501791112764932997, guid: a5652da8d3f617e4fbab58656f1f77ef, type: 3}
   cameraOffset: {x: 0, y: 0, z: -10}
   world1Origin: {x: 0, y: 0, z: 0}
   world2Origin: {x: 100, y: 0, z: 0}
