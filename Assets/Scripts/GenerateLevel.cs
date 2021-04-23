@@ -20,8 +20,9 @@ public class GenerateLevel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        roomHeight = room.GetComponent<Room>().GetSize().y;
-        roomWidth = room.GetComponent<Room>().GetSize().x;
+        roomHeight = room.GetComponent<RoomGeneration>().GetSize().y;
+        roomWidth = room.GetComponent<RoomGeneration>().GetSize().x;
+        Debug.Log(roomHeight + ", " + roomWidth);
         roomStructure = new GameObject[levelHeight][];
         GenerateLevelLayout();
         InstantiateLevel();
@@ -34,7 +35,8 @@ public class GenerateLevel : MonoBehaviour
             roomStructure[y] = new GameObject[levelWidth];
             for (int x = 0; x < levelHeight; x++)
             {
-                roomStructure[y][x] = room;
+                roomStructure[y][x] = Instantiate(room);
+                roomStructure[y][x].GetComponent<RoomGeneration>().SelectDoors();
             }
         }
     }
@@ -48,10 +50,10 @@ public class GenerateLevel : MonoBehaviour
         {
             for (int y = 0; y < levelHeight; y++)
             {
-                GameObject room = roomStructure[y][x];
+                Debug.Log(room.GetComponent<RoomGeneration>().hasDoorUp());
                 Vector3 offset = new Vector3(x * roomWidth, y * roomHeight);
-                Instantiate(room, world1Origin + offset, Quaternion.identity);
-                Instantiate(room, world2Origin + offset, Quaternion.identity);
+                roomStructure[y][x].transform.position = world1Origin + offset;
+                Instantiate(roomStructure[y][x], world2Origin + offset, Quaternion.identity);
             }
         }
     }
