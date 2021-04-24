@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6027817158489325034}
   - component: {fileID: 923767910727767472}
   m_Layer: 0
-  m_Name: Block
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 073342e7db04d5640afaefdd6c26cb3d, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.20545983, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -10,12 +10,16 @@ public class RoomGeneration : MonoBehaviour
     [SerializeField] int doorSize;
     [SerializeField] GameObject origin;
     [SerializeField] GameObject wall;
-    
+    [SerializeField] GameObject playerPrefab;
+    [SerializeField] GameObject bossPrefab;
+
     //Has to be public so Instantiation copies these properties?
     public bool doorUp;
     public bool doorDown;
     public bool doorRight;
     public bool doorLeft;
+    public bool start;
+    public bool boss;
     
 
     // Start is called before the first frame update
@@ -25,6 +29,13 @@ public class RoomGeneration : MonoBehaviour
         //room.SelectDoors();
         //SelectDoors();
         CreateWalls();
+        if (start)
+        {
+            Instantiate(playerPrefab, origin.transform.position + new Vector3(width / 2f, height / 2f, 0f), Quaternion.identity);
+        } else if (boss)
+        {
+            Instantiate(bossPrefab, origin.transform.position + new Vector3(width / 2f, height / 2f, 0f), Quaternion.identity);
+        }
     }
 
     private void CreateWalls()
