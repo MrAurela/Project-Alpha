@@ -81,13 +81,15 @@ MonoBehaviour:
   doorSize: 1
   origin: {fileID: 8571485780181517691}
   wall: {fileID: 4065717727726724012, guid: 92c93ca79f84e934db1781180e477b79, type: 3}
-  playerPrefab: {fileID: 4065717727726724012, guid: 0d1c0c0c225b76045baae048500324b3, type: 3}
+  playerPrefab1: {fileID: 4065717727726724012, guid: 0d1c0c0c225b76045baae048500324b3, type: 3}
+  playerPrefab2: {fileID: 4065717727726724012, guid: 7ae62d0d87b475744857970ea4ab9459, type: 3}
   bossPrefab: {fileID: 4065717727726724012, guid: 14c12f960e6d0744784fc1e28e23d21a, type: 3}
   doorUp: 0
   doorDown: 0
   doorRight: 0
   doorLeft: 0
-  start: 0
+  start1: 0
+  start2: 0
   boss: 0
 --- !u!1001 &8205535580886904748
 PrefabInstance:

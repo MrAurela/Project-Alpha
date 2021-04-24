@@ -46,7 +46,7 @@ public class GenerateLevel : MonoBehaviour
         nextCoordinates.Add(new Vector2(0, 0));
         Vector2 selectedCoordinate = new Vector2(0, 0);
 
-        roomStructure[0][0].GetComponent<RoomGeneration>().start = true;
+        roomStructure[0][0].GetComponent<RoomGeneration>().start1 = true;
 
         Vector2 direction = new Vector2(0,0); 
         
@@ -181,8 +181,8 @@ public class GenerateLevel : MonoBehaviour
 
     private void InstantiateLevel()
     {
-        Instantiate(camera1, world1Origin + cameraOffset, Quaternion.identity);
-        Instantiate(camera2, world2Origin + cameraOffset, Quaternion.identity);
+        //Instantiate(camera1, world1Origin + cameraOffset, Quaternion.identity);
+        //Instantiate(camera2, world2Origin + cameraOffset, Quaternion.identity);
 
         for (int x = 0; x < levelWidth; x++)
         {
@@ -190,7 +190,12 @@ public class GenerateLevel : MonoBehaviour
             {
                 Vector3 offset = new Vector3(x * roomWidth, y * roomHeight);
                 roomStructure[y][x].transform.position = world1Origin + offset;
-                Instantiate(roomStructure[y][x], world2Origin + offset, Quaternion.identity);
+                GameObject otherRoom = Instantiate(roomStructure[y][x], world2Origin + offset, Quaternion.identity);
+                if (otherRoom.GetComponent<RoomGeneration>().start1)
+                {
+                    otherRoom.GetComponent<RoomGeneration>().start1 = false;
+                    otherRoom.GetComponent<RoomGeneration>().start2 = true;
+                }
             }
         }
     }
