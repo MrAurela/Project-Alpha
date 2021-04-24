@@ -62,12 +62,12 @@ public class RoomGeneration : MonoBehaviour
         }
     }
 
-    public void SelectDoors()
+    public void SelectDoors(float up=0.5f, float right=0.5f, float down=0.5f, float left=0.5f)
     {
-        doorUp = Random.value > 0.5f;
-        doorDown = Random.value > 0.5f;
-        doorRight = Random.value > 0.5f;
-        doorLeft = Random.value > 0.5f;
+        doorUp = Random.value < up;
+        doorDown = Random.value < down;
+        doorRight = Random.value < right;
+        doorLeft = Random.value < left;
     }
 
     public Vector2 GetSize()
