@@ -54,61 +54,48 @@ public class GenerateLevel : MonoBehaviour
         
         while (nextCoordinates.Count > 0)
         {
+            //Select random neighbour room
             Vector2 lastCoordinate = selectedCoordinate;
             selectedCoordinate = nextCoordinates[Random.Range(0, nextCoordinates.Count)];
 
+            //Create door between the rooms
             CreateDoorway(lastCoordinate, selectedCoordinate);
-
             path[(int)selectedCoordinate.y][(int)selectedCoordinate.x] = path[(int)lastCoordinate.y][(int)lastCoordinate.x] + 1;
 
-            nextCoordinates = new List<Vector2>();
-            if (notVisited(selectedCoordinate + Vector2.right))
-            {
-                nextCoordinates.Add(selectedCoordinate + Vector2.right);
-            }
-            if (notVisited(selectedCoordinate + Vector2.left))
-            {
-                nextCoordinates.Add(selectedCoordinate + Vector2.left);
-            }
-            if (notVisited(selectedCoordinate + Vector2.up))
-            {
-                nextCoordinates.Add(selectedCoordinate + Vector2.up);
-            }
-            if (notVisited(selectedCoordinate + Vector2.down))
-            {
-                nextCoordinates.Add(selectedCoordinate + Vector2.down);
-            }
-
+            //List of unvisited neighbours
+            nextCoordinates = NeighbourCoordinates(selectedCoordinate, false,true);
         }
 
+        //The last room on the path will be the Boss room
         roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].IsBossRoom = true;
 
-        //Creating doors to unvisited rooms and some shortcuts
+
+
+
+        //Create doors to rooms that are not part of the main path and add some random extra doors between rooms
         for (int y = 0; y < levelWidth; y++)
         {
             for (int x = 0; x < levelHeight; x++)
             {
                 Vector2 coordinate = new Vector2(x, y);
-                if (path[y][x] == 0)
+                if (path[y][x] == 0) //If room was not found in previous step, combine it to some found room
                 {
-                    nextCoordinates = new List<Vector2>();
-                    if (validCoordinate(new Vector2(x, y + 1)) && !notVisited(new Vector2(x, y + 1))) nextCoordinates.Add(new Vector2(x, y + 1));
-                    if (validCoordinate(new Vector2(x, y - 1)) && !notVisited(new Vector2(x, y - 1))) nextCoordinates.Add(new Vector2(x, y - 1));
-                    if (validCoordinate(new Vector2(x + 1, y)) && !notVisited(new Vector2(x + 1, y))) nextCoordinates.Add(new Vector2(x + 1, y));
-                    if (validCoordinate(new Vector2(x - 1, y)) && !notVisited(new Vector2(x - 1, y))) nextCoordinates.Add(new Vector2(x - 1, y));
+                    //List of visited neighbour
+                    nextCoordinates = NeighbourCoordinates(coordinate,true);
 
                     if (nextCoordinates.Count == 0)
                     {
-                        if (validCoordinate(new Vector2(x, y + 1))) nextCoordinates.Add(new Vector2(x, y + 1));
-                        if (validCoordinate(new Vector2(x, y - 1))) nextCoordinates.Add(new Vector2(x, y - 1));
-                        if (validCoordinate(new Vector2(x + 1, y))) nextCoordinates.Add(new Vector2(x + 1, y));
-                        if (validCoordinate(new Vector2(x - 1, y))) nextCoordinates.Add(new Vector2(x - 1, y));
+                        //List of all neighbors
+                        nextCoordinates = NeighbourCoordinates(coordinate); //Any neighbours
                     }
 
+                    //Select random neighbour
                     selectedCoordinate = nextCoordinates[Random.Range(0, nextCoordinates.Count)];
+
+                    //Create door
                     CreateDoorway(coordinate, selectedCoordinate);
 
-                } else if (!roomStructure[(int)coordinate.y][(int)coordinate.x].IsBossRoom)
+                } else if (!roomStructure[(int)coordinate.y][(int)coordinate.x].IsBossRoom) //Randomly add shortcuts for other rooms
                 {
                     nextCoordinates = new List<Vector2>();
                     if (validCoordinate(new Vector2(x, y + 1)) && closeEnough(new Vector2(x, y + 1), coordinate, 5)) nextCoordinates.Add(new Vector2(x, y + 1));
@@ -118,7 +105,10 @@ public class GenerateLevel : MonoBehaviour
 
                     if (nextCoordinates.Count > 0)
                     {
+                        //Select random neighbour
                         selectedCoordinate = nextCoordinates[Random.Range(0, nextCoordinates.Count)];
+
+                        //Create door
                         CreateDoorway(coordinate, selectedCoordinate);
                     }
                 }
@@ -126,9 +116,35 @@ public class GenerateLevel : MonoBehaviour
             }
         }
 
-        Vector2 NeighbourCoordinates(Vector2 c, bool allowVisited=true)
+
+
+        List<Vector2> NeighbourCoordinates(Vector2 c, bool mustBeVisited=false, bool mustBeNotVisited=false)
         {
-            return new Vector2(0, 0);
+            List<Vector2> nextCoordinates = new List<Vector2>();
+            if (mustBeNotVisited)
+            {
+                if (notVisited(new Vector2(c.x, c.y + 1))) nextCoordinates.Add(new Vector2(c.x, c.y + 1));
+                if (notVisited(new Vector2(c.x, c.y - 1))) nextCoordinates.Add(new Vector2(c.x, c.y - 1));
+                if (notVisited(new Vector2(c.x + 1, c.y))) nextCoordinates.Add(new Vector2(c.x + 1, c.y));
+                if (notVisited(new Vector2(c.x - 1, c.y))) nextCoordinates.Add(new Vector2(c.x - 1, c.y));
+            } else if (mustBeVisited)
+            {
+                if (validCoordinate(new Vector2(c.x, c.y + 1)) && !notVisited(new Vector2(c.x, c.y + 1)))
+                    nextCoordinates.Add(new Vector2(c.x, c.y + 1));
+                if (validCoordinate(new Vector2(c.x, c.y - 1)) && !notVisited(new Vector2(c.x, c.y - 1)))
+                    nextCoordinates.Add(new Vector2(c.x, c.y - 1));
+                if (validCoordinate(new Vector2(c.x + 1, c.y)) && !notVisited(new Vector2(c.x + 1, c.y)))
+                    nextCoordinates.Add(new Vector2(c.x + 1, c.y));
+                if (validCoordinate(new Vector2(c.x - 1, c.y)) && !notVisited(new Vector2(c.x - 1, c.y)))
+                    nextCoordinates.Add(new Vector2(c.x - 1, c.y));
+            } else
+            {
+                if (validCoordinate(new Vector2(c.x, c.y + 1))) nextCoordinates.Add(new Vector2(c.x, c.y + 1));
+                if (validCoordinate(new Vector2(c.x, c.y - 1))) nextCoordinates.Add(new Vector2(c.x, c.y - 1));
+                if (validCoordinate(new Vector2(c.x + 1, c.y))) nextCoordinates.Add(new Vector2(c.x + 1, c.y));
+                if (validCoordinate(new Vector2(c.x - 1, c.y))) nextCoordinates.Add(new Vector2(c.x - 1, c.y));
+            } 
+            return nextCoordinates;
         }
 
         void CreateDoorway(Vector2 room1Coordinate, Vector2 room2Coordinate)
