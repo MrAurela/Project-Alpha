@@ -116,8 +116,6 @@ public class GenerateLevel : MonoBehaviour
             }
         }
 
-
-
         List<Vector2> NeighbourCoordinates(Vector2 c, bool mustBeVisited=false, bool mustBeNotVisited=false)
         {
             List<Vector2> nextCoordinates = new List<Vector2>();

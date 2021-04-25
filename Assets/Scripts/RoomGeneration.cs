@@ -10,8 +10,6 @@ public class RoomGeneration : MonoBehaviour
     [SerializeField] int doorSize;
     [SerializeField] GameObject origin;
     [SerializeField] GameObject wall;
-    [SerializeField] GameObject playerPrefab1;
-    [SerializeField] GameObject playerPrefab2;
     [SerializeField] GameObject bossPrefab;
     public GameObject playerPrefab;
 

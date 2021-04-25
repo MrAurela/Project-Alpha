@@ -12,5 +12,7 @@ public class Room
     public bool IsStartRoom{ get; set; }
     public bool IsBossRoom { get; set; }
 
+
+
 }
 
