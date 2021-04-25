@@ -29,7 +29,7 @@ public class Room
     public bool IsIVertical() { return NumberOfDoors() == 2 && HasDoorDown && HasDoorUp; }
     public bool IsIHorizontal() { return NumberOfDoors() == 2 && HasDoorRight && HasDoorRight; }
     public bool IsDEVertical() { return NumberOfDoors() == 1 && (HasDoorDown || HasDoorUp); }
-    public bool IsDEHorizontal() { return NumberOfDoors() == 1 && (HasDoorRight || HasDoorRight); }
+    public bool IsDEHorizontal() { return NumberOfDoors() == 1 && (HasDoorRight || HasDoorLeft); }
 
     public string ToString()
     {
@@ -41,7 +41,7 @@ public class Room
         else if (IsIHorizontal()) return "I horizontal";
         else if (IsDEVertical()) return "DE vertical";
         else if (IsDEHorizontal()) return "DE horizontal";
-        else return "Unknown room type";
+        else return "Unknown room type! Up: "+HasDoorUp+", Right: "+HasDoorRight+", Down: "+HasDoorDown+", Left:"+HasDoorLeft;
     }
 }
 

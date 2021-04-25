@@ -216,6 +216,11 @@ public class GenerateLevel : MonoBehaviour
         else if (room.IsIHorizontal()) choices = horizontalI;
         else if (room.IsDEVertical()) choices = verticalDE;
         else if (room.IsDEHorizontal()) choices = horizontalDE;
+        else
+        {
+            Debug.Log(room.ToString());
+            return null;
+        }
 
         return choices[Random.Range(0, choices.Length)];
         
