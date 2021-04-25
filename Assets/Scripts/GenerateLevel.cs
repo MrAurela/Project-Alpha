@@ -188,7 +188,7 @@ public class GenerateLevel : MonoBehaviour
         {
             for (int y = 0; y < levelHeight; y++)
             {
-                Vector3 offset = new Vector3(x * roomWidth, y * roomHeight);
+                Vector3 offset = new Vector3(x * roomWidth, y * roomHeight, 0f);
                 roomStructure[y][x].transform.position = world1Origin + offset;
                 GameObject otherRoom = Instantiate(roomStructure[y][x], world2Origin + offset, Quaternion.identity);
                 if (otherRoom.GetComponent<RoomGeneration>().start1)

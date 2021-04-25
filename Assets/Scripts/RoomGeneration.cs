@@ -50,13 +50,13 @@ public class RoomGeneration : MonoBehaviour
         {
             float x = origin.transform.position.x + unitSize * i;
             float y1 = origin.transform.position.y;
-            float y2 = origin.transform.position.y + width * unitSize;
+            float y2 = origin.transform.position.y + height * unitSize;
             
-            if (Mathf.Abs(width / 2 - doorSize*i) > doorSize || !hasDoorDown())
+            if (Mathf.Abs(width / 2 - doorSize*i) > doorSize || !doorDown)
             {
                 Instantiate(wall, new Vector3(x, y1, 0f), Quaternion.identity, transform);
             }
-            if (Mathf.Abs(width / 2 - doorSize * i) > doorSize || !hasDoorUp())
+            if (Mathf.Abs(width / 2 - doorSize * i) > doorSize || !doorUp)
             {
                 Instantiate(wall, new Vector3(x, y2, 0f), Quaternion.identity, transform);
             }
@@ -66,24 +66,16 @@ public class RoomGeneration : MonoBehaviour
         {
             float y = origin.transform.position.y + unitSize * i;
             float x1 = origin.transform.position.x;
-            float x2 = origin.transform.position.x + height * unitSize;
-            if (Mathf.Abs(height / 2 - doorSize * i) > doorSize || !hasDoorLeft())
+            float x2 = origin.transform.position.x + width * unitSize;
+            if (Mathf.Abs(height / 2 - doorSize * i) > doorSize || !doorLeft)
             {
                 Instantiate(wall, new Vector3(x1, y, 0f), Quaternion.identity, transform);
             }
-            if (Mathf.Abs(height / 2 - doorSize * i) > doorSize || !hasDoorRight())
+            if (Mathf.Abs(height / 2 - doorSize * i) > doorSize || !doorRight)
             {
                 Instantiate(wall, new Vector3(x2, y, 0f), Quaternion.identity, transform);
             }
         }
-    }
-
-    public void SelectDoors(float up=0.5f, float right=0.5f, float down=0.5f, float left=0.5f)
-    {
-        doorUp = Random.value < up;
-        doorDown = Random.value < down;
-        doorRight = Random.value < right;
-        doorLeft = Random.value < left;
     }
 
     public Vector2 GetSize()
@@ -91,24 +83,12 @@ public class RoomGeneration : MonoBehaviour
         return new Vector2(width * unitSize, height * unitSize);
     }
 
-    public bool hasDoorUp()
+    public void SelectDoors(float up = 0.5f, float right = 0.5f, float down = 0.5f, float left = 0.5f)
     {
-        return doorUp;
-    }
-
-    public bool hasDoorDown()
-    {
-        return doorDown;
-    }
-
-    public bool hasDoorRight()
-    {
-        return doorRight;
-    }
-
-    public bool hasDoorLeft()
-    {
-        return doorLeft;
+        doorUp = Random.value < up;
+        doorDown = Random.value < down;
+        doorRight = Random.value < right;
+        doorLeft = Random.value < left;
     }
 
 }
