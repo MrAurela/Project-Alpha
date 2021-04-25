@@ -19,9 +19,10 @@ public class RoomGeneration : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //Instantiate outer structures: walls & doors
         CreateWalls();
 
+        //Instantiate players
         if (room.IsStartRoom)
         {
             Instantiate(playerPrefab, origin.transform.position + new Vector3(width / 2f, height / 2f, 0f), Quaternion.identity);
@@ -29,6 +30,22 @@ public class RoomGeneration : MonoBehaviour
         {
             Instantiate(bossPrefab, origin.transform.position + new Vector3(width / 2f, height / 2f, 0f), Quaternion.identity);
         }
+
+        //Mirror the room layout when needed
+        if (room.IsTVertical() && room.HasDoorUp)
+            transform.GetChild(2).transform.localScale = new Vector3(1, -1, 1);
+        if (room.IsTHorizontal() && room.HasDoorRight)
+            transform.GetChild(2).transform.localScale = new Vector3(-1, 1, 1);
+        if (room.IsL() && (room.HasDoorUp && room.HasDoorLeft))
+            transform.GetChild(2).transform.localScale = new Vector3(-1, 1, 1);
+        if (room.IsL() && (room.HasDoorDown && room.HasDoorLeft))
+            transform.GetChild(2).transform.localScale = new Vector3(-1, -1, 1);
+        if (room.IsL() && (room.HasDoorDown && room.HasDoorRight))
+            transform.GetChild(2).transform.localScale = new Vector3(1, -1, 1);
+        if (room.IsDEHorizontal() && room.HasDoorRight)
+            transform.GetChild(2).transform.localScale = new Vector3(-1, 1, 1);
+        if (room.IsDEVertical() && room.HasDoorDown)
+            transform.GetChild(2).transform.localScale= new Vector3(1, -1, 1);
     }
 
     private void CreateWalls()

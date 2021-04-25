@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class GenerateLevel : MonoBehaviour
 {
-    [SerializeField] GameObject camera1;
-    [SerializeField] GameObject camera2;
     [SerializeField] Vector3 cameraOffset;
     [SerializeField] Vector3 world1Origin;
     [SerializeField] Vector3 world2Origin;
@@ -14,6 +12,8 @@ public class GenerateLevel : MonoBehaviour
     [SerializeField] GameObject room;
     [SerializeField] int levelWidth;
     [SerializeField] int levelHeight;
+
+    [SerializeField] GameObject[] verticalDE, horizontalDE, verticalI, horizontalI, L, verticalT, horizontalT, X;
 
     private Room[][] roomStructure;
     private float roomHeight;
@@ -186,10 +186,12 @@ public class GenerateLevel : MonoBehaviour
             {
                 Vector3 offset = new Vector3(x * roomWidth, y * roomHeight, 0f);
 
-                GameObject player1 = Instantiate(room, world1Origin + offset, Quaternion.identity);
+                GameObject roomTemplate = SelectRoomTemplate(roomStructure[y][x]);
+
+                GameObject player1 = Instantiate(roomTemplate, world1Origin + offset, Quaternion.identity);
                 player1.GetComponent<RoomGeneration>().room = roomStructure[y][x];
 
-                GameObject player2 = Instantiate(room, world2Origin + offset, Quaternion.identity);
+                GameObject player2 = Instantiate(roomTemplate, world2Origin + offset, Quaternion.identity);
                 player2.GetComponent<RoomGeneration>().room = roomStructure[y][x];
 
                 if (roomStructure[y][x].IsStartRoom)
@@ -200,5 +202,22 @@ public class GenerateLevel : MonoBehaviour
                 
             }
         }
+    }
+
+    private GameObject SelectRoomTemplate(Room room)
+    {
+        GameObject[] choices = new GameObject[] { };
+
+        if (room.IsX()) choices = X;
+        else if (room.IsTVertical()) choices = verticalT;
+        else if (room.IsTHorizontal()) choices = horizontalT;
+        else if (room.IsL()) choices = L;
+        else if (room.IsIVertical()) choices = verticalI;
+        else if (room.IsIHorizontal()) choices = horizontalI;
+        else if (room.IsDEVertical()) choices = verticalDE;
+        else if (room.IsDEHorizontal()) choices = horizontalDE;
+
+        return choices[Random.Range(0, choices.Length)];
+        
     }
 }

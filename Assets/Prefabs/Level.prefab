@@ -43,8 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08e33911703f2ad4a84f0a9e76d83414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera1: {fileID: 7501791112764932997, guid: 592dce0ce08f84d4d9494c0841820597, type: 3}
-  camera2: {fileID: 7501791112764932997, guid: a5652da8d3f617e4fbab58656f1f77ef, type: 3}
   cameraOffset: {x: 0, y: 0, z: -10}
   world1Origin: {x: 0, y: 0, z: 0}
   world2Origin: {x: 1000, y: 0, z: 0}
@@ -53,3 +51,26 @@ MonoBehaviour:
   room: {fileID: 8571485781107144164, guid: 3de7864e54c9b7d4f9585e1acb8c6545, type: 3}
   levelWidth: 4
   levelHeight: 4
+  verticalDE:
+  - {fileID: 8571485781107144164, guid: 3ef6d10583f63c94ea7278c4f4ddea53, type: 3}
+  horizontalDE:
+  - {fileID: 8571485781107144164, guid: 926634a3982abd640a5aa60f058a0a77, type: 3}
+  verticalI:
+  - {fileID: 8571485781107144164, guid: 3ef6d10583f63c94ea7278c4f4ddea53, type: 3}
+  horizontalI:
+  - {fileID: 8571485781107144164, guid: 277d748e3d6cdba49bf92dd60d166c03, type: 3}
+  - {fileID: 8571485781107144164, guid: bb3aa1316f2f12f45a6641c677bd4997, type: 3}
+  - {fileID: 8571485781107144164, guid: 0128f6ddd740c02448eb92cb67000037, type: 3}
+  L:
+  - {fileID: 8571485781107144164, guid: 7ffbd3887d896f5468240977ef55e482, type: 3}
+  - {fileID: 8571485781107144164, guid: 0bdc64f8fc513d049ab2ee750be1ddac, type: 3}
+  verticalT:
+  - {fileID: 8571485781107144164, guid: 0bdc64f8fc513d049ab2ee750be1ddac, type: 3}
+  - {fileID: 8571485781107144164, guid: bb3aa1316f2f12f45a6641c677bd4997, type: 3}
+  horizontalT:
+  - {fileID: 8571485781107144164, guid: 0bdc64f8fc513d049ab2ee750be1ddac, type: 3}
+  - {fileID: 8571485781107144164, guid: 926634a3982abd640a5aa60f058a0a77, type: 3}
+  X:
+  - {fileID: 8571485781107144164, guid: bb3aa1316f2f12f45a6641c677bd4997, type: 3}
+  - {fileID: 8571485781107144164, guid: 0bdc64f8fc513d049ab2ee750be1ddac, type: 3}
+  - {fileID: 8571485781107144164, guid: 0128f6ddd740c02448eb92cb67000037, type: 3}
