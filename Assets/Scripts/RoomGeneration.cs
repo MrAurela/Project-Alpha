@@ -13,15 +13,18 @@ public class RoomGeneration : MonoBehaviour
     [SerializeField] GameObject playerPrefab1;
     [SerializeField] GameObject playerPrefab2;
     [SerializeField] GameObject bossPrefab;
+    public GameObject playerPrefab;
 
     //Has to be public so Instantiation copies these properties?
-    public bool doorUp;
+    /*public bool doorUp;
     public bool doorDown;
     public bool doorRight;
     public bool doorLeft;
     public bool start1;
     public bool start2;
-    public bool boss;
+    public bool boss;*/
+
+    public Room room;
     
 
     // Start is called before the first frame update
@@ -31,15 +34,19 @@ public class RoomGeneration : MonoBehaviour
         //room.SelectDoors();
         //SelectDoors();
         CreateWalls();
-        if (start1)
+        /*if (room.IsCharacter1Start)
         {
             Instantiate(playerPrefab1, origin.transform.position + new Vector3(width / 2f, height / 2f, 0f), Quaternion.identity);
         }
-        else if (start2) {
+        else if (room.IsCharacter2Start) {
             Instantiate(playerPrefab2, origin.transform.position + new Vector3(width / 2f, height / 2f, 0f), Quaternion.identity);
-        } else if (boss)
+        } else if (room.IsBossRoom)
         {
             Instantiate(bossPrefab, origin.transform.position + new Vector3(width / 2f, height / 2f, 0f), Quaternion.identity);
+        }*/
+        if (room.IsStartRoom)
+        {
+            Instantiate(playerPrefab, origin.transform.position + new Vector3(width / 2f, height / 2f, 0f), Quaternion.identity);
         }
     }
 
@@ -52,11 +59,11 @@ public class RoomGeneration : MonoBehaviour
             float y1 = origin.transform.position.y;
             float y2 = origin.transform.position.y + height * unitSize;
             
-            if (Mathf.Abs(width / 2 - doorSize*i) > doorSize || !doorDown)
+            if (Mathf.Abs(width / 2 - doorSize*i) > doorSize || !room.HasDoorDown)
             {
                 Instantiate(wall, new Vector3(x, y1, 0f), Quaternion.identity, transform);
             }
-            if (Mathf.Abs(width / 2 - doorSize * i) > doorSize || !doorUp)
+            if (Mathf.Abs(width / 2 - doorSize * i) > doorSize || !room.HasDoorUp)
             {
                 Instantiate(wall, new Vector3(x, y2, 0f), Quaternion.identity, transform);
             }
@@ -67,11 +74,11 @@ public class RoomGeneration : MonoBehaviour
             float y = origin.transform.position.y + unitSize * i;
             float x1 = origin.transform.position.x;
             float x2 = origin.transform.position.x + width * unitSize;
-            if (Mathf.Abs(height / 2 - doorSize * i) > doorSize || !doorLeft)
+            if (Mathf.Abs(height / 2 - doorSize * i) > doorSize || !room.HasDoorLeft)
             {
                 Instantiate(wall, new Vector3(x1, y, 0f), Quaternion.identity, transform);
             }
-            if (Mathf.Abs(height / 2 - doorSize * i) > doorSize || !doorRight)
+            if (Mathf.Abs(height / 2 - doorSize * i) > doorSize || !room.HasDoorRight)
             {
                 Instantiate(wall, new Vector3(x2, y, 0f), Quaternion.identity, transform);
             }
@@ -85,10 +92,10 @@ public class RoomGeneration : MonoBehaviour
 
     public void SelectDoors(float up = 0.5f, float right = 0.5f, float down = 0.5f, float left = 0.5f)
     {
-        doorUp = Random.value < up;
-        doorDown = Random.value < down;
-        doorRight = Random.value < right;
-        doorLeft = Random.value < left;
+        room.HasDoorUp = Random.value < up;
+        room.HasDoorDown = Random.value < down;
+        room.HasDoorRight = Random.value < right;
+        room.HasDoorLeft = Random.value < left;
     }
 
 }

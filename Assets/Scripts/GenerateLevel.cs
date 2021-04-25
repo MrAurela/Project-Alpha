@@ -9,11 +9,13 @@ public class GenerateLevel : MonoBehaviour
     [SerializeField] Vector3 cameraOffset;
     [SerializeField] Vector3 world1Origin;
     [SerializeField] Vector3 world2Origin;
+    [SerializeField] GameObject character1Prefab;
+    [SerializeField] GameObject character2Prefab;
     [SerializeField] GameObject room;
     [SerializeField] int levelWidth;
     [SerializeField] int levelHeight;
 
-    private GameObject[][] roomStructure;
+    private Room[][] roomStructure;
     private float roomHeight;
     private float roomWidth;
 
@@ -22,7 +24,7 @@ public class GenerateLevel : MonoBehaviour
     {
         roomHeight = room.GetComponent<RoomGeneration>().GetSize().y;
         roomWidth = room.GetComponent<RoomGeneration>().GetSize().x;
-        roomStructure = new GameObject[levelHeight][];
+        roomStructure = new Room[levelHeight][];
         GenerateLevelLayout();
         InstantiateLevel();
     }
@@ -33,12 +35,14 @@ public class GenerateLevel : MonoBehaviour
         int[][] path = new int[levelHeight][];
         for (int y = 0; y < levelWidth; y++)
         {
-            roomStructure[y] = new GameObject[levelWidth];
+            roomStructure[y] = new Room[levelWidth];
             path[y] = new int[levelWidth];
             for (int x = 0; x < levelHeight; x++)
             {
-                roomStructure[y][x] = Instantiate(room);
-                roomStructure[y][x].GetComponent<RoomGeneration>().SelectDoors(0f,0f,0f,0f);
+                //roomStructure[y][x] = Instantiate(room);
+                //roomStructure[y][x].GetComponent<RoomGeneration>().SelectDoors(0f,0f,0f,0f);
+                roomStructure[y][x] = new Room();
+                roomStructure[y][x].SetDoors(0f);
             }
         }
 
@@ -46,7 +50,8 @@ public class GenerateLevel : MonoBehaviour
         nextCoordinates.Add(new Vector2(0, 0));
         Vector2 selectedCoordinate = new Vector2(0, 0);
 
-        roomStructure[0][0].GetComponent<RoomGeneration>().start1 = true;
+        //roomStructure[0][0].GetComponent<RoomGeneration>().start1 = true;
+        roomStructure[0][0].IsStartRoom = true;
 
         Vector2 direction = new Vector2(0,0); 
         
@@ -58,7 +63,7 @@ public class GenerateLevel : MonoBehaviour
             direction = selectedCoordinate - lastCoordinate;
 
             //Door from the last room on current room
-            if (direction.x > 0) roomStructure[(int)lastCoordinate.y][(int)lastCoordinate.x].GetComponent<RoomGeneration>().doorRight = true;
+            /*if (direction.x > 0) roomStructure[(int)lastCoordinate.y][(int)lastCoordinate.x].GetComponent<RoomGeneration>().doorRight = true;
             else if (direction.x < 0) roomStructure[(int)lastCoordinate.y][(int)lastCoordinate.x].GetComponent<RoomGeneration>().doorLeft = true;
             else if (direction.y > 0) roomStructure[(int)lastCoordinate.y][(int)lastCoordinate.x].GetComponent<RoomGeneration>().doorUp = true;
             else if (direction.y < 0) roomStructure[(int)lastCoordinate.y][(int)lastCoordinate.x].GetComponent<RoomGeneration>().doorDown = true;
@@ -68,7 +73,19 @@ public class GenerateLevel : MonoBehaviour
             else if (-direction.x < 0) roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].GetComponent<RoomGeneration>().doorLeft = true;
             else if (-direction.y > 0) roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].GetComponent<RoomGeneration>().doorUp = true;
             else if (-direction.y < 0) roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].GetComponent<RoomGeneration>().doorDown = true;
-            
+            */
+            //Door from the last room on current room
+            if (direction.x > 0) roomStructure[(int)lastCoordinate.y][(int)lastCoordinate.x].HasDoorRight = true;
+            else if (direction.x < 0) roomStructure[(int)lastCoordinate.y][(int)lastCoordinate.x].HasDoorLeft = true;
+            else if (direction.y > 0) roomStructure[(int)lastCoordinate.y][(int)lastCoordinate.x].HasDoorUp = true;
+            else if (direction.y < 0) roomStructure[(int)lastCoordinate.y][(int)lastCoordinate.x].HasDoorDown = true;
+
+            //Door from current room to the last room
+            if (-direction.x > 0) roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].HasDoorRight = true;
+            else if (-direction.x < 0) roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].HasDoorLeft = true;
+            else if (-direction.y > 0) roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].HasDoorUp = true;
+            else if (-direction.y < 0) roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].HasDoorDown = true;
+
 
             path[(int)selectedCoordinate.y][(int)selectedCoordinate.x] = path[(int)lastCoordinate.y][(int)lastCoordinate.x] + 1;
 
@@ -92,7 +109,8 @@ public class GenerateLevel : MonoBehaviour
 
         }
 
-        roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].GetComponent<RoomGeneration>().boss = true;
+        //roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].GetComponent<RoomGeneration>().boss = true;
+        roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].IsBossRoom = true;
         Debug.Log("Boss room: " + selectedCoordinate);
 
         //Creating doors to unvisited rooms and some shortcuts
@@ -104,7 +122,7 @@ public class GenerateLevel : MonoBehaviour
                 if (path[y][x] == 0)
                 {
                     nextCoordinates = new List<Vector2>();
-                    if (validCoordinate(new Vector2(x,y + 1)) && !notVisited(new Vector2(x, y + 1))) nextCoordinates.Add(new Vector2(x, y + 1));
+                    if (validCoordinate(new Vector2(x, y + 1)) && !notVisited(new Vector2(x, y + 1))) nextCoordinates.Add(new Vector2(x, y + 1));
                     if (validCoordinate(new Vector2(x, y - 1)) && !notVisited(new Vector2(x, y - 1))) nextCoordinates.Add(new Vector2(x, y - 1));
                     if (validCoordinate(new Vector2(x + 1, y)) && !notVisited(new Vector2(x + 1, y))) nextCoordinates.Add(new Vector2(x + 1, y));
                     if (validCoordinate(new Vector2(x - 1, y)) && !notVisited(new Vector2(x - 1, y))) nextCoordinates.Add(new Vector2(x - 1, y));
@@ -116,13 +134,13 @@ public class GenerateLevel : MonoBehaviour
                         if (validCoordinate(new Vector2(x + 1, y))) nextCoordinates.Add(new Vector2(x + 1, y));
                         if (validCoordinate(new Vector2(x - 1, y))) nextCoordinates.Add(new Vector2(x - 1, y));
                     }
-                    
+
                     selectedCoordinate = nextCoordinates[Random.Range(0, nextCoordinates.Count)];
 
                     direction = selectedCoordinate - coordinate;
 
                     //Door from the last room on current room
-                    if (direction.x > 0) roomStructure[(int)coordinate.y][(int)coordinate.x].GetComponent<RoomGeneration>().doorRight = true;
+                    /*if (direction.x > 0) roomStructure[(int)coordinate.y][(int)coordinate.x].GetComponent<RoomGeneration>().doorRight = true;
                     else if (direction.x < 0) roomStructure[(int)coordinate.y][(int)coordinate.x].GetComponent<RoomGeneration>().doorLeft = true;
                     else if (direction.y > 0) roomStructure[(int)coordinate.y][(int)coordinate.x].GetComponent<RoomGeneration>().doorUp = true;
                     else if (direction.y < 0) roomStructure[(int)coordinate.y][(int)coordinate.x].GetComponent<RoomGeneration>().doorDown = true;
@@ -132,8 +150,21 @@ public class GenerateLevel : MonoBehaviour
                     else if (-direction.x < 0) roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].GetComponent<RoomGeneration>().doorLeft = true;
                     else if (-direction.y > 0) roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].GetComponent<RoomGeneration>().doorUp = true;
                     else if (-direction.y < 0) roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].GetComponent<RoomGeneration>().doorDown = true;
+                    */
 
-                } else if (!roomStructure[(int)coordinate.y][(int)coordinate.x].GetComponent<RoomGeneration>().boss)
+                    //Door from the last room on current room
+                    if (direction.x > 0) roomStructure[(int)coordinate.y][(int)coordinate.x].HasDoorRight = true;
+                    else if (direction.x < 0) roomStructure[(int)coordinate.y][(int)coordinate.x].HasDoorLeft = true;
+                    else if (direction.y > 0) roomStructure[(int)coordinate.y][(int)coordinate.x].HasDoorUp = true;
+                    else if (direction.y < 0) roomStructure[(int)coordinate.y][(int)coordinate.x].HasDoorDown = true;
+
+                    //Door from current room to the last room
+                    if (-direction.x > 0) roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].HasDoorRight = true;
+                    else if (-direction.x < 0) roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].HasDoorLeft = true;
+                    else if (-direction.y > 0) roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].HasDoorUp = true;
+                    else if (-direction.y < 0) roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].HasDoorDown = true;
+                //} else if (!roomStructure[(int)coordinate.y][(int)coordinate.x].GetComponent<RoomGeneration>().boss)
+                } else if (!roomStructure[(int)coordinate.y][(int)coordinate.x].IsBossRoom)
                 {
                     nextCoordinates = new List<Vector2>();
                     if (validCoordinate(new Vector2(x, y + 1)) && closeEnough(new Vector2(x, y + 1), coordinate, 5)) nextCoordinates.Add(new Vector2(x, y + 1));
@@ -148,7 +179,7 @@ public class GenerateLevel : MonoBehaviour
                         direction = selectedCoordinate - coordinate;
 
                         //Door from the last room on current room
-                        if (direction.x > 0) roomStructure[(int)coordinate.y][(int)coordinate.x].GetComponent<RoomGeneration>().doorRight = true;
+                        /*if (direction.x > 0) roomStructure[(int)coordinate.y][(int)coordinate.x].GetComponent<RoomGeneration>().doorRight = true;
                         else if (direction.x < 0) roomStructure[(int)coordinate.y][(int)coordinate.x].GetComponent<RoomGeneration>().doorLeft = true;
                         else if (direction.y > 0) roomStructure[(int)coordinate.y][(int)coordinate.x].GetComponent<RoomGeneration>().doorUp = true;
                         else if (direction.y < 0) roomStructure[(int)coordinate.y][(int)coordinate.x].GetComponent<RoomGeneration>().doorDown = true;
@@ -158,6 +189,18 @@ public class GenerateLevel : MonoBehaviour
                         else if (-direction.x < 0) roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].GetComponent<RoomGeneration>().doorLeft = true;
                         else if (-direction.y > 0) roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].GetComponent<RoomGeneration>().doorUp = true;
                         else if (-direction.y < 0) roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].GetComponent<RoomGeneration>().doorDown = true;
+                        */
+                        //Door from the last room on current room
+                        if (direction.x > 0) roomStructure[(int)coordinate.y][(int)coordinate.x].HasDoorRight = true;
+                        else if (direction.x < 0) roomStructure[(int)coordinate.y][(int)coordinate.x].HasDoorLeft = true;
+                        else if (direction.y > 0) roomStructure[(int)coordinate.y][(int)coordinate.x].HasDoorUp = true;
+                        else if (direction.y < 0) roomStructure[(int)coordinate.y][(int)coordinate.x].HasDoorDown = true;
+
+                        //Door from current room to the last room
+                        if (-direction.x > 0) roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].HasDoorRight = true;
+                        else if (-direction.x < 0) roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].HasDoorLeft = true;
+                        else if (-direction.y > 0) roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].HasDoorUp = true;
+                        else if (-direction.y < 0) roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].HasDoorDown = true;
                     }
                 }
                 Debug.Log(coordinate + ", " + path[y][x]);
@@ -189,13 +232,25 @@ public class GenerateLevel : MonoBehaviour
             for (int y = 0; y < levelHeight; y++)
             {
                 Vector3 offset = new Vector3(x * roomWidth, y * roomHeight, 0f);
-                roomStructure[y][x].transform.position = world1Origin + offset;
+                /*roomStructure[y][x].transform.position = world1Origin + offset;
                 GameObject otherRoom = Instantiate(roomStructure[y][x], world2Origin + offset, Quaternion.identity);
                 if (otherRoom.GetComponent<RoomGeneration>().start1)
                 {
                     otherRoom.GetComponent<RoomGeneration>().start1 = false;
                     otherRoom.GetComponent<RoomGeneration>().start2 = true;
+                }*/
+                GameObject player1 = Instantiate(room, world1Origin + offset, Quaternion.identity);
+                player1.GetComponent<RoomGeneration>().room = roomStructure[y][x];
+
+                GameObject player2 = Instantiate(room, world2Origin + offset, Quaternion.identity);
+                player2.GetComponent<RoomGeneration>().room = roomStructure[y][x];
+
+                if (roomStructure[y][x].IsStartRoom)
+                {
+                    player1.GetComponent<RoomGeneration>().playerPrefab = character1Prefab;
+                    player2.GetComponent<RoomGeneration>().playerPrefab = character2Prefab;
                 }
+                
             }
         }
     }

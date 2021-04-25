@@ -9,7 +9,7 @@ public class Room
     public bool HasDoorDown { get; set; }
     public bool HasDoorRight { get; set; }
     public bool HasDoorLeft { get; set; }
-    public bool IsCharacter1Start { get; set; }
+    public bool IsStartRoom{ get; set; }
     public bool IsCharacter2Start { get; set; }
     public bool IsBossRoom { get; set; }
 
