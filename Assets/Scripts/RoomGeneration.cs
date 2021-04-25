@@ -15,44 +15,27 @@ public class RoomGeneration : MonoBehaviour
     [SerializeField] GameObject bossPrefab;
     public GameObject playerPrefab;
 
-    //Has to be public so Instantiation copies these properties?
-    /*public bool doorUp;
-    public bool doorDown;
-    public bool doorRight;
-    public bool doorLeft;
-    public bool start1;
-    public bool start2;
-    public bool boss;*/
-
     public Room room;
     
 
     // Start is called before the first frame update
     void Start()
     {
-        //room = GetComponent<Room>();
-        //room.SelectDoors();
-        //SelectDoors();
+
         CreateWalls();
-        /*if (room.IsCharacter1Start)
-        {
-            Instantiate(playerPrefab1, origin.transform.position + new Vector3(width / 2f, height / 2f, 0f), Quaternion.identity);
-        }
-        else if (room.IsCharacter2Start) {
-            Instantiate(playerPrefab2, origin.transform.position + new Vector3(width / 2f, height / 2f, 0f), Quaternion.identity);
-        } else if (room.IsBossRoom)
-        {
-            Instantiate(bossPrefab, origin.transform.position + new Vector3(width / 2f, height / 2f, 0f), Quaternion.identity);
-        }*/
+
         if (room.IsStartRoom)
         {
             Instantiate(playerPrefab, origin.transform.position + new Vector3(width / 2f, height / 2f, 0f), Quaternion.identity);
+        } else if(room.IsBossRoom)
+        {
+            Instantiate(bossPrefab, origin.transform.position + new Vector3(width / 2f, height / 2f, 0f), Quaternion.identity);
         }
     }
 
     private void CreateWalls()
     {
-        //Debug.Log(doorUp);
+        //Horizontal walls & doors
         for (int i = 0; i <= width; i++)
         {
             float x = origin.transform.position.x + unitSize * i;
@@ -69,6 +52,7 @@ public class RoomGeneration : MonoBehaviour
             }
         }
 
+        //Vertical walls & doors
         for (int i = 0; i <= height; i++)
         {
             float y = origin.transform.position.y + unitSize * i;
@@ -88,14 +72,6 @@ public class RoomGeneration : MonoBehaviour
     public Vector2 GetSize()
     {
         return new Vector2(width * unitSize, height * unitSize);
-    }
-
-    public void SelectDoors(float up = 0.5f, float right = 0.5f, float down = 0.5f, float left = 0.5f)
-    {
-        room.HasDoorUp = Random.value < up;
-        room.HasDoorDown = Random.value < down;
-        room.HasDoorRight = Random.value < right;
-        room.HasDoorLeft = Random.value < left;
     }
 
 }
