@@ -5,6 +5,8 @@ public class WeaponController : MonoBehaviour
     // Ref to child sprite renderer to set color later
     SpriteRenderer sprite;
     public Camera cam;
+    public GameObject bullet;
+
 
     private void Start()
     {
@@ -24,11 +26,16 @@ public class WeaponController : MonoBehaviour
         // Color weapon red if mouse pressed
         if (Input.GetMouseButtonDown(0))
         {
-            sprite.color = new Color(1, 0, 0, 1);
+            Vector2 dir = positionOnScreen - mouseOnScreen;
+            Fire(dir);
         }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            sprite.color = new Color(1, 1, 1, 1);
-        }
+    }
+
+    private void Fire(Vector2 dir)
+    {
+        GameObject bulletClone = (GameObject) Instantiate(bullet, transform.position, transform.rotation);
+        bulletClone.transform.position += new Vector3(-dir.normalized.x, -dir.normalized.y, 0);
+        bulletClone.GetComponent<Rigidbody2D>().velocity = -dir.normalized;
+        //bulletClone.set_direction(dir.normalized);
     }
 }

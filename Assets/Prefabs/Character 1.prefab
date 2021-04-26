@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1204248742435873710}
+  bullet: {fileID: 1513296735412195338, guid: 219387a78be46c44db4813a3668aa5bc, type: 3}
 --- !u!1 &4065717727726724012
 GameObject:
   m_ObjectHideFlags: 0
