@@ -11,6 +11,7 @@ public class RoomGeneration : MonoBehaviour
     [SerializeField] GameObject origin;
     [SerializeField] GameObject wall;
     [SerializeField] GameObject bossPrefab;
+    [SerializeField] GameObject enemyPrefab;
     public GameObject playerPrefab;
 
     public Room room;
@@ -21,6 +22,8 @@ public class RoomGeneration : MonoBehaviour
     {
         //Instantiate outer structures: walls & doors
         CreateWalls();
+
+        SetEnemyTargets();
 
         //Instantiate players
         if (room.IsStartRoom)
@@ -80,6 +83,23 @@ public class RoomGeneration : MonoBehaviour
             if (Mathf.Abs(height / 2 - doorSize * i) > doorSize || !room.HasDoorRight)
             {
                 Instantiate(wall, new Vector3(x2, y, 0f), Quaternion.identity, transform);
+            }
+        }
+    }
+
+    private void SetEnemyTargets()
+    {
+
+        foreach (Transform child in transform)
+        {
+            foreach (Transform grandchild in transform.transform)
+            {
+                if (transform.transform.gameObject.tag == "Spawn")
+                {
+                    GameObject enemy = Instantiate(enemyPrefab, transform.transform.position, Quaternion.identity);
+                    //enemy.GetComponent<Enemy_Movement>().Player = playerRigidbody;
+                    Debug.Log("moi");
+                }
             }
         }
     }
