@@ -23,6 +23,14 @@ public class Room
         return doors;
     }
 
+    public void SetSeed(int seed = -1)
+    {
+        if (seed < 0)
+        {
+            this.seed = Random.Range(-1000000, 1000000);
+        }
+    }
+
     public bool IsX() { return NumberOfDoors() == 4; }
     public bool IsTVertical() { return NumberOfDoors() == 3 && HasDoorRight && HasDoorRight; }
     public bool IsTHorizontal() { return NumberOfDoors() == 3 && HasDoorUp && HasDoorDown; }

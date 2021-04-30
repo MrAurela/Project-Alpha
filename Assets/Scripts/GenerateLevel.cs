@@ -41,7 +41,7 @@ public class GenerateLevel : MonoBehaviour
         locationX = 0;
         locationY = 0;
 
-        InstantiateRoom(locationX, locationY);
+        InstantiateRoom(locationX, locationY, true);
         //InstantiateLevel();
         
     }
@@ -74,6 +74,7 @@ public class GenerateLevel : MonoBehaviour
             for (int x = 0; x < levelHeight; x++)
             {
                 roomStructure[y][x] = new Room();
+                roomStructure[y][x].SetSeed();
                 //roomStructure[y][x].SetDoors(0f);
             }
         }
@@ -211,10 +212,13 @@ public class GenerateLevel : MonoBehaviour
         }
     }
 
-    public void InstantiateRoom(int x, int y)
+    public void InstantiateRoom(int x, int y, bool sameRoom=false)
     {
-        if (instantiationRunning) return;
-        else instantiationRunning = true;
+        if (x == locationX && y == locationY && !sameRoom)
+        {
+            Debug.Log("ERROR! Cannot instantiate the same room unless in speacial circumstances!");
+            return;
+        }
 
         if (room1) Destroy(room1);
         if (room2) Destroy(room2);
@@ -230,7 +234,7 @@ public class GenerateLevel : MonoBehaviour
 
         //room1.GetComponent<RoomGeneration>().playerPrefab = character1;
         //room2.GetComponent<RoomGeneration>().playerPrefab = character2;
-        Debug.Log(x+", "+ y);
+
         int id = 0;
         if (y > locationY) id = 1;
         else if (x > locationX) id = 2;
@@ -245,8 +249,6 @@ public class GenerateLevel : MonoBehaviour
 
         locationX = x;
         locationY = y;
-
-        instantiationRunning = false;
     }
 
     /*private void InstantiateLevel()
