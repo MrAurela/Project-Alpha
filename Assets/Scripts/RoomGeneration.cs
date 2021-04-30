@@ -117,7 +117,7 @@ public class RoomGeneration : MonoBehaviour
                 Instantiate(wall, new Vector3(x, y2, 0f), Quaternion.identity, transform);
             } else
             {
-                GameObject newDoor = Instantiate(door, new Vector3(x, y1, 0f), Quaternion.identity, transform);
+                GameObject newDoor = Instantiate(door, new Vector3(x, y2, 0f), Quaternion.identity, transform);
                 newDoor.GetComponent<Door>().SetConnection(this.roomX, this.roomY + 1);
             }
         }
@@ -150,7 +150,6 @@ public class RoomGeneration : MonoBehaviour
 
     private void SetEnemyTargets()
     {
-
         foreach (Transform child in transform)
         {
             foreach (Transform grandchild in transform.transform)
