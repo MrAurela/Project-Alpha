@@ -215,6 +215,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RangedEnemy Variant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8602497043285895090, guid: f611c01cd60c03047abd493e228e031e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f611c01cd60c03047abd493e228e031e, type: 3}
 --- !u!4 &7957065279231449982 stripped
@@ -339,6 +343,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RangedEnemy Variant (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8602497043285895090, guid: f611c01cd60c03047abd493e228e031e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f611c01cd60c03047abd493e228e031e, type: 3}
 --- !u!4 &725976746055502947 stripped
@@ -400,6 +408,10 @@ PrefabInstance:
     - target: {fileID: 8602497043285895090, guid: f611c01cd60c03047abd493e228e031e, type: 3}
       propertyPath: m_Name
       value: RangedEnemy Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8602497043285895090, guid: f611c01cd60c03047abd493e228e031e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f611c01cd60c03047abd493e228e031e, type: 3}

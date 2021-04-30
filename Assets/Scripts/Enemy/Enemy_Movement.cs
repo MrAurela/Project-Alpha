@@ -19,18 +19,22 @@ public class Enemy_Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CloseToPlayer())
+        if (Player != null)
         {
-            MoveAway();
+            if (CloseToPlayer())
+            {
+                MoveAway();
+            }
+            else if (FarFromPlayer())
+            {
+                MoveCloser();
+            }
+            else
+            {
+                Attack();
+            }
         }
-        else if (FarFromPlayer())
-        {
-            MoveCloser();
-        }
-        else
-        {
-            Attack();
-        }
+        
     }
     bool CloseToPlayer()
     {

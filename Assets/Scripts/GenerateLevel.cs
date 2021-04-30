@@ -19,6 +19,13 @@ public class GenerateLevel : MonoBehaviour
     private float roomHeight;
     private float roomWidth;
 
+    private int locationX;
+    private int locationY;
+
+    private GameObject room1, room2;
+    private GameObject character1, character2;
+    private bool instantiationRunning;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,12 +33,39 @@ public class GenerateLevel : MonoBehaviour
         roomWidth = room.GetComponent<RoomGeneration>().GetSize().x;
         roomStructure = new Room[levelHeight][];
         GenerateLevelLayout();
-        InstantiateLevel();
+
+
+        character1 = Instantiate(character1Prefab, new Vector3(0, 0, 0), Quaternion.identity);
+        character2 = Instantiate(character2Prefab, new Vector3(0, 0, 0), Quaternion.identity);
+
+        locationX = 0;
+        locationY = 0;
+
+        InstantiateRoom(locationX, locationY);
+        //InstantiateLevel();
+        
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown("w"))
+        {
+            FindObjectOfType<GenerateLevel>().InstantiateRoom(locationX, locationY + 1);
+        } else if(Input.GetKeyDown("d"))
+        {
+            FindObjectOfType<GenerateLevel>().InstantiateRoom(locationX + 1, locationY);
+        } else if (Input.GetKeyDown("s"))
+        {
+            FindObjectOfType<GenerateLevel>().InstantiateRoom(locationX, locationY - 1);
+        }
+        else if (Input.GetKeyDown("a"))
+        {
+            FindObjectOfType<GenerateLevel>().InstantiateRoom(locationX - 1, locationY);
+        }
     }
 
     private void GenerateLevelLayout()
     {
-
         int[][] path = new int[levelHeight][];
         for (int y = 0; y < levelWidth; y++)
         {
@@ -177,7 +211,45 @@ public class GenerateLevel : MonoBehaviour
         }
     }
 
-    private void InstantiateLevel()
+    public void InstantiateRoom(int x, int y)
+    {
+        if (instantiationRunning) return;
+        else instantiationRunning = true;
+
+        if (room1) Destroy(room1);
+        if (room2) Destroy(room2);
+
+        Room room = roomStructure[y][x];
+        GameObject roomTemplate = SelectRoomTemplate(room);
+
+        room1 = Instantiate(roomTemplate, world1Origin, Quaternion.identity);
+        room1.GetComponent<RoomGeneration>().room = room;
+
+        room2 = Instantiate(roomTemplate, world2Origin, Quaternion.identity);
+        room2.GetComponent<RoomGeneration>().room = room;
+
+        //room1.GetComponent<RoomGeneration>().playerPrefab = character1;
+        //room2.GetComponent<RoomGeneration>().playerPrefab = character2;
+        Debug.Log(x+", "+ y);
+        int id = 0;
+        if (y > locationY) id = 1;
+        else if (x > locationX) id = 2;
+        else if (y < locationY) id = 3;
+        else if (x < locationX) id = 4;
+
+        room1.GetComponent<RoomGeneration>().SetCoordinates(x, y);
+        room2.GetComponent<RoomGeneration>().SetCoordinates(x, y);
+
+        room1.GetComponent<RoomGeneration>().SetPlayerTo(character1, id);
+        room2.GetComponent<RoomGeneration>().SetPlayerTo(character2, id);
+
+        locationX = x;
+        locationY = y;
+
+        instantiationRunning = false;
+    }
+
+    /*private void InstantiateLevel()
     {
 
         for (int x = 0; x < levelWidth; x++)
@@ -202,7 +274,7 @@ public class GenerateLevel : MonoBehaviour
                 
             }
         }
-    }
+    }*/
 
     private GameObject SelectRoomTemplate(Room room)
     {

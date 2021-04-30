@@ -142,11 +142,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605897754, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.39
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605897754, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.24
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605897754, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -187,7 +187,7 @@ PrefabInstance:
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: Player
       value: 
-      objectReference: {fileID: 6833828448116276575, guid: 0d1c0c0c225b76045baae048500324b3, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: velocity
       value: 4
