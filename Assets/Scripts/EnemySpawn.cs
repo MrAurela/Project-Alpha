@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
+    //Any number of enymy types that can be at this location
     [SerializeField] GameObject[] enemyTypes;
+
+    //Weigths for the enemies in enemyTypes.
     [SerializeField] float[] probabilities;
 
     private RoomGeneration roomGenerator;
@@ -13,25 +16,39 @@ public class EnemySpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Set information about the room
         this.roomGenerator = transform.root.GetComponent<RoomGeneration>();
         this.room = this.roomGenerator.room;
 
-        //Setup random generation
-        Random.InitState(this.room.seed);
+        //Setup random generation with room seed
+        Random.InitState(this.room.Seed);
 
-        //Spawn enemies if room has not been cleared already
+        //Spawn enemies if room has NOT BEEN CLEARED
         if (!this.room.IsCleared)
         {
             GameObject enemy = SelectEnemyType();
             if (enemy != null)
             {
                 GameObject instantiatedEnemy = Instantiate(enemy, transform.position, Quaternion.identity);
+                instantiatedEnemy.transform.parent = this.roomGenerator.transform;
+
+                //Set references to correct character object in Enemy_Movement and Enemy_Shooting scripts
                 instantiatedEnemy.GetComponent<Enemy_Movement>().Player = this.roomGenerator.playerPrefab.GetComponent<Rigidbody2D>();
                 instantiatedEnemy.transform.GetChild(0).gameObject.GetComponent<Enemy_Shooting>().Player = this.roomGenerator.playerPrefab.GetComponent<Rigidbody2D>();
             }
         }
     }
 
+    //Randomly selects the enemy type based on the weights given.
+    //If enemy types are: enemy1, enemy2, enemy3 and
+    //probabilities are: 0.4, 0.2, 0.25
+    //Then the enemy is selected with following probabilities:
+    //    enemy1: 40%
+    //    enemy2: 20%
+    //    enemy3: 25%
+    //    no enemy: 15%
+    //
+    //Returns: GameObject of the enemy or null
     private GameObject SelectEnemyType()
     {
         float random = Random.Range(0f, 1f);
@@ -47,9 +64,4 @@ public class EnemySpawn : MonoBehaviour
         return null;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

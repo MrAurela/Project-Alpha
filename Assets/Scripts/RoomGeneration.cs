@@ -58,7 +58,7 @@ public class RoomGeneration : MonoBehaviour
         //Instantiate outer structures: walls & doors
         CreateWalls();
 
-        SetEnemyTargets();
+        //SetEnemyTargets();
 
         //Instantiate players
         /*if (room.IsStartRoom)

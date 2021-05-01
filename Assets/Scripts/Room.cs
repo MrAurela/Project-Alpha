@@ -4,19 +4,28 @@ using UnityEngine;
 
 public class Room
 {
-    //Has to be public so Instantiation copies these properties?
+    //Does the room has connection to another room in certain direction:
     public bool HasDoorUp { get; set; }
     public bool HasDoorDown { get; set; }
     public bool HasDoorRight { get; set; }
     public bool HasDoorLeft { get; set; }
+
+    //Speacial rooms
     public bool IsStartRoom{ get; set; }
     public bool IsBossRoom { get; set; }
-    public int seed { get; set;  }
+
+    //Room states. Enemies are not spawned when entering to a cleared room
     public bool IsCleared { get; set; }
 
+    //Room coordinates at world level. These are the values that this room can be fetched with GetRoom() from GenerateLevel.
     public int x { get; set; }
     public int y { get; set; }
 
+    //Room seed. This value should be set only once and then used as seed every time this room is load to prevent room from generating again
+    public int Seed { get; set; }
+    
+
+    //Returns the number of doors the room has.
     private int NumberOfDoors()
     {
         int doors = 0;
@@ -27,6 +36,8 @@ public class Room
         return doors;
     }
 
+    //Boolean functions describing the shape of the room.
+    //Used to select from appropriate room layouts when randomizing the rooms in GenerateLevel.
     public bool IsX() { return NumberOfDoors() == 4; }
     public bool IsTVertical() { return NumberOfDoors() == 3 && HasDoorRight && HasDoorRight; }
     public bool IsTHorizontal() { return NumberOfDoors() == 3 && HasDoorUp && HasDoorDown; }
@@ -36,6 +47,8 @@ public class Room
     public bool IsDEVertical() { return NumberOfDoors() == 1 && (HasDoorDown || HasDoorUp); }
     public bool IsDEHorizontal() { return NumberOfDoors() == 1 && (HasDoorRight || HasDoorLeft); }
 
+
+    //Textual representation of the room. Used for debugging purposes.
     public string ToString()
     {
         if (IsX()) return "X";

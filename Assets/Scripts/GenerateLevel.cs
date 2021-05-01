@@ -4,53 +4,52 @@ using UnityEngine;
 
 public class GenerateLevel : MonoBehaviour
 {
-    [SerializeField] Vector3 cameraOffset;
-    [SerializeField] Vector3 world1Origin;
-    [SerializeField] Vector3 world2Origin;
-    [SerializeField] GameObject character1Prefab;
-    [SerializeField] GameObject character2Prefab;
+    //Variables that can be changed in the editor
+    [SerializeField] Vector3 world1Origin, world2Origin;
+    [SerializeField] GameObject character1Prefab, character2Prefab;
     [SerializeField] GameObject room;
-    [SerializeField] int levelWidth;
-    [SerializeField] int levelHeight;
-
+    [SerializeField] int levelWidth, levelHeight;
     [SerializeField] GameObject[] verticalDE, horizontalDE, verticalI, horizontalI, L, verticalT, horizontalT, X;
 
+    //2D layout of the rooms that will be randomly generated. Adjacent room can be connected with doors
     private Room[][] roomStructure;
+
     private float roomHeight;
     private float roomWidth;
 
+    //Current room coordinates of the player
     private int locationX;
     private int locationY;
 
-    private GameObject room1, room2;
+    //Instantiated character objects:
     private GameObject character1, character2;
-    private bool instantiationRunning;
+
+    //Currently instantiated room layout objects:
+    private GameObject room1, room2;
 
     // Start is called before the first frame update
     void Start()
     {
         roomHeight = room.GetComponent<RoomGeneration>().GetSize().y;
         roomWidth = room.GetComponent<RoomGeneration>().GetSize().x;
+
+        //Connections of the rooms will be generated. Rooms are saved to roomStructure variable
         roomStructure = new Room[levelHeight][];
         GenerateLevelLayout();
 
-
+        //Characters are instantieated
         character1 = Instantiate(character1Prefab, new Vector3(0, 0, 0), Quaternion.identity);
         character2 = Instantiate(character2Prefab, new Vector3(0, 0, 0), Quaternion.identity);
 
+        //Character map location is set
         locationX = 0;
         locationY = 0;
 
-        InstantiateRoom(locationX, locationY, true);
-        //InstantiateLevel();
-        
+        //First room will be instantiated
+        InstantiateRoom(locationX, locationY, true);  
     }
 
-    public Room GetRoom(int x, int y)
-    {
-        return this.roomStructure[y][x];
-    }
-
+    //DEBUG: keys to change rooms quickly
     void Update()
     {
         if (Input.GetKeyDown("t"))
@@ -69,8 +68,10 @@ public class GenerateLevel : MonoBehaviour
         }
     }
 
+    //Generates the main layout of the level
     private void GenerateLevelLayout()
     {
+        //Room object are created and placed at roomStructure variabel
         int[][] path = new int[levelHeight][];
         for (int y = 0; y < levelWidth; y++)
         {
@@ -81,18 +82,25 @@ public class GenerateLevel : MonoBehaviour
                 roomStructure[y][x] = new Room();
                 roomStructure[y][x].x = x;
                 roomStructure[y][x].y = y;
-                roomStructure[y][x].seed = Random.Range(-1000000,10000000);
+                roomStructure[y][x].Seed = Random.Range(-1000000,10000000);
             }
         }
 
+        //nextCoordinates is a list of possible room coordinates that can be visited in the main path
         List<Vector2> nextCoordinates = new List<Vector2>();
-        nextCoordinates.Add(new Vector2(0, 0));
-        Vector2 selectedCoordinate = new Vector2(0, 0);
+        nextCoordinates.Add(new Vector2(locationX, locationY));
 
-        roomStructure[0][0].IsStartRoom = true;
+        //selectedCoordinate is the coordinates of the room that was selected to be visited next. Initialized with starting coordinates
+        Vector2 selectedCoordinate = new Vector2(locationX, locationY);
 
+        //These coordinates also determine the Start room
+        roomStructure[locationX][locationY].IsStartRoom = true;
+
+        //Direction is used to determine in which direction the path goes trough the map of the rooms
         Vector2 direction = new Vector2(0,0); 
         
+
+        //The main path continues as long as at least on neighbour room exists that has not yet been visited
         while (nextCoordinates.Count > 0)
         {
             //Select random neighbour room
@@ -109,8 +117,6 @@ public class GenerateLevel : MonoBehaviour
 
         //The last room on the path will be the Boss room
         roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].IsBossRoom = true;
-
-
 
 
         //Create doors to rooms that are not part of the main path and add some random extra doors between rooms
@@ -218,6 +224,14 @@ public class GenerateLevel : MonoBehaviour
         }
     }
 
+    //Returns the Room object at map coordinates x,y
+    public Room GetRoom(int x, int y)
+    {
+        return this.roomStructure[y][x];
+    }
+
+    //Instantiates the room at map coordinates x,y.
+    //If sameRoom=true, instantiation happens even if the the same room has already been instantiated
     public void InstantiateRoom(int x, int y, bool sameRoom=false)
     {
         if (x == locationX && y == locationY && !sameRoom)
@@ -257,33 +271,8 @@ public class GenerateLevel : MonoBehaviour
         locationY = y;
     }
 
-    /*private void InstantiateLevel()
-    {
 
-        for (int x = 0; x < levelWidth; x++)
-        {
-            for (int y = 0; y < levelHeight; y++)
-            {
-                Vector3 offset = new Vector3(x * roomWidth, y * roomHeight, 0f);
-
-                GameObject roomTemplate = SelectRoomTemplate(roomStructure[y][x]);
-
-                GameObject player1 = Instantiate(roomTemplate, world1Origin + offset, Quaternion.identity);
-                player1.GetComponent<RoomGeneration>().room = roomStructure[y][x];
-
-                GameObject player2 = Instantiate(roomTemplate, world2Origin + offset, Quaternion.identity);
-                player2.GetComponent<RoomGeneration>().room = roomStructure[y][x];
-
-                if (roomStructure[y][x].IsStartRoom)
-                {
-                    player1.GetComponent<RoomGeneration>().playerPrefab = character1Prefab;
-                    player2.GetComponent<RoomGeneration>().playerPrefab = character2Prefab;
-                }
-                
-            }
-        }
-    }*/
-
+    //Randomly selects and returns room template based on the shape of the room
     private GameObject SelectRoomTemplate(Room room)
     {
         GameObject[] choices = new GameObject[] { };
@@ -298,12 +287,12 @@ public class GenerateLevel : MonoBehaviour
         else if (room.IsDEHorizontal()) choices = horizontalDE;
         else
         {
+            //This should never happen!
             Debug.Log(room.ToString());
             return null;
         }
 
-        Random.InitState(room.seed);
-        return choices[Random.Range(0, choices.Length)];
-        
+        Random.InitState(room.Seed); //Initialize random generator with the room seed to select the same room type every time this room is visited
+        return choices[Random.Range(0, choices.Length)];   
     }
 }

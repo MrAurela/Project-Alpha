@@ -27,11 +27,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6680212196264716579}
+  - {fileID: 6579692485631451653}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &174096616243279147
+--- !u!1001 &401278992705830413
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -48,11 +48,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6836009493165251592, guid: 294ed78e59ab53248b35d436a3ec2a90, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 6836009493165251592, guid: 294ed78e59ab53248b35d436a3ec2a90, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 6836009493165251592, guid: 294ed78e59ab53248b35d436a3ec2a90, type: 3}
       propertyPath: m_LocalPosition.z
@@ -86,26 +86,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9145520572116170975, guid: 294ed78e59ab53248b35d436a3ec2a90, type: 3}
-      propertyPath: enemyTypes.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145520572116170975, guid: 294ed78e59ab53248b35d436a3ec2a90, type: 3}
-      propertyPath: enemyTypes.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145520572116170975, guid: 294ed78e59ab53248b35d436a3ec2a90, type: 3}
-      propertyPath: probabilities.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145520572116170975, guid: 294ed78e59ab53248b35d436a3ec2a90, type: 3}
-      propertyPath: probabilities.Array.data[0]
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 294ed78e59ab53248b35d436a3ec2a90, type: 3}
---- !u!4 &6680212196264716579 stripped
+--- !u!4 &6579692485631451653 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6836009493165251592, guid: 294ed78e59ab53248b35d436a3ec2a90, type: 3}
-  m_PrefabInstance: {fileID: 174096616243279147}
+  m_PrefabInstance: {fileID: 401278992705830413}
   m_PrefabAsset: {fileID: 0}
