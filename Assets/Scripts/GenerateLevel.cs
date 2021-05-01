@@ -46,6 +46,11 @@ public class GenerateLevel : MonoBehaviour
         
     }
 
+    public Room GetRoom(int x, int y)
+    {
+        return this.roomStructure[y][x];
+    }
+
     void Update()
     {
         if (Input.GetKeyDown("t"))
@@ -74,6 +79,8 @@ public class GenerateLevel : MonoBehaviour
             for (int x = 0; x < levelHeight; x++)
             {
                 roomStructure[y][x] = new Room();
+                roomStructure[y][x].x = x;
+                roomStructure[y][x].y = y;
                 roomStructure[y][x].seed = Random.Range(-1000000,10000000);
             }
         }
@@ -231,8 +238,8 @@ public class GenerateLevel : MonoBehaviour
         room2 = Instantiate(roomTemplate, world2Origin, Quaternion.identity);
         room2.GetComponent<RoomGeneration>().room = room;
 
-        //room1.GetComponent<RoomGeneration>().playerPrefab = character1;
-        //room2.GetComponent<RoomGeneration>().playerPrefab = character2;
+        room1.GetComponent<RoomGeneration>().playerPrefab = character1;
+        room2.GetComponent<RoomGeneration>().playerPrefab = character2;
 
         int id = 0;
         if (y > locationY) id = 1;

@@ -4,28 +4,22 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public Room connectedRoom;
-    private int x, y;
+    private Room currentRoom;
+    private Room connectedRoom;
    
-    public void SetConnection(int x, int y)
+    public void SetConnection(Room currentRoom, Room connectedRoom)
     {
-        this.x = x;
-        this.y = y;
+        this.currentRoom = currentRoom;
+        this.connectedRoom = connectedRoom;
     }
 
-    public void ConnectTo(Room room)
-    {
-        connectedRoom = room;
-    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(x + ", " + y);
-
         if (collision.gameObject.tag == "Player")
         {
-            FindObjectOfType<GenerateLevel>().InstantiateRoom(x, y);
+            FindObjectOfType<GenerateLevel>().InstantiateRoom(connectedRoom.x, connectedRoom.y);
+            currentRoom.IsCleared = true;
         }
-
     }
 }

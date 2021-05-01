@@ -12,6 +12,10 @@ public class Room
     public bool IsStartRoom{ get; set; }
     public bool IsBossRoom { get; set; }
     public int seed { get; set;  }
+    public bool IsCleared { get; set; }
+
+    public int x { get; set; }
+    public int y { get; set; }
 
     private int NumberOfDoors()
     {

@@ -105,7 +105,7 @@ public class RoomGeneration : MonoBehaviour
             } else
             {
                 GameObject newDoor = Instantiate(door, new Vector3(x, y1, 0f), Quaternion.identity, transform);
-                newDoor.GetComponent<Door>().SetConnection(this.roomX, this.roomY - 1);
+                newDoor.GetComponent<Door>().SetConnection(this.room, FindObjectOfType<GenerateLevel>().GetRoom(this.room.x, this.room.y - 1));
             }
             if (Mathf.Abs(width / 2 - doorSize * i) > doorSize || !room.HasDoorUp)
             {
@@ -113,7 +113,7 @@ public class RoomGeneration : MonoBehaviour
             } else
             {
                 GameObject newDoor = Instantiate(door, new Vector3(x, y2, 0f), Quaternion.identity, transform);
-                newDoor.GetComponent<Door>().SetConnection(this.roomX, this.roomY + 1);
+                newDoor.GetComponent<Door>().SetConnection(this.room, FindObjectOfType<GenerateLevel>().GetRoom(this.room.x, this.room.y + 1));
             }
         }
 
@@ -130,7 +130,7 @@ public class RoomGeneration : MonoBehaviour
             } else
             {
                 GameObject newDoor = Instantiate(door, new Vector3(x1, y, 0f), Quaternion.identity, transform);
-                newDoor.GetComponent<Door>().SetConnection(this.roomX - 1, this.roomY);
+                newDoor.GetComponent<Door>().SetConnection(this.room, FindObjectOfType<GenerateLevel>().GetRoom(this.room.x - 1, this.room.y));
             }
             if (Mathf.Abs(height / 2 - doorSize * i) > doorSize || !room.HasDoorRight)
             {
@@ -138,7 +138,7 @@ public class RoomGeneration : MonoBehaviour
             } else
             {
                 GameObject newDoor = Instantiate(door, new Vector3(x2, y, 0f), Quaternion.identity, transform);
-                newDoor.GetComponent<Door>().SetConnection(this.roomX + 1, this.roomY);
+                newDoor.GetComponent<Door>().SetConnection(this.room, FindObjectOfType<GenerateLevel>().GetRoom(this.room.x + 1, this.room.y));
             }
         }
     }
