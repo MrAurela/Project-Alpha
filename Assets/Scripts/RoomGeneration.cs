@@ -32,26 +32,21 @@ public class RoomGeneration : MonoBehaviour
         if (id == 1)
         {
             playerPrefab.transform.position = origin.transform.position + new Vector3(width / 2f, 3f, 0f);
-            //Debug.Log("Up");
         }
         else if (id == 3)
         {
             playerPrefab.transform.position = origin.transform.position + new Vector3(width / 2f, height - 3f, 0f);
-            //Debug.Log("Down");
         }     
         else if (id == 2)
         {
             playerPrefab.transform.position = origin.transform.position + new Vector3(3f, height / 2f, 0f);
-            //Debug.Log("Right");
         }
         else if (id == 4)
         {
             playerPrefab.transform.position = origin.transform.position + new Vector3(width - 3f, height / 2f, 0f);
-            //Debug.Log("Left");
         }  
         else {
             playerPrefab.transform.position = origin.transform.position + new Vector3(width / 2f, height / 2f, 0f);
-            //Debug.Log("Start");
         }
 
     }

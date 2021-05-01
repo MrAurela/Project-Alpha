@@ -11,7 +11,7 @@ public class Room
     public bool HasDoorLeft { get; set; }
     public bool IsStartRoom{ get; set; }
     public bool IsBossRoom { get; set; }
-    private int seed;
+    public int seed { get; set;  }
 
     private int NumberOfDoors()
     {
@@ -21,14 +21,6 @@ public class Room
         if (HasDoorRight) doors += 1;
         if (HasDoorLeft) doors += 1;
         return doors;
-    }
-
-    public void SetSeed(int seed = -1)
-    {
-        if (seed < 0)
-        {
-            this.seed = Random.Range(-1000000, 1000000);
-        }
     }
 
     public bool IsX() { return NumberOfDoors() == 4; }

@@ -48,17 +48,17 @@ public class GenerateLevel : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("w"))
+        if (Input.GetKeyDown("t"))
         {
             FindObjectOfType<GenerateLevel>().InstantiateRoom(locationX, locationY + 1);
-        } else if(Input.GetKeyDown("d"))
+        } else if(Input.GetKeyDown("h"))
         {
             FindObjectOfType<GenerateLevel>().InstantiateRoom(locationX + 1, locationY);
-        } else if (Input.GetKeyDown("s"))
+        } else if (Input.GetKeyDown("g"))
         {
             FindObjectOfType<GenerateLevel>().InstantiateRoom(locationX, locationY - 1);
         }
-        else if (Input.GetKeyDown("a"))
+        else if (Input.GetKeyDown("f"))
         {
             FindObjectOfType<GenerateLevel>().InstantiateRoom(locationX - 1, locationY);
         }
@@ -74,8 +74,7 @@ public class GenerateLevel : MonoBehaviour
             for (int x = 0; x < levelHeight; x++)
             {
                 roomStructure[y][x] = new Room();
-                roomStructure[y][x].SetSeed();
-                //roomStructure[y][x].SetDoors(0f);
+                roomStructure[y][x].seed = Random.Range(-1000000,10000000);
             }
         }
 
@@ -296,6 +295,7 @@ public class GenerateLevel : MonoBehaviour
             return null;
         }
 
+        Random.InitState(room.seed);
         return choices[Random.Range(0, choices.Length)];
         
     }
