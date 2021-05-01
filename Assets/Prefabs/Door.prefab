@@ -144,3 +144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9984420e7ee3525459a708ebb09e9376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockedUntilEnimiesKilled: 1
+  colorOpen: {r: 0.8196079, g: 0.32941177, b: 0.18039216, a: 1}
+  colorClosed: {r: 0.254717, g: 0.06824492, b: 0.06824492, a: 1}

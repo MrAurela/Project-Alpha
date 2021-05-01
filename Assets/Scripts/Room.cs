@@ -15,7 +15,18 @@ public class Room
     public bool IsBossRoom { get; set; }
 
     //Room states. Enemies are not spawned when entering to a cleared room
-    public bool IsCleared { get; set; }
+    //public bool IsCleared { get; set; }
+    private int roomsCleared = 0;
+
+    public void SetRoomCleared()
+    {
+        roomsCleared++;
+    }
+
+    public bool IsCleared()
+    {
+        return roomsCleared == 2;
+    }
 
     //Room coordinates at world level. These are the values that this room can be fetched with GetRoom() from GenerateLevel.
     public int x { get; set; }

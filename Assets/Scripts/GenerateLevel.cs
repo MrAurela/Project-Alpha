@@ -261,9 +261,6 @@ public class GenerateLevel : MonoBehaviour
         else if (y < locationY) id = 3;
         else if (x < locationX) id = 4;
 
-        room1.GetComponent<RoomGeneration>().SetCoordinates(x, y);
-        room2.GetComponent<RoomGeneration>().SetCoordinates(x, y);
-
         room1.GetComponent<RoomGeneration>().SetPlayerTo(character1, id);
         room2.GetComponent<RoomGeneration>().SetPlayerTo(character2, id);
 

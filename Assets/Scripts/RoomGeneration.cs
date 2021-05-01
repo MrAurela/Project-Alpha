@@ -16,15 +16,8 @@ public class RoomGeneration : MonoBehaviour
     public GameObject playerPrefab;
 
     public Room room;
-    public Room RoomUp { get; set; }
-    private int roomX;
-    private int roomY;
 
-    public void SetCoordinates(int x, int y)
-    {
-        roomX = x;
-        roomY = y;
-    }
+    private int numberOfEnemies = 0;
 
     public void SetPlayerTo(GameObject character, int id)
     {
@@ -49,6 +42,22 @@ public class RoomGeneration : MonoBehaviour
             playerPrefab.transform.position = origin.transform.position + new Vector3(width / 2f, height / 2f, 0f);
         }
 
+    }
+
+    public void IncreaseNumberOfEnemies()
+    {
+        this.numberOfEnemies++;
+        Debug.Log("Increased: " + this.numberOfEnemies);
+    }
+
+    public void DecreaseNumberOfEnemies()
+    {
+        this.numberOfEnemies--;
+        if (this.numberOfEnemies == 0)
+        {
+            this.room.SetRoomCleared();
+        }
+        Debug.Log("Decreased: " + this.numberOfEnemies);
     }
 
 
@@ -142,7 +151,7 @@ public class RoomGeneration : MonoBehaviour
             }
         }
     }
-
+/*
     private void SetEnemyTargets()
     {
         foreach (Transform child in transform)
@@ -157,7 +166,7 @@ public class RoomGeneration : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 
     public Vector2 GetSize()
     {

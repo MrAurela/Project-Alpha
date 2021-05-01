@@ -16,6 +16,8 @@ public class EnemySpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("EnemySpawns");
+
         //Set information about the room
         this.roomGenerator = transform.root.GetComponent<RoomGeneration>();
         this.room = this.roomGenerator.room;
@@ -24,7 +26,7 @@ public class EnemySpawn : MonoBehaviour
         Random.InitState(this.room.Seed);
 
         //Spawn enemies if room has NOT BEEN CLEARED
-        if (!this.room.IsCleared)
+        if (!this.room.IsCleared())
         {
             GameObject enemy = SelectEnemyType();
             if (enemy != null)
@@ -35,6 +37,9 @@ public class EnemySpawn : MonoBehaviour
                 //Set references to correct character object in Enemy_Movement and Enemy_Shooting scripts
                 instantiatedEnemy.GetComponent<Enemy_Movement>().Player = this.roomGenerator.playerPrefab.GetComponent<Rigidbody2D>();
                 instantiatedEnemy.transform.GetChild(0).gameObject.GetComponent<Enemy_Shooting>().Player = this.roomGenerator.playerPrefab.GetComponent<Rigidbody2D>();
+
+                //Counts the number of enemies added to keep count how many are left in a room
+                roomGenerator.IncreaseNumberOfEnemies();
             }
         }
     }
