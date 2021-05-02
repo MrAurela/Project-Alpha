@@ -13,19 +13,20 @@ public class Room
     //Speacial rooms
     public bool IsStartRoom{ get; set; }
     public bool IsBossRoom { get; set; }
+    public bool IsSafeRoom { get; set; }
 
     //Room states. Enemies are not spawned when entering to a cleared room
     //public bool IsCleared { get; set; }
     private int roomsCleared = 0;
 
-    public void SetRoomCleared()
+    public void SetRoomCleared(int addition = 1)
     {
-        roomsCleared++;
+        roomsCleared += addition;
     }
 
     public bool IsCleared()
     {
-        return roomsCleared == 2;
+        return roomsCleared >= 2;
     }
 
     //Room coordinates at world level. These are the values that this room can be fetched with GetRoom() from GenerateLevel.

@@ -26,7 +26,7 @@ public class EnemySpawn : MonoBehaviour
         Random.InitState(this.room.Seed);
 
         //Spawn enemies if room has NOT BEEN CLEARED
-        if (!this.room.IsCleared())
+        if (!this.room.IsCleared() && !this.room.IsSafeRoom)
         {
             GameObject enemy = SelectEnemyType();
             if (enemy != null)

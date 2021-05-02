@@ -47,7 +47,6 @@ public class RoomGeneration : MonoBehaviour
     public void IncreaseNumberOfEnemies()
     {
         this.numberOfEnemies++;
-        Debug.Log("Increased: " + this.numberOfEnemies);
     }
 
     public void DecreaseNumberOfEnemies()
@@ -57,7 +56,6 @@ public class RoomGeneration : MonoBehaviour
         {
             this.room.SetRoomCleared();
         }
-        Debug.Log("Decreased: " + this.numberOfEnemies);
     }
 
 

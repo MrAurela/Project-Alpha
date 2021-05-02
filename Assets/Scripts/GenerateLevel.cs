@@ -9,7 +9,7 @@ public class GenerateLevel : MonoBehaviour
     [SerializeField] GameObject character1Prefab, character2Prefab;
     [SerializeField] GameObject room;
     [SerializeField] int levelWidth, levelHeight;
-    [SerializeField] GameObject[] verticalDE, horizontalDE, verticalI, horizontalI, L, verticalT, horizontalT, X;
+    [SerializeField] GameObject[] verticalDE, horizontalDE, verticalI, horizontalI, L, verticalT, horizontalT, X, boss, start;
 
     //2D layout of the rooms that will be randomly generated. Adjacent room can be connected with doors
     private Room[][] roomStructure;
@@ -71,6 +71,8 @@ public class GenerateLevel : MonoBehaviour
     //Generates the main layout of the level
     private void GenerateLevelLayout()
     {
+        List<Vector2> pathToBoss = new List<Vector2>();
+
         //Room object are created and placed at roomStructure variabel
         int[][] path = new int[levelHeight][];
         for (int y = 0; y < levelWidth; y++)
@@ -95,10 +97,8 @@ public class GenerateLevel : MonoBehaviour
 
         //These coordinates also determine the Start room
         roomStructure[locationX][locationY].IsStartRoom = true;
-
-        //Direction is used to determine in which direction the path goes trough the map of the rooms
-        Vector2 direction = new Vector2(0,0); 
-        
+        roomStructure[locationX][locationY].IsSafeRoom = true; 
+        roomStructure[locationX][locationY].SetRoomCleared(2); //2=both rooms are ready
 
         //The main path continues as long as at least on neighbour room exists that has not yet been visited
         while (nextCoordinates.Count > 0)
@@ -113,6 +113,9 @@ public class GenerateLevel : MonoBehaviour
 
             //List of unvisited neighbours
             nextCoordinates = NeighbourCoordinates(selectedCoordinate, false,true);
+
+
+            Debug.Log(selectedCoordinate);
         }
 
         //The last room on the path will be the Boss room
@@ -161,6 +164,8 @@ public class GenerateLevel : MonoBehaviour
                 }
 
             }
+
+
         }
 
         List<Vector2> NeighbourCoordinates(Vector2 c, bool mustBeVisited=false, bool mustBeNotVisited=false)
@@ -274,7 +279,9 @@ public class GenerateLevel : MonoBehaviour
     {
         GameObject[] choices = new GameObject[] { };
 
-        if (room.IsX()) choices = X;
+        if (room.IsBossRoom) choices = boss;
+        else if (room.IsStartRoom) choices = start;
+        else if (room.IsX()) choices = X;
         else if (room.IsTVertical()) choices = verticalT;
         else if (room.IsTHorizontal()) choices = horizontalT;
         else if (room.IsL()) choices = L;
