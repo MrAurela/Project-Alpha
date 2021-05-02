@@ -87,6 +87,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9145520572116170975, guid: 294ed78e59ab53248b35d436a3ec2a90, type: 3}
+      propertyPath: probabilities.Array.data[0]
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 294ed78e59ab53248b35d436a3ec2a90, type: 3}
 --- !u!4 &9043269481153014793 stripped
@@ -148,6 +152,10 @@ PrefabInstance:
     - target: {fileID: 6836009493165251592, guid: 294ed78e59ab53248b35d436a3ec2a90, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9145520572116170975, guid: 294ed78e59ab53248b35d436a3ec2a90, type: 3}
+      propertyPath: probabilities.Array.data[0]
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 294ed78e59ab53248b35d436a3ec2a90, type: 3}

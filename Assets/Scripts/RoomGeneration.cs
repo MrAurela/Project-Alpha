@@ -44,6 +44,15 @@ public class RoomGeneration : MonoBehaviour
 
     }
 
+    public float RandomFloat(float f1, float f2)
+    {
+        return Random.Range(f1, f2);
+    }
+    public int RandomFloat(int i1, int i2)
+    {
+        return Random.Range(i1, i2);
+    }
+
     public void IncreaseNumberOfEnemies()
     {
         this.numberOfEnemies++;
@@ -62,6 +71,9 @@ public class RoomGeneration : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Setup random generation with room seed
+        Random.InitState(this.room.Seed);
+
         //Instantiate outer structures: walls & doors
         CreateWalls();
 

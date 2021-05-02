@@ -16,14 +16,12 @@ public class EnemySpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("EnemySpawns");
-
         //Set information about the room
         this.roomGenerator = transform.root.GetComponent<RoomGeneration>();
         this.room = this.roomGenerator.room;
 
         //Setup random generation with room seed
-        Random.InitState(this.room.Seed);
+        //Random.InitState(this.room.Seed);
 
         //Spawn enemies if room has NOT BEEN CLEARED
         if (!this.room.IsCleared() && !this.room.IsSafeRoom)
@@ -56,7 +54,7 @@ public class EnemySpawn : MonoBehaviour
     //Returns: GameObject of the enemy or null
     private GameObject SelectEnemyType()
     {
-        float random = Random.Range(0f, 1f);
+        float random = roomGenerator.RandomFloat(0f, 1f);
         float cumulativeProbability = 0f;
         for (int i = 0; i < probabilities.Length; i++)
         {

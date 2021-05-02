@@ -142,11 +142,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605897754, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605897754, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605897754, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -214,7 +214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898215, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_Name
-      value: RangedEnemy Variant 1
+      value: Boss
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4985346b799dbf945ae685f89456089c, type: 3}
