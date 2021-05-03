@@ -41,8 +41,13 @@ public class QRand : MonoBehaviour
 
     void Start()
     {
-        NextRegister();
-        NextInt();
+        this.currentSeed = CurrentTimeMillis();
+        Debug.Log(this.currentSeed);
+        // this.NextRegister();
+        this.NextRegister_Coroutine();
+        Debug.Log(this.currentSeed);
+        this.NextInt();
+        Debug.Log(this.currentSeed);
     }
 
     void NextRegister() => StartCoroutine(NextRegister_Coroutine());
@@ -64,16 +69,16 @@ public class QRand : MonoBehaviour
                     this.countsList = CreateArray(DefaultStr);
                     break;
                 case UnityWebRequest.Result.Success:
-                    Debug.Log(webRequest.downloadHandler.text);
                     this.countsList = CreateArray(webRequest.downloadHandler.text);
                     break;
             }
+            this.NextInt();
         }
     }
 
-    int GetCurrentSeed()
+    int GetCurrentSeed(int maxNumberOfDigits = 3)
     {
-        return ToBoundsFloat(this.currentSeed);
+        return ToBoundsFloat(this.currentSeed,maxNumberOfDigits);
     }
 
     // Gets the current time in milliseconds since Jan 1, 1970
@@ -95,7 +100,7 @@ public class QRand : MonoBehaviour
     }
 
     // scales given seed to the bounds: 0 to max
-    int ToBoundsFloat(double num, int maxNumberOfDigits = 3)
+    int ToBoundsFloat(double num, int maxNumberOfDigits)
     {
         return Convert.ToInt32(num / M * Convert.ToInt32(new string ('9', maxNumberOfDigits)));
     }
@@ -164,7 +169,7 @@ public class QRand : MonoBehaviour
         // create string representing binary value of n
         char[] binaryArray = DecimalToBinary(Convert.ToInt64(n)).ToCharArray();
         // isolate decimal of ToBoundsFloat(n)
-        double f = ToBoundsFloat(n)-Convert.ToInt64(ToBoundsFloat(n));
+        double f = ToBoundsFloat(n,3)-Convert.ToInt64(ToBoundsFloat(n,3));
         // apply quantum bit error to n bitwise
         for (long i = 0; i < binaryArray.Length; i++)
         {
@@ -188,6 +193,7 @@ public class QRand : MonoBehaviour
         // update currentSeed
         this.currentSeed = ret;
         // return scaled seed
+        Debug.LogFormat("Seed: {0}",ToBoundsFloat(ret,maxNumberOfDigits));
         return ToBoundsFloat(ret,maxNumberOfDigits);
     }
 }
