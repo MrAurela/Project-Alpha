@@ -42,8 +42,8 @@ public class GenerateLevel : MonoBehaviour
         character2 = Instantiate(character2Prefab, new Vector3(0, 0, 0), Quaternion.identity);
 
         //Character map location is set
-        locationX = 0;
-        locationY = 0;
+        locationX = Random.Range(0,levelWidth);
+        locationY = Random.Range(0,levelHeight);
 
         //First room will be instantiated
         InstantiateRoom(locationX, locationY, true);  
