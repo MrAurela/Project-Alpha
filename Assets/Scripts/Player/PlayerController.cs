@@ -63,5 +63,11 @@ public class PlayerController : MonoBehaviour
         else if (moveX < 0)
             facing = false;
         moveDirection = new Vector2(moveX, moveY).normalized;
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            FindObjectOfType<PlayerSpirit>().GetComponent<Damageable>().Damage(10f);
+        }
     }
+
 }
