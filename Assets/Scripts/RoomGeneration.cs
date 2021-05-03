@@ -76,20 +76,6 @@ public class RoomGeneration : MonoBehaviour
 
         //Instantiate outer structures: walls & doors
         CreateWalls();
-
-        //SetEnemyTargets();
-
-        //Instantiate players
-        /*if (room.IsStartRoom)
-        {
-            //Instantiate(playerPrefab, origin.transform.position + new Vector3(width / 2f, height / 2f, 0f), Quaternion.identity);
-        } else if(room.IsBossRoom)
-        {
-            Instantiate(bossPrefab, origin.transform.position + new Vector3(width / 2f, height / 2f, 0f), Quaternion.identity);
-        }*7
-        /*GameObject enemy = Instantiate(enemyPrefab, origin.transform.position + new Vector3(width / 2f, height / 2f, 0f), Quaternion.identity);
-        enemy.GetComponent<Enemy_Movement>().Player = playerPrefab.GetComponent<Rigidbody2D>();
-        Debug.Log("Enemy addad.");*/
         
 
         //Mirror the room layout when needed
@@ -161,22 +147,6 @@ public class RoomGeneration : MonoBehaviour
             }
         }
     }
-/*
-    private void SetEnemyTargets()
-    {
-        foreach (Transform child in transform)
-        {
-            foreach (Transform grandchild in transform.transform)
-            {
-                if (transform.transform.gameObject.tag == "Spawn")
-                {
-                    GameObject enemy = Instantiate(enemyPrefab, transform.transform.position, Quaternion.identity);
-                    //enemy.GetComponent<Enemy_Movement>().Player = playerRigidbody;
-                    Debug.Log("moi");
-                }
-            }
-        }
-    }*/
 
     public Vector2 GetSize()
     {
