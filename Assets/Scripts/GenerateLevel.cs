@@ -31,11 +31,7 @@ public class GenerateLevel : MonoBehaviour
     void Start()
     {
         roomHeight = room.GetComponent<RoomGeneration>().GetSize().y;
-        roomWidth = room.GetComponent<RoomGeneration>().GetSize().x;
-
-        //Connections of the rooms will be generated. Rooms are saved to roomStructure variable
-        roomStructure = new Room[levelHeight][];
-        GenerateLevelLayout();
+        roomWidth = room.GetComponent<RoomGeneration>().GetSize().x; 
 
         //Characters are instantieated
         character1 = Instantiate(character1Prefab, new Vector3(0, 0, 0), Quaternion.identity);
@@ -44,6 +40,10 @@ public class GenerateLevel : MonoBehaviour
         //Character map location is set
         locationX = Random.Range(0,levelWidth);
         locationY = Random.Range(0,levelHeight);
+
+        //Connections of the rooms will be generated. Rooms are saved to roomStructure variable
+        roomStructure = new Room[levelHeight][];
+        GenerateLevelLayout();
 
         //First room will be instantiated
         InstantiateRoom(locationX, locationY, true);  
@@ -98,9 +98,9 @@ public class GenerateLevel : MonoBehaviour
         Vector2 selectedCoordinate = new Vector2(locationX, locationY);
 
         //These coordinates also determine the Start room
-        roomStructure[locationX][locationY].IsStartRoom = true;
-        roomStructure[locationX][locationY].IsSafeRoom = true; 
-        roomStructure[locationX][locationY].SetRoomCleared(2); //2=both rooms are ready
+        roomStructure[locationY][locationX].IsStartRoom = true;
+        roomStructure[locationY][locationX].IsSafeRoom = true; 
+        roomStructure[locationY][locationX].SetRoomCleared(2); //2=both rooms are ready
 
         //The main path continues as long as at least on neighbour room exists that has not yet been visited
         while (nextCoordinates.Count > 0)
