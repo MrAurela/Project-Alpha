@@ -23,6 +23,11 @@ public class WeaponController : MonoBehaviour
         float angle = Mathf.Atan2(positionOnScreen.y - mouseOnScreen.y, positionOnScreen.x - mouseOnScreen.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
 
+        if (Quaternion.Euler(new Vector3(0f, 0f, angle)).z > 0)
+            sprite.sortingOrder = 2;
+        else if (Quaternion.Euler(new Vector3(0f, 0f, angle)).z < 0)
+            sprite.sortingOrder = 0;
+
         // Color weapon red if mouse pressed
         if (Input.GetMouseButtonDown(0))
         {
