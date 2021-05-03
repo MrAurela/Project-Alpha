@@ -11,7 +11,6 @@ public interface IDamageable
 public class Damageable : MonoBehaviour
 {
     [SerializeField] float maximumHealth;
-    [SerializeField] GameObject iDamageable;
 
     private float health;
     private float currentMaximumHealth;
@@ -38,7 +37,7 @@ public class Damageable : MonoBehaviour
         SetHealth(this.health - damageTaken);
         if (this.health <= 0f)
         {
-            iDamageable.GetComponent<IDamageable>().Die();
+            GetComponent<IDamageable>().Die();
         }
     }
 
@@ -48,7 +47,7 @@ public class Damageable : MonoBehaviour
         SetMaximumHealth(this.currentMaximumHealth - decrease);
         if (this.currentMaximumHealth <= 0f)
         {
-            iDamageable.GetComponent<IDamageable>();
+            GetComponent<IDamageable>();
         }
     }
 
