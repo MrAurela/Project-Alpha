@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Shooting : MonoBehaviour
+public class Enemy_Melee_Attack : MonoBehaviour
 {
     // Ref to child sprite renderer to set color later
     SpriteRenderer sprite;
-    public GameObject bullet;
     public Rigidbody2D enemy;
     public Rigidbody2D Player;
 
@@ -17,7 +16,7 @@ public class Enemy_Shooting : MonoBehaviour
     //Sorry, I just stole the code from the player, but it works fine here :D
     private void Update()
     {
-        
+
         Vector2 positionOnScreen = enemy.position;
         Vector2 playerOnScreen = Player.position;
 
@@ -27,15 +26,17 @@ public class Enemy_Shooting : MonoBehaviour
         // Color weapon red if mouse pressed
         if (Input.GetMouseButtonDown(0))
         {
-            Vector2 dir = positionOnScreen - playerOnScreen;
-            Fire(dir);
+            
+            Attack();
+        }
+        else
+        {
+            sprite.color = new Color(1, 1, 1, 1);
         }
     }
 
-    private void Fire(Vector2 dir)
+    private void Attack()
     {
-        GameObject bulletClone = (GameObject)Instantiate(bullet, transform.position, transform.rotation);
-        bulletClone.transform.position += new Vector3(-dir.normalized.x, -dir.normalized.y, 0);
-        bulletClone.GetComponent<Rigidbody2D>().velocity = -dir.normalized;
+        sprite.color = new Color(1,0,0,1);
     }
 }

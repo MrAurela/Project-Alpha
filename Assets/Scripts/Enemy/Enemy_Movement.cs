@@ -14,8 +14,8 @@ public class Enemy_Movement : MonoBehaviour
     public Rigidbody2D Enemy;
     public int velocity = 1;
     private Vector2 moveDirection;
-    
-
+    public int Close_distance;
+    public int Far_distance;
     // Update is called once per frame
     void Update()
     {
@@ -41,7 +41,7 @@ public class Enemy_Movement : MonoBehaviour
         float X = Player.position.x - Enemy.position.x;
         float Y = Player.position.y - Enemy.position.y;
         Vector2 distanceVector = new Vector2(X, Y);
-        if (distanceVector.SqrMagnitude() < 5)
+        if (distanceVector.SqrMagnitude() < Close_distance)
         {
             return true;
         }
@@ -55,7 +55,7 @@ public class Enemy_Movement : MonoBehaviour
         float X = Player.position.x - Enemy.position.x;
         float Y = Player.position.y - Enemy.position.y;
         Vector2 distanceVector = new Vector2(X, Y);
-        if (distanceVector.SqrMagnitude() > 20)
+        if (distanceVector.SqrMagnitude() > Far_distance)
         {
             return true;
         }
