@@ -150,6 +150,7 @@ public class QRand : MonoBehaviour
             initialValue = 1;
         }
         // set index based on value of f
+        Debug.Log(this.countsList); //this.countList is null here
         while(f>this.countsList[initialValue,index])
         {
             index++;
