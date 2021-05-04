@@ -11,7 +11,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Bullets
   - Water
   - UI
   - 
@@ -46,4 +46,7 @@ TagManager:
     locked: 0
   - name: GameObject
     uniqueID: 2862715559
+    locked: 0
+  - name: Bullets
+    uniqueID: 806483957
     locked: 0
