@@ -77,3 +77,6 @@ MonoBehaviour:
   - {fileID: 8571485781107144164, guid: ad7a8e9770b881642b00f8c175aa6a74, type: 3}
   start:
   - {fileID: 8571485781107144164, guid: a5fbd2b12538e784089cbe9601f1d3b9, type: 3}
+  tilemap: {fileID: 0}
+  wallTile: {fileID: 11400000, guid: 262efc3755b05724180536c545937873, type: 2}
+  floorTile: {fileID: 0}
