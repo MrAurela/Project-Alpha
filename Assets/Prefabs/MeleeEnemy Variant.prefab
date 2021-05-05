@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7539715203069735036}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WeaponAxis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 2209178102115330903}
   - component: {fileID: 2209178102115330900}
   - component: {fileID: 4740007959931582765}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MeleeEnemy Variant
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.5587921, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -204,7 +204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1300707748886955342}
   - component: {fileID: 7070759223024489464}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WeaponObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}

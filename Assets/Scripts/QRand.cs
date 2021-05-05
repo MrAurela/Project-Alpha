@@ -31,8 +31,8 @@ public class QRand : MonoBehaviour
     //
 
     // quantum register
-    double[,] countsList;
-
+    List<List<double>> countsList;
+    // the current seed (with extra decimals)
     double currentSeed;
 
     //
@@ -42,16 +42,36 @@ public class QRand : MonoBehaviour
     void Start()
     {
         this.currentSeed = CurrentTimeMillis();
-        Debug.Log(this.currentSeed);
-        // this.NextRegister();
-        this.NextRegister_Coroutine();
-        Debug.Log(this.currentSeed);
-        this.NextInt();
-        Debug.Log(this.currentSeed);
+        this.countsList = new List<List<double>>{new List<double>{0.6839729119638827, 0.7697516930022573, 0.8893905191873589, 0.9051918735891648, 0.9232505643340858, 0.9367945823927766, 0.945823927765237, 1.0}, new List<double>{0.022375215146299483, 0.043029259896729774, 0.055077452667814115, 0.11015490533562823, 0.14113597246127366, 0.29259896729776247, 0.35111876075731496, 1.0}};
     }
 
+    // void PrintCounts(List<List<double>> thing)
+    // {
+    //     string retval = "[";
+    //     foreach(List<double> l in thing)
+    //     {
+    //         retval += "[";
+    //         foreach(double v in l)
+    //         {
+    //             retval += v+",";
+    //         }
+    //         retval += "]";
+    //     }
+    //     retval += "]";
+    //     Debug.Log(retval);
+    // }
+
+    // calls NextRegisterCoroutine without returning an IEnumerator
     void NextRegister() => StartCoroutine(NextRegister_Coroutine());
 
+    // calls NextRegisterCoroutine (for init)
+    IEnumerator InitQRand()
+    {
+        yield return StartCoroutine(NextRegister_Coroutine());
+        Debug.Log("QRand fully initialized");
+    }
+
+    // Gets a new quantum register's counts from a server
     IEnumerator NextRegister_Coroutine()
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get("https://quantum-seed-generator.herokuapp.com/get-seeds"))
@@ -63,22 +83,23 @@ public class QRand : MonoBehaviour
             {
                 case UnityWebRequest.Result.ConnectionError:
                 case UnityWebRequest.Result.DataProcessingError:
-                    this.countsList = CreateArray(DefaultStr);
+                    Debug.Log("Error fetching counts from server");
                     break;
                 case UnityWebRequest.Result.ProtocolError:
-                    this.countsList = CreateArray(DefaultStr);
+                    Debug.Log("Error fetching counts from server");
                     break;
                 case UnityWebRequest.Result.Success:
+                    Debug.Log("generating countsList");
                     this.countsList = CreateArray(webRequest.downloadHandler.text);
                     break;
             }
-            this.NextInt();
         }
     }
 
+    // returns the int form of the current seed
     int GetCurrentSeed(int maxNumberOfDigits = 3)
     {
-        return ToBoundsFloat(this.currentSeed,maxNumberOfDigits);
+        return Convert.ToInt32(ToBoundsFloat(this.currentSeed,maxNumberOfDigits));
     }
 
     // Gets the current time in milliseconds since Jan 1, 1970
@@ -100,41 +121,35 @@ public class QRand : MonoBehaviour
     }
 
     // scales given seed to the bounds: 0 to max
-    int ToBoundsFloat(double num, int maxNumberOfDigits)
+    double ToBoundsFloat(double num, int maxNumberOfDigits)
     {
-        return Convert.ToInt32(num / M * Convert.ToInt32(new string ('9', maxNumberOfDigits)));
+        return num / M * Convert.ToInt32(new string ('9', maxNumberOfDigits));
     }
 
     // creates a double[,] given a double[] as a string
-    double[,] CreateArray(string msg)
+    List<List<double>> CreateArray(string msg)
     {
-        List<double> rawCountsList = new List<double>();
+        // List<double> rawCountsList = new List<double>();
+        List<List<double>> retval = new List<List<double>>(){new List<double>(),new List<double>()};
         string[] numList = msg.Substring(1,msg.Length-3).Split(',');
-        foreach(string s in numList)
+        int subLength = numList.Length/2;
+        for(int i = 0; i < numList.Length; i++)
         {
-            rawCountsList.Add(Convert.ToInt64(s));
-        }
-        double[] rawCounts = rawCountsList.ToArray();
-        double[,] countsList = new double[rawCounts.Length/2,rawCounts.Length/2];
-        int subLength = rawCounts.Length/2;
-        for(int i = 0; i < rawCounts.Length; i++)
-        {
-            int index = i/subLength;
-            countsList[index,i%subLength] = rawCounts[i];
+            retval[(i/subLength)%2].Add(Convert.ToInt64(numList[i]));
         }
         // reformat counts to desired percentage format
         for(int i = 0; i < 2; i++)
         {
             for(int j = 1; j < subLength; j++)
             {
-                countsList[i,j] += countsList[i,j-1];
+                retval[i][j] += retval[i][j-1];
             }
             for(int j = 0; j < subLength; j++)
             {
-                countsList[i,j] /= countsList[i,subLength-1];
+                retval[i][j] /= retval[i][subLength-1];
             }
         }
-        return countsList;
+        return retval;
     }
 
     // takes 2 parameters:
@@ -150,8 +165,8 @@ public class QRand : MonoBehaviour
             initialValue = 1;
         }
         // set index based on value of f
-        Debug.Log(this.countsList); //this.countList is null here
-        while(f>this.countsList[initialValue,index])
+        // Debug.Log(this.countsList[initialValue][index]);
+        while(f>this.countsList[initialValue][index])
         {
             index++;
         }
@@ -183,18 +198,18 @@ public class QRand : MonoBehaviour
     }
 
     // returns the next seed according to the Linear Congruent Classic PRNG
-    int NextInt(int maxNumberOfDigits = 3)
+    double NextInt(int maxNumberOfDigits = 3)
     {
         // preform linear congruent classic calculation
-        double ret = (A * this.currentSeed + C) % M;
+        double retval = (A * this.currentSeed + C) % M;
         // collect the decimals of stuff
-        double f = ret-Convert.ToInt64(ret);
+        double f = retval-Convert.ToInt64(retval);
         // preform bitwise pseudo quantum error
-        ret = Magic(ret) + f;
+        retval = Magic(retval) + f;
         // update currentSeed
-        this.currentSeed = ret;
+        this.currentSeed = Convert.ToInt64(retval);
         // return scaled seed
-        Debug.LogFormat("Seed: {0}",ToBoundsFloat(ret,maxNumberOfDigits));
-        return ToBoundsFloat(ret,maxNumberOfDigits);
+        Debug.LogFormat("Seed: {0}",Convert.ToInt32(ToBoundsFloat(retval,maxNumberOfDigits)));
+        return ToBoundsFloat(retval,maxNumberOfDigits);
     }
 }
