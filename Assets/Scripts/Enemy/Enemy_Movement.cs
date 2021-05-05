@@ -41,7 +41,7 @@ public class Enemy_Movement : MonoBehaviour
         float X = Player.position.x - Enemy.position.x;
         float Y = Player.position.y - Enemy.position.y;
         Vector2 distanceVector = new Vector2(X, Y);
-        if (distanceVector.SqrMagnitude() < Close_distance)
+        if (distanceVector.magnitude < Close_distance)
         {
             return true;
         }
@@ -55,7 +55,7 @@ public class Enemy_Movement : MonoBehaviour
         float X = Player.position.x - Enemy.position.x;
         float Y = Player.position.y - Enemy.position.y;
         Vector2 distanceVector = new Vector2(X, Y);
-        if (distanceVector.SqrMagnitude() > Far_distance)
+        if (distanceVector.magnitude > Far_distance)
         {
             return true;
         }
