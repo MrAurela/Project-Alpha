@@ -129,6 +129,9 @@ MonoBehaviour:
   bullet: {fileID: 1949555957978316934, guid: 8f301ee2a2946d04f8b56e6ecddfd9cc, type: 3}
   enemy: {fileID: 8602497043285895088}
   Player: {fileID: 0}
+  FarDistance: 20
+  CloseDistance: 5
+  timer: 1
 --- !u!1001 &5163272401336323669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -194,11 +197,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: Far_distance
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: Close_distance
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898215, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_Name
