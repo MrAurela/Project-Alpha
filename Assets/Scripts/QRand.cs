@@ -32,7 +32,7 @@ public class QRand : MonoBehaviour
 
     // quantum register
     List<List<double>> countsList;
-
+    // the current seed (with extra decimals)
     double currentSeed;
 
     //
@@ -43,35 +43,32 @@ public class QRand : MonoBehaviour
     {
         this.currentSeed = CurrentTimeMillis();
         this.countsList = new List<List<double>>{new List<double>{0.6839729119638827, 0.7697516930022573, 0.8893905191873589, 0.9051918735891648, 0.9232505643340858, 0.9367945823927766, 0.945823927765237, 1.0}, new List<double>{0.022375215146299483, 0.043029259896729774, 0.055077452667814115, 0.11015490533562823, 0.14113597246127366, 0.29259896729776247, 0.35111876075731496, 1.0}};
-        // PrintCounts(this.countsList);
-        this.NextRegister();
-        // this.NextRegister_Coroutine();
-        for(int i = 0; i < 20; i++)
-        {
-            this.NextInt();
-            // PrintCounts(this.countsList);
-        }
-        this.NextRegister();
-        // PrintCounts(this.countsList);
     }
 
-    void PrintCounts(List<List<double>> thing)
-    {
-        string retval = "[";
-        foreach(List<double> l in thing)
-        {
-            retval += "[";
-            foreach(double v in l)
-            {
-                retval += v+",";
-            }
-            retval += "]";
-        }
-        retval += "]";
-        Debug.Log(retval);
-    }
+    // void PrintCounts(List<List<double>> thing)
+    // {
+    //     string retval = "[";
+    //     foreach(List<double> l in thing)
+    //     {
+    //         retval += "[";
+    //         foreach(double v in l)
+    //         {
+    //             retval += v+",";
+    //         }
+    //         retval += "]";
+    //     }
+    //     retval += "]";
+    //     Debug.Log(retval);
+    // }
 
     void NextRegister() => StartCoroutine(NextRegister_Coroutine());
+
+
+    IEnumerator InitQRand()
+    {
+        yield return StartCoroutine(NextRegister_Coroutine());
+        Debug.Log("QRand fully initialized");
+    }
 
     IEnumerator NextRegister_Coroutine()
     {
@@ -90,6 +87,7 @@ public class QRand : MonoBehaviour
                     Debug.Log("Error fetching counts from server");
                     break;
                 case UnityWebRequest.Result.Success:
+                    Debug.Log("generating countsList");
                     this.countsList = CreateArray(webRequest.downloadHandler.text);
                     break;
             }
@@ -148,7 +146,6 @@ public class QRand : MonoBehaviour
                 retval[i][j] /= retval[i][subLength-1];
             }
         }
-        PrintCounts(retval);
         return retval;
     }
 
