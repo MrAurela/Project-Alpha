@@ -61,15 +61,17 @@ public class QRand : MonoBehaviour
     //     Debug.Log(retval);
     // }
 
+    // calls NextRegisterCoroutine without returning an IEnumerator
     void NextRegister() => StartCoroutine(NextRegister_Coroutine());
 
-
+    // calls NextRegisterCoroutine (for init)
     IEnumerator InitQRand()
     {
         yield return StartCoroutine(NextRegister_Coroutine());
         Debug.Log("QRand fully initialized");
     }
 
+    // Gets a new quantum register's counts from a server
     IEnumerator NextRegister_Coroutine()
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get("https://quantum-seed-generator.herokuapp.com/get-seeds"))
@@ -94,6 +96,7 @@ public class QRand : MonoBehaviour
         }
     }
 
+    // returns the int form of the current seed
     int GetCurrentSeed(int maxNumberOfDigits = 3)
     {
         return Convert.ToInt32(ToBoundsFloat(this.currentSeed,maxNumberOfDigits));
