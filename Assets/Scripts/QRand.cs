@@ -43,6 +43,9 @@ public class QRand : MonoBehaviour
     {
         this.currentSeed = CurrentTimeMillis();
         this.countsList = new List<List<double>>{new List<double>{0.6839729119638827, 0.7697516930022573, 0.8893905191873589, 0.9051918735891648, 0.9232505643340858, 0.9367945823927766, 0.945823927765237, 1.0}, new List<double>{0.022375215146299483, 0.043029259896729774, 0.055077452667814115, 0.11015490533562823, 0.14113597246127366, 0.29259896729776247, 0.35111876075731496, 1.0}};
+        for(int i = 0; i < 20; i++) {
+            Debug.LogFormat("Seed: {0}",this.NextInt());
+        }
     }
 
     // void PrintCounts(List<List<double>> thing)
@@ -97,9 +100,9 @@ public class QRand : MonoBehaviour
     }
 
     // returns the int form of the current seed
-    int GetCurrentSeed(int maxNumberOfDigits = 3)
+    int GetCurrentSeed(double maxValue = 999)
     {
-        return Convert.ToInt32(ToBoundsFloat(this.currentSeed,maxNumberOfDigits));
+        return Convert.ToInt32(ToBoundsFloat(this.currentSeed)*maxValue);
     }
 
     // Gets the current time in milliseconds since Jan 1, 1970
@@ -121,9 +124,9 @@ public class QRand : MonoBehaviour
     }
 
     // scales given seed to the bounds: 0 to max
-    double ToBoundsFloat(double num, int maxNumberOfDigits)
+    double ToBoundsFloat(double num)
     {
-        return num / M * Convert.ToInt32(new string ('9', maxNumberOfDigits));
+        return num / M;
     }
 
     // creates a double[,] given a double[] as a string
@@ -185,7 +188,7 @@ public class QRand : MonoBehaviour
         // create string representing binary value of n
         char[] binaryArray = DecimalToBinary(Convert.ToInt64(n)).ToCharArray();
         // isolate decimal of ToBoundsFloat(n)
-        double f = ToBoundsFloat(n,3)-Convert.ToInt64(ToBoundsFloat(n,3));
+        double f = ToBoundsFloat(n)%1;
         // apply quantum bit error to n bitwise
         for (long i = 0; i < binaryArray.Length; i++)
         {
@@ -194,22 +197,27 @@ public class QRand : MonoBehaviour
             f-=Convert.ToInt64(f);
         }
         // return int value of modified bit sequence adding back the lost decimals
-        return BinaryToDecimal(new string(binaryArray)) + n-Convert.ToInt64(n);
+        return BinaryToDecimal(new string(binaryArray)) + n%1;
     }
 
-    // returns the next seed according to the Linear Congruent Classic PRNG
-    double NextInt(int maxNumberOfDigits = 3)
+    // returns the next seed as a double between 0 and 1 according to the Linear Congruent Classic PRNG
+    double NextDouble()
     {
         // preform linear congruent classic calculation
         double retval = (A * this.currentSeed + C) % M;
         // collect the decimals of stuff
-        double f = retval-Convert.ToInt64(retval);
+        double f = retval%1;
         // preform bitwise pseudo quantum error
         retval = Magic(retval) + f;
         // update currentSeed
         this.currentSeed = Convert.ToInt64(retval);
         // return scaled seed
-        Debug.LogFormat("Seed: {0}",Convert.ToInt32(ToBoundsFloat(retval,maxNumberOfDigits)));
-        return ToBoundsFloat(retval,maxNumberOfDigits);
+        return ToBoundsFloat(retval);
+    }
+
+    // returns the next seed as an int between 0 and maxValue according to the Linear Congruent Classic PRNG
+    int NextInt(int maxValue = 999)
+    {
+        return Convert.ToInt32(this.NextDouble() * maxValue);
     }
 }
