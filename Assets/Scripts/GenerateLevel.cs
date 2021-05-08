@@ -29,9 +29,12 @@ public class GenerateLevel : MonoBehaviour
     //Currently instantiated room layout objects:
     private GameObject room1, room2;
 
+    private QRand qrand;
+
     // Start is called before the first frame update
     void Start()
     {
+        qrand = FindObjectOfType<QRand>();
 
         roomHeight = room.GetComponent<RoomGeneration>().GetSize().y;
         roomWidth = room.GetComponent<RoomGeneration>().GetSize().x; 
@@ -41,8 +44,10 @@ public class GenerateLevel : MonoBehaviour
         character2 = Instantiate(character2Prefab, new Vector3(0, 0, 0), Quaternion.identity);
 
         //Character map location is set
-        locationX = Random.Range(0,levelWidth);
-        locationY = Random.Range(0,levelHeight);
+        //locationX = Random.Range(0,levelWidth);
+        //locationY = Random.Range(0,levelHeight);
+        locationX = qrand.NextInt(levelWidth-1);
+        locationY = qrand.NextInt(levelHeight-1);
 
         //Connections of the rooms will be generated. Rooms are saved to roomStructure variable
         roomStructure = new Room[levelHeight][];
@@ -87,7 +92,7 @@ public class GenerateLevel : MonoBehaviour
                 roomStructure[y][x] = new Room();
                 roomStructure[y][x].x = x;
                 roomStructure[y][x].y = y;
-                roomStructure[y][x].Seed = Random.Range(-1000000,10000000);
+                roomStructure[y][x].Seed = qrand.NextInt(10000000);
 
                 Debug.Log("Room created at: " + x + ", " + y);
             }
@@ -110,7 +115,7 @@ public class GenerateLevel : MonoBehaviour
         {
             //Select random neighbour room
             Vector2 lastCoordinate = selectedCoordinate;
-            selectedCoordinate = nextCoordinates[Random.Range(0, nextCoordinates.Count)];
+            selectedCoordinate = nextCoordinates[qrand.NextInt(nextCoordinates.Count-1)];
 
             //Create door between the rooms
             CreateDoorway(lastCoordinate, selectedCoordinate);
@@ -146,7 +151,8 @@ public class GenerateLevel : MonoBehaviour
                     }
 
                     //Select random neighbour
-                    selectedCoordinate = nextCoordinates[Random.Range(0, nextCoordinates.Count)];
+                    //selectedCoordinate = nextCoordinates[Random.Range(0, nextCoordinates.Count)];
+                    selectedCoordinate = nextCoordinates[qrand.NextInt(nextCoordinates.Count-1)];
 
                     //Create door
                     CreateDoorway(coordinate, selectedCoordinate);
@@ -162,7 +168,8 @@ public class GenerateLevel : MonoBehaviour
                     if (nextCoordinates.Count > 0)
                     {
                         //Select random neighbour
-                        selectedCoordinate = nextCoordinates[Random.Range(0, nextCoordinates.Count)];
+                        //selectedCoordinate = nextCoordinates[Random.Range(0, nextCoordinates.Count)];
+                        selectedCoordinate = nextCoordinates[qrand.NextInt(nextCoordinates.Count-1)];
 
                         //Create door
                         CreateDoorway(coordinate, selectedCoordinate);
@@ -310,7 +317,10 @@ public class GenerateLevel : MonoBehaviour
             return null;
         }
 
-        Random.InitState(room.Seed); //Initialize random generator with the room seed to select the same room type every time this room is visited
-        return choices[Random.Range(0, choices.Length)];   
+        //Random.InitState(room.Seed); //Initialize random generator with the room seed to select the same room type every time this room is visited
+        //return choices[Random.Range(0, choices.Length)];
+
+        qrand.InitState(room.Seed);
+        return choices[qrand.NextInt(choices.Length-1)];
     }
 }

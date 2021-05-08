@@ -22,6 +22,7 @@ public class RoomGeneration : MonoBehaviour
     public Room room;
 
     private int numberOfEnemies = 0;
+    private QRand qrand;
 
     public void SetPlayerTo(GameObject character, int id)
     {
@@ -50,7 +51,9 @@ public class RoomGeneration : MonoBehaviour
 
     public float RandomFloat(float f1, float f2)
     {
-        return Random.Range(f1, f2);
+        float rand = qrand.NextFloat();
+        Debug.Log(rand);
+        return rand*(f2-f1)+f1;
     }
     public int RandomFloat(int i1, int i2)
     {
@@ -71,12 +74,18 @@ public class RoomGeneration : MonoBehaviour
         }
     }
 
+    void Awake()
+    {
+        qrand = FindObjectOfType<QRand>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         //Setup random generation with room seed
-        Random.InitState(this.room.Seed);
+        //Random.InitState(this.room.Seed);
+        qrand.InitState(this.room.Seed);
+
 
         //Instantiate outer structures: walls & doors
         CreateWalls();
