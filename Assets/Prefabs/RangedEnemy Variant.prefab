@@ -130,7 +130,7 @@ MonoBehaviour:
   enemy: {fileID: 8602497043285895088}
   Player: {fileID: 0}
   FarDistance: 20
-  CloseDistance: 5
+  CloseDistance: 2
   timer: 1
 --- !u!1001 &5163272401336323669
 PrefabInstance:
