@@ -43,9 +43,6 @@ public class QRand : MonoBehaviour
     {
         this.currentSeed = CurrentTimeMillis();
         this.countsList = new List<List<double>>{new List<double>{0.6839729119638827, 0.7697516930022573, 0.8893905191873589, 0.9051918735891648, 0.9232505643340858, 0.9367945823927766, 0.945823927765237, 1.0}, new List<double>{0.022375215146299483, 0.043029259896729774, 0.055077452667814115, 0.11015490533562823, 0.14113597246127366, 0.29259896729776247, 0.35111876075731496, 1.0}};
-        for(int i = 0; i < 20; i++) {
-            Debug.LogFormat("Seed: {0}",this.NextInt());
-        }
     }
 
     // void PrintCounts(List<List<double>> thing)
