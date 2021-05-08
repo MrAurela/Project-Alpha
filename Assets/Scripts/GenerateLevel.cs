@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class GenerateLevel : MonoBehaviour
 {
@@ -11,8 +10,8 @@ public class GenerateLevel : MonoBehaviour
     [SerializeField] GameObject room;
     [SerializeField] int levelWidth, levelHeight;
     [SerializeField] GameObject[] verticalDE, horizontalDE, verticalI, horizontalI, L, verticalT, horizontalT, X, boss, start;
-    [SerializeField] Tilemap tilemap;
-    [SerializeField] TileBase wallTile, floorTile;
+    //[SerializeField] Tilemap tilemap;
+    //[SerializeField] TileBase wallTile, floorTile;
 
     //2D layout of the rooms that will be randomly generated. Adjacent room can be connected with doors
     private Room[][] roomStructure;
@@ -33,9 +32,6 @@ public class GenerateLevel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        tilemap = FindObjectOfType<Tilemap>();
-        //GameObject tileSystem = Instantiate(tileSystem, new Vector3(0f, 0f, 0f), Quaternion.identity);
-        tilemap.SetTile(new Vector3Int(0,0,0), wallTile);
 
         roomHeight = room.GetComponent<RoomGeneration>().GetSize().y;
         roomWidth = room.GetComponent<RoomGeneration>().GetSize().x; 

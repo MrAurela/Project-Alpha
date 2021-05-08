@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class RoomGeneration : MonoBehaviour
 {
@@ -10,9 +11,12 @@ public class RoomGeneration : MonoBehaviour
     [SerializeField] int doorSize;
     [SerializeField] GameObject origin;
     [SerializeField] GameObject wall;
+    [SerializeField] GameObject floor;
     [SerializeField] GameObject door;
     [SerializeField] GameObject bossPrefab;
     [SerializeField] GameObject enemyPrefab;
+    //[SerializeField] Tilemap tilemap;
+    //[SerializeField] TileBase wallTile, floorTile;
     public GameObject playerPrefab;
 
     public Room room;
@@ -98,13 +102,17 @@ public class RoomGeneration : MonoBehaviour
     private void CreateWalls()
     {
 
-        for (int i = 0; i <= width; i++)
+        //tilemap = FindObjectOfType<Tilemap>();
+        //GameObject tileSystem = Instantiate(tileSystem, new Vector3(0f, 0f, 0f), Quaternion.identity);
+        //tilemap.SetTile(new Vector3Int(0, 0, 0), wallTile);
+
+        for (int i = 0; i < width-1; i++)
         {
             float x = origin.transform.position.x + unitSize * i;
             float y1 = origin.transform.position.y;
-            float y2 = origin.transform.position.y + height * unitSize;
+            float y2 = origin.transform.position.y + (height-1) * unitSize;
             
-            if (Mathf.Abs(width / 2 - doorSize*i) > doorSize || !room.HasDoorDown)
+            if (Mathf.Abs((width-1) / 2 - doorSize*i) > doorSize || !room.HasDoorDown)
             {
                 Instantiate(wall, new Vector3(x, y1, 0f), Quaternion.identity, transform);
             } else
@@ -112,7 +120,7 @@ public class RoomGeneration : MonoBehaviour
                 GameObject newDoor = Instantiate(door, new Vector3(x, y1, 0f), Quaternion.identity, transform);
                 newDoor.GetComponent<Door>().SetConnection(this.room, FindObjectOfType<GenerateLevel>().GetRoom(this.room.x, this.room.y - 1));
             }
-            if (Mathf.Abs(width / 2 - doorSize * i) > doorSize || !room.HasDoorUp)
+            if (Mathf.Abs((width-1) / 2 - doorSize * i) > doorSize || !room.HasDoorUp)
             {
                 Instantiate(wall, new Vector3(x, y2, 0f), Quaternion.identity, transform);
             } else
@@ -123,12 +131,12 @@ public class RoomGeneration : MonoBehaviour
         }
 
 
-        for (int i = 0; i <= height; i++)
+        for (int i = 0; i < height-1; i++)
         {
             float y = origin.transform.position.y + unitSize * i;
             float x1 = origin.transform.position.x;
-            float x2 = origin.transform.position.x + width * unitSize;
-            if (Mathf.Abs(height / 2 - doorSize * i) > doorSize || !room.HasDoorLeft)
+            float x2 = origin.transform.position.x + (width-1) * unitSize;
+            if (Mathf.Abs((height-1) / 2 - doorSize * i) > doorSize || !room.HasDoorLeft)
             {
                 Instantiate(wall, new Vector3(x1, y, 0f), Quaternion.identity, transform);
                 
@@ -137,13 +145,23 @@ public class RoomGeneration : MonoBehaviour
                 GameObject newDoor = Instantiate(door, new Vector3(x1, y, 0f), Quaternion.identity, transform);
                 newDoor.GetComponent<Door>().SetConnection(this.room, FindObjectOfType<GenerateLevel>().GetRoom(this.room.x - 1, this.room.y));
             }
-            if (Mathf.Abs(height / 2 - doorSize * i) > doorSize || !room.HasDoorRight)
+            if (Mathf.Abs((height-1) / 2 - doorSize * i) > doorSize || !room.HasDoorRight)
             {
                 Instantiate(wall, new Vector3(x2, y, 0f), Quaternion.identity, transform);
             } else
             {
                 GameObject newDoor = Instantiate(door, new Vector3(x2, y, 0f), Quaternion.identity, transform);
                 newDoor.GetComponent<Door>().SetConnection(this.room, FindObjectOfType<GenerateLevel>().GetRoom(this.room.x + 1, this.room.y));
+            }
+        }
+
+        for (int i = 0; i < height - 1; i++)
+        {
+            for (int j = 0; j < width - 1; j++)
+            {
+                float y = origin.transform.position.y + i*unitSize;
+                float x = origin.transform.position.x + j*unitSize;
+                Instantiate(floor, new Vector3(x, y, 0f), Quaternion.identity, transform);
             }
         }
     }
