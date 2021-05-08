@@ -129,6 +129,9 @@ MonoBehaviour:
   bullet: {fileID: 1513296735412195338, guid: 219387a78be46c44db4813a3668aa5bc, type: 3}
   enemy: {fileID: 8602497043285895088}
   Player: {fileID: 0}
+  FarDistance: 0
+  CloseDistance: 0
+  timer: 0
 --- !u!1001 &5163272401336323669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -142,11 +145,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605897754, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605897754, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605897754, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_LocalPosition.x
