@@ -1,5 +1,5 @@
-// PRNG with Pseudo Quantum Error
-// 2021 © Aaron Campbellusing System;
+// PRNG with pseudo quantum error
+// 2021 © Aaron Campbell
 
 
 //
@@ -17,22 +17,22 @@ public class QRand : MonoBehaviour
     // Constant definitions
     //
 
-    // multiplier
-    static long A = 1664525;
-    // increment
-    static long C = 1013904223;
-    // modulus
-    static double M = System.Math.Pow(2,32);
-    // default string for Quantum
-    static string DefaultStr = "[228, 1, 8, 16, 1, 29, 3, 2, 45, 2, 26, 5, 51, 4, 47, 16, 318, 31, 1, 28, 1, 30, 2, 25, 3, 7, 4, 35, 3, 24, 28] ";
+    // Multiplier constant for PRNG
+    private static readonly long PRNGMultiplier = 1664525;
+    // Increment constant for PRNG
+    private static readonly long PRNGConstant = 1013904223;
+    // Modulus constant for PRNG
+    private static readonly double PRNGModulus = System.Math.Pow(2,32);
+    // Default quantum register
+    private static readonly List<List<double>> OfflineCounts = new List<List<double>>{new List<double>{0.6839729119638827, 0.7697516930022573, 0.8893905191873589, 0.9051918735891648, 0.9232505643340858, 0.9367945823927766, 0.945823927765237, 1.0}, new List<double>{0.022375215146299483, 0.043029259896729774, 0.055077452667814115, 0.11015490533562823, 0.14113597246127366, 0.29259896729776247, 0.35111876075731496, 1.0}};
 
     //
     // Instance variable definitions
     //
 
-    // quantum register
+    // Quantum register
     List<List<double>> countsList;
-    // the current seed (with extra decimals)
+    // Current seed
     double currentSeed;
 
     //
@@ -41,38 +41,125 @@ public class QRand : MonoBehaviour
 
     void Start()
     {
+        // Initialize this.currentSeed to CurrentTimeMillis();
         this.currentSeed = CurrentTimeMillis();
-        this.countsList = new List<List<double>>{new List<double>{0.6839729119638827, 0.7697516930022573, 0.8893905191873589, 0.9051918735891648, 0.9232505643340858, 0.9367945823927766, 0.945823927765237, 1.0}, new List<double>{0.022375215146299483, 0.043029259896729774, 0.055077452667814115, 0.11015490533562823, 0.14113597246127366, 0.29259896729776247, 0.35111876075731496, 1.0}};
+        // Initialize this.countsList
+        this.countsList = OfflineCounts;
     }
 
-    void PrintCounts(List<List<double>> thing)
+    /// <summary>
+    /// Sets the starting seed so that the same QPRNG sequence can be repeated.
+    /// </summary>
+    /// <param name="startingSeed">Int value which the QRand starting seed will be set to.</param>
+    public void InitState(int startingSeed)
     {
-        string retval = "[";
-        foreach (List<double> l in thing)
-        {
-            retval += "[";
-            foreach (double v in l)
-            {
-                retval += v + ",";
-            }
-            retval += "]";
-        }
-        retval += "]";
-        Debug.Log(retval);
+        this.currentSeed = startingSeed;
     }
 
-    // calls NextRegisterCoroutine without returning an IEnumerator
-    void NextRegister() => StartCoroutine(NextRegister_Coroutine());
+    /// <summary>
+    /// Returns the current seed's value as a double.
+    /// </summary>
+    /// <returns>Returns the current seed's value as a double.</returns>
+    public double GetCurrentSeed()
+    {
+        return (double)this.currentSeed;
+    }
 
-    // calls NextRegisterCoroutine (for init)
+    /// <summary>
+    /// Returns the current seed's scaled value as a double.
+    /// </summary>
+    /// <returns>Returns the current seed's scaled value as a double.</returns>
+    public double GetCurrentSeedDouble()
+    {
+        return (double)(this.currentSeed/PRNGModulus);
+    }
+
+    /// <summary>
+    /// Returns the current seed's scaled value as an int.
+    /// </summary>
+    /// <returns>Returns the current seed's scaled value as an int.</returns>
+    public int GetCurrentSeedInt(int maxValue = 1000)
+    {
+        return (int)(maxValue*this.currentSeed/PRNGModulus);
+    }
+
+    /// <summary>
+    /// Returns the current seed's scaled value as a float.
+    /// </summary>
+    /// <returns>Returns the current seed's scaled value as a float.</returns>
+    public float GetCurrentSeedFloat()
+    {
+        return (float)(this.currentSeed/PRNGModulus);
+    }
+
+    /// <summary>
+    /// Computes and a new seed using a linear congruent classic PRNG and bitwise pseudo quantum error.
+    /// </summary>
+    /// <returns>Returns the computed seed without scaling.</returns>
+    public double NextSeed()
+    {
+        // preform linear congruent classic calculation
+        double retval = (PRNGMultiplier * this.currentSeed + PRNGConstant) % PRNGModulus;
+        // collect the decimals of stuff
+        double d = retval%1;
+        // preform bitwise pseudo quantum error
+        retval = ApplyQuantumError(retval) + d;
+        // update currentSeed
+        this.currentSeed = retval;
+        // return scaled seed
+        return retval;
+    }
+
+    /// <summary>
+    /// Computes and a new seed using a linear congruent classic PRNG and bitwise pseudo quantum error.
+    /// </summary>
+    /// <returns>Returns the computed seed as a double in the range [0,1).</returns>
+    public double NextDouble()
+    {
+        return this.NextSeed()/PRNGModulus;
+    }
+
+    /// <summary>
+    /// Computes and a new seed using a linear congruent classic PRNG and bitwise pseudo quantum error.
+    /// </summary>
+    /// <returns>Returns the computed seed as a float in the range [0,1).</returns>
+    public float NextFloat()
+    {
+        return (float)this.NextDouble();
+    }
+
+    /// <summary>
+    /// Computes and a new seed using a linear congruent classic PRNG and bitwise pseudo quantum error.
+    /// </summary>
+    /// <returns>Returns the computed seed as an int in the range [0,maxValue).</returns>
+    /// <param name="maxValue">The maximum value of the returned seed. 1000 by default.</param>
+    public int NextInt(int maxValue = 1000)
+    {
+        return (int)(this.NextDouble() * maxValue);
+    }
+
+    /// <summary>
+    /// Get the current time in milliseconds since Jan 1, 1970.
+    /// </summary>
+    /// <returns>Current time in milliseconds since Jan 1, 1970.</returns>
+    static long CurrentTimeMillis()
+    {
+        return (long)(System.DateTime.UtcNow - new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc)).TotalMilliseconds;
+    }
+
+    /// <summary>
+    /// A call for NextRegister_Coroutine() intended for QRand initialization which will print a completion message to the Debug.Log when complete.
+    /// </summary>
     public IEnumerator InitQRand()
     {
         yield return StartCoroutine(NextRegister_Coroutine());
         Debug.Log("QRand fully initialized");
-        //PrintCounts(this.countsList);
+        // PrintCounts(this.countsList);
     }
 
-    // Gets a new quantum register's counts from a server
+    /// <summary>
+    /// Get a new quantum register from the quantum-seed-generator server.
+    /// </summary>
     IEnumerator NextRegister_Coroutine()
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get("https://quantum-seed-generator.herokuapp.com/get-seeds"))
@@ -90,60 +177,29 @@ public class QRand : MonoBehaviour
                     Debug.Log("Error fetching counts from server");
                     break;
                 case UnityWebRequest.Result.Success:
-                    Debug.Log("generating countsList");
+                    Debug.Log("Fetching quantum register from quantum-seed-generator.");
                     this.countsList = CreateArray(webRequest.downloadHandler.text);
                     break;
             }
         }
     }
 
-    // returns the int form of the current seed
-    public int GetCurrentSeed(double maxValue = 999)
+    /// <summary>
+    /// Given an input string representing an Int[], creates a new List<\List<\double>> to be used by bitwise pseudo quantum error.
+    /// </summary>
+    /// <returns>List<\List<\double>> representing the outcome probabilities of a real quantum circuit.</returns>
+    /// <param name="msg">String representing an Int[] array. Either retrieved via webrequest from a real quantum computer or the default message.</param>
+    List<List<double>> CreateArray(string counts)
     {
-        return Convert.ToInt32(ToBoundsFloat(this.currentSeed)*maxValue);
-    }
-
-    public void InitState(int startingSeed)
-    {
-        this.currentSeed = startingSeed;
-    }
-
-    // Gets the current time in milliseconds since Jan 1, 1970
-    static long CurrentTimeMillis()
-    {
-        return (long) (System.DateTime.UtcNow - new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc)).TotalMilliseconds;
-    }
-
-    // convert a base 10 long to its binary representation as a string
-    static string DecimalToBinary(long n)
-    {
-        return Convert.ToString(n, 2);;
-    }
-
-    // convert a binary string longo its base 10 representation as an long
-    static long BinaryToDecimal(string n)
-    {
-        return Convert.ToInt64(n,2);
-    }
-
-    // scales given seed to the bounds: 0 to max
-    double ToBoundsFloat(double num)
-    {
-        return num / M;
-    }
-
-    // creates a double[,] given a double[] as a string
-    List<List<double>> CreateArray(string msg)
-    {
-        // List<double> rawCountsList = new List<double>();
+        // Split the list into 2 halves
         List<List<double>> retval = new List<List<double>>(){new List<double>(),new List<double>()};
-        string[] numList = msg.Substring(1,msg.Length-3).Split(',');
+        string[] numList = counts.Substring(1,counts.Length-3).Split(',');
         int subLength = numList.Length/2;
         for(int i = 0; i < numList.Length; i++)
         {
             retval[(i/subLength)%2].Add(Convert.ToInt64(numList[i]));
         }
-        // reformat counts to desired percentage format
+        // Reformat counts to desired percentage format
         for(int i = 0; i < 2; i++)
         {
             for(int j = 1; j < subLength; j++)
@@ -158,74 +214,55 @@ public class QRand : MonoBehaviour
         return retval;
     }
 
-    // takes 2 parameters:
-    //    v: single binary digit as a string
-    //    f: float value < 0
-    // returns a single binary digit as a string which has been changed based on the cuttoffs in the count list based on the float value
-    char QuantumBitError(char v, double f)
+    /// <summary>
+    /// A function to print the value of a List<List<double>> in a human readable form to Debug.Log.
+    /// </summary>
+    /// <param name="args">The List<List<double>> to be logged.</param>
+    void PrintCounts(List<List<double>> args)
+    {
+        List<string> retval = new List<string>{};
+        foreach (List<double> list in args)
+        {
+            retval.Add(string.Join(",",list));
+        }
+        Debug.Log("[[" + string.Join("],[",retval) + "]]");
+    }
+
+    /// <summary>
+    /// Given a double n, preforms bitwise pseudo quantum error on n.
+    /// </summary>
+    /// <returns>N after being affected by bitwise pseudo quantum error plus the decimal values from the original number after being scaled by PRNGModulus.</returns>
+    /// <param name="n">The number to be affected by quantum error.</param>
+    double ApplyQuantumError(double num)
+    {
+        // Isolate decimal of num after scaling with PRNGModulus
+        double d = (num/PRNGModulus)%1;
+        // Return value
+        long retval = 0;
+        // Apply quantum bit error to n bitwise
+        for (int i = 0; i < 32; i++)
+        {
+            long bit = 1&((long)num)>>(31-i);
+            retval |= QuantumBitError(bit,d)<<i;
+        }
+        // Return int value of modified bit sequence adding back the lost decimals
+        return retval;
+    }
+
+    /// <summary>
+    /// Applies pseudo quantum error to the given bit.
+    /// </summary>
+    /// <returns>Char value after being affected by pseudo quantum error.</returns>
+    /// <param name="v">Char value to be affected by quantum error.</param>
+    /// <param name="d">Decimal value used to determine output of pseudo quantum error.</param>
+    long QuantumBitError(long bit, double d)
     {
         int index = 0;
-        int initialValue = 0;
-        if (v=='1')
-        {
-            initialValue = 1;
-        }
-        // set index based on value of f
-        // Debug.Log(this.countsList[initialValue][index]);
-        while(f>this.countsList[initialValue][index])
+        // Set index based on value of d
+        while(d>this.countsList[(int)bit&1][index])
         {
             index++;
         }
-        if(index%2 == 1)
-        {
-            return '1';
-        } else
-        {
-            return '0';
-        }
-    }
-
-    // given a float n, returns the double with the part of the value > 0 affected by the quantum circuit
-    double Magic(double n)
-    {
-        // create string representing binary value of n
-        char[] binaryArray = DecimalToBinary(Convert.ToInt64(n)).ToCharArray();
-        // isolate decimal of ToBoundsFloat(n)
-        double f = ToBoundsFloat(n)%1;
-        // apply quantum bit error to n bitwise
-        for (long i = 0; i < binaryArray.Length; i++)
-        {
-            binaryArray[i] = QuantumBitError(binaryArray[i],f);
-            f*=100;
-            f-=Convert.ToInt64(f);
-        }
-        // return int value of modified bit sequence adding back the lost decimals
-        return BinaryToDecimal(new string(binaryArray)) + n%1;
-    }
-
-    // returns the next seed as a double between 0 and 1 according to the Linear Congruent Classic PRNG
-    public double NextDouble()
-    {
-        // preform linear congruent classic calculation
-        double retval = (A * this.currentSeed + C) % M;
-        // collect the decimals of stuff
-        double f = retval%1;
-        // preform bitwise pseudo quantum error
-        retval = Magic(retval) + f;
-        // update currentSeed
-        this.currentSeed = Convert.ToInt64(retval);
-        // return scaled seed
-        return ToBoundsFloat(retval);
-    }
-
-    public float NextFloat()
-    {
-        return (float)this.NextDouble();
-    }
-
-    // returns the next seed as an int between 0 and maxValue according to the Linear Congruent Classic PRNG
-    public int NextInt(int maxValue = 999)
-    {
-        return Convert.ToInt32(this.NextDouble() * maxValue);
+        return index&1;
     }
 }

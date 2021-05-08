@@ -46,8 +46,8 @@ public class GenerateLevel : MonoBehaviour
         //Character map location is set
         //locationX = Random.Range(0,levelWidth);
         //locationY = Random.Range(0,levelHeight);
-        locationX = qrand.NextInt(levelWidth-1);
-        locationY = qrand.NextInt(levelHeight-1);
+        locationX = qrand.NextInt(levelWidth);
+        locationY = qrand.NextInt(levelHeight);
 
         //Connections of the rooms will be generated. Rooms are saved to roomStructure variable
         roomStructure = new Room[levelHeight][];
@@ -115,7 +115,7 @@ public class GenerateLevel : MonoBehaviour
         {
             //Select random neighbour room
             Vector2 lastCoordinate = selectedCoordinate;
-            selectedCoordinate = nextCoordinates[qrand.NextInt(nextCoordinates.Count-1)];
+            selectedCoordinate = nextCoordinates[qrand.NextInt(nextCoordinates.Count)];
 
             //Create door between the rooms
             CreateDoorway(lastCoordinate, selectedCoordinate);
@@ -169,7 +169,7 @@ public class GenerateLevel : MonoBehaviour
                     {
                         //Select random neighbour
                         //selectedCoordinate = nextCoordinates[Random.Range(0, nextCoordinates.Count)];
-                        selectedCoordinate = nextCoordinates[qrand.NextInt(nextCoordinates.Count-1)];
+                        selectedCoordinate = nextCoordinates[qrand.NextInt(nextCoordinates.Count)];
 
                         //Create door
                         CreateDoorway(coordinate, selectedCoordinate);
@@ -321,6 +321,6 @@ public class GenerateLevel : MonoBehaviour
         //return choices[Random.Range(0, choices.Length)];
 
         qrand.InitState(room.Seed);
-        return choices[qrand.NextInt(choices.Length-1)];
+        return choices[qrand.NextInt(choices.Length)];
     }
 }
