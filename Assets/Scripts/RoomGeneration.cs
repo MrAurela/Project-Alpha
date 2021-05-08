@@ -106,13 +106,13 @@ public class RoomGeneration : MonoBehaviour
         //GameObject tileSystem = Instantiate(tileSystem, new Vector3(0f, 0f, 0f), Quaternion.identity);
         //tilemap.SetTile(new Vector3Int(0, 0, 0), wallTile);
 
-        for (int i = 0; i < width-1; i++)
+        for (int i = 0; i < width; i++)
         {
             float x = origin.transform.position.x + unitSize * i;
             float y1 = origin.transform.position.y;
             float y2 = origin.transform.position.y + (height-1) * unitSize;
             
-            if (Mathf.Abs((width-1) / 2 - doorSize*i) > doorSize || !room.HasDoorDown)
+            if (Mathf.Abs(x) > doorSize*unitSize || !room.HasDoorDown)
             {
                 Instantiate(wall, new Vector3(x, y1, 0f), Quaternion.identity, transform);
             } else
@@ -120,7 +120,7 @@ public class RoomGeneration : MonoBehaviour
                 GameObject newDoor = Instantiate(door, new Vector3(x, y1, 0f), Quaternion.identity, transform);
                 newDoor.GetComponent<Door>().SetConnection(this.room, FindObjectOfType<GenerateLevel>().GetRoom(this.room.x, this.room.y - 1));
             }
-            if (Mathf.Abs((width-1) / 2 - doorSize * i) > doorSize || !room.HasDoorUp)
+            if (Mathf.Abs(x) > doorSize * unitSize || !room.HasDoorUp)
             {
                 Instantiate(wall, new Vector3(x, y2, 0f), Quaternion.identity, transform);
             } else
@@ -131,12 +131,12 @@ public class RoomGeneration : MonoBehaviour
         }
 
 
-        for (int i = 0; i < height-1; i++)
+        for (int i = 0; i < height; i++)
         {
             float y = origin.transform.position.y + unitSize * i;
             float x1 = origin.transform.position.x;
             float x2 = origin.transform.position.x + (width-1) * unitSize;
-            if (Mathf.Abs((height-1) / 2 - doorSize * i) > doorSize || !room.HasDoorLeft)
+            if (Mathf.Abs(y) > doorSize * unitSize || !room.HasDoorLeft)
             {
                 Instantiate(wall, new Vector3(x1, y, 0f), Quaternion.identity, transform);
                 
@@ -145,7 +145,7 @@ public class RoomGeneration : MonoBehaviour
                 GameObject newDoor = Instantiate(door, new Vector3(x1, y, 0f), Quaternion.identity, transform);
                 newDoor.GetComponent<Door>().SetConnection(this.room, FindObjectOfType<GenerateLevel>().GetRoom(this.room.x - 1, this.room.y));
             }
-            if (Mathf.Abs((height-1) / 2 - doorSize * i) > doorSize || !room.HasDoorRight)
+            if (Mathf.Abs(y) > doorSize * unitSize || !room.HasDoorRight)
             {
                 Instantiate(wall, new Vector3(x2, y, 0f), Quaternion.identity, transform);
             } else

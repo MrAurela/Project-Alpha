@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 923767910727767472}
   - component: {fileID: -5833940588385238488}
   - component: {fileID: -2334343629976888448}
+  - component: {fileID: -3322777417301485765}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,3 +132,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-3322777417301485765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4065717727726724012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a0c7f74660196748bc2ee6afe36e616, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 4035501790466999928, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
+  - {fileID: 1432774421400288080, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
+  - {fileID: 2376107565742220442, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
+  - {fileID: -4080137071908401649, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
+  - {fileID: 4755373664117421245, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
+  - {fileID: 7179352014698049699, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
+  - {fileID: 5645451735475491846, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
+  - {fileID: 8266258911003420344, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
+  - {fileID: -2455287069041890485, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
+  - {fileID: -702408572997326234, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
+  - {fileID: -3772098893637499282, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
+  - {fileID: 7988907048659085410, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
+  - {fileID: -3639016157858113680, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
+  - {fileID: -8717017754119436831, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
+  - {fileID: 3400160013776356846, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
+  - {fileID: -6813189574185817458, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
+  downRightSprite: {fileID: 8490642196906846815, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
+  up: 0
+  right: 0
+  down: 0
+  left: 0
