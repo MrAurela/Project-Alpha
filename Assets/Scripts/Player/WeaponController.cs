@@ -6,6 +6,7 @@ public class WeaponController : MonoBehaviour
     SpriteRenderer sprite;
     public Camera cam;
     public GameObject bullet;
+    public float bulletSpawnDistance;
 
 
     private void Start()
@@ -39,7 +40,7 @@ public class WeaponController : MonoBehaviour
     private void Fire(Vector2 dir)
     {
         GameObject bulletClone = (GameObject) Instantiate(bullet, transform.position, transform.rotation);
-        bulletClone.transform.position += new Vector3(-dir.normalized.x, -dir.normalized.y, 0);
+        bulletClone.transform.position += new Vector3(-dir.normalized.x, -dir.normalized.y, 0) * bulletSpawnDistance;
         bulletClone.GetComponent<Rigidbody2D>().velocity = -dir.normalized;
         //bulletClone.set_direction(dir.normalized);
     }
