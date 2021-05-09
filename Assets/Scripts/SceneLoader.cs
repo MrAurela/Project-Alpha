@@ -9,7 +9,7 @@ public class SceneLoader : MonoBehaviour
     public QRand qrand;
 
     // Start is called before the first frame update
-    void Update()
+    void Start()
     {
         QRand qrand = FindObjectOfType<QRand>();
         if (qrand)
