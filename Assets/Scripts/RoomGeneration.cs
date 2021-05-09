@@ -21,7 +21,7 @@ public class RoomGeneration : MonoBehaviour
 
     public Room room;
 
-    private int numberOfEnemies = 0;
+    public int numberOfEnemies = 0; //public for testing only
     private QRand qrand;
 
     public void SetPlayerTo(GameObject character, int id)
@@ -68,10 +68,6 @@ public class RoomGeneration : MonoBehaviour
     public void DecreaseNumberOfEnemies()
     {
         this.numberOfEnemies--;
-        if (this.numberOfEnemies == 0)
-        {
-            this.room.SetRoomCleared();
-        }
     }
 
     void Awake()
@@ -89,23 +85,59 @@ public class RoomGeneration : MonoBehaviour
 
         //Instantiate outer structures: walls & doors
         CreateWalls();
-        
+
 
         //Mirror the room layout when needed
         if (room.IsTVertical() && room.HasDoorUp)
-            transform.GetChild(2).transform.localScale = new Vector3(1, -1, 1);
+            //transform.GetChild(2).transform.localScale = new Vector3(1, -1, 1);
+            mirror(false, true);
         if (room.IsTHorizontal() && room.HasDoorRight)
-            transform.GetChild(2).transform.localScale = new Vector3(-1, 1, 1);
+            //transform.GetChild(2).transform.localScale = new Vector3(-1, 1, 1);
+            mirror(true, false);
         if (room.IsL() && (room.HasDoorUp && room.HasDoorLeft))
-            transform.GetChild(2).transform.localScale = new Vector3(-1, 1, 1);
+            //transform.GetChild(2).transform.localScale = new Vector3(-1, 1, 1);
+            mirror(true, false);
         if (room.IsL() && (room.HasDoorDown && room.HasDoorLeft))
-            transform.GetChild(2).transform.localScale = new Vector3(-1, -1, 1);
+            //transform.GetChild(2).transform.localScale = new Vector3(-1, -1, 1);
+            mirror(true, true);
         if (room.IsL() && (room.HasDoorDown && room.HasDoorRight))
-            transform.GetChild(2).transform.localScale = new Vector3(1, -1, 1);
+            //transform.GetChild(2).transform.localScale = new Vector3(1, -1, 1);
+            mirror(false, true);
         if (room.IsDEHorizontal() && room.HasDoorRight)
-            transform.GetChild(2).transform.localScale = new Vector3(-1, 1, 1);
+            //transform.GetChild(2).transform.localScale = new Vector3(-1, 1, 1);
+            mirror(true, false);
         if (room.IsDEVertical() && room.HasDoorDown)
-            transform.GetChild(2).transform.localScale= new Vector3(1, -1, 1);
+            //transform.GetChild(2).transform.localScale= new Vector3(1, -1, 1);
+            mirror(false, true);
+    }
+
+    void Update()
+    {
+        if (this.numberOfEnemies <= 0)
+        {
+            this.room.SetRoomCleared();
+        }
+    }
+
+    private void mirror(bool x, bool y)
+    {
+        Debug.Log("Called");
+        GameObject levelLayout = transform.GetChild(2).gameObject;
+        for (int i = 0; i < levelLayout.transform.GetChildCount(); i++)
+        {
+            GameObject child = levelLayout.transform.GetChild(i).gameObject;
+            if (x) child.transform.position = new Vector3(-child.transform.position.x, child.transform.position.y, child.transform.position.z);
+            if (y) child.transform.position = new Vector3(child.transform.position.x, -child.transform.position.y, child.transform.position.z);
+
+            //QUick fix:
+            //if (child.transform.position.x < -1500f)
+            //{
+            //    Debug.Log("Quick fix Called: ", this);
+            //    child.transform.position += new Vector3(3000f, 0f, 0f);
+            //}
+
+            Debug.Log(child);
+        }
     }
 
     private void CreateWalls()
@@ -121,7 +153,7 @@ public class RoomGeneration : MonoBehaviour
             float y1 = origin.transform.position.y;
             float y2 = origin.transform.position.y + (height-1) * unitSize;
             
-            if (Mathf.Abs(x) > doorSize*unitSize || !room.HasDoorDown)
+            if (Mathf.Abs(i - width/2 + 0.5f) >= doorSize || !room.HasDoorDown)
             {
                 Instantiate(wall, new Vector3(x, y1, 0f), Quaternion.identity, transform);
             } else
@@ -129,7 +161,7 @@ public class RoomGeneration : MonoBehaviour
                 GameObject newDoor = Instantiate(door, new Vector3(x, y1, 0f), Quaternion.identity, transform);
                 newDoor.GetComponent<Door>().SetConnection(this.room, FindObjectOfType<GenerateLevel>().GetRoom(this.room.x, this.room.y - 1));
             }
-            if (Mathf.Abs(x) > doorSize * unitSize || !room.HasDoorUp)
+            if (Mathf.Abs(i - width / 2 + 0.5f) >= doorSize || !room.HasDoorUp)
             {
                 Instantiate(wall, new Vector3(x, y2, 0f), Quaternion.identity, transform);
             } else
@@ -145,7 +177,7 @@ public class RoomGeneration : MonoBehaviour
             float y = origin.transform.position.y + unitSize * i;
             float x1 = origin.transform.position.x;
             float x2 = origin.transform.position.x + (width-1) * unitSize;
-            if (Mathf.Abs(y) > doorSize * unitSize || !room.HasDoorLeft)
+            if (Mathf.Abs(i - height / 2 + 0.5f) >= doorSize || !room.HasDoorLeft)
             {
                 Instantiate(wall, new Vector3(x1, y, 0f), Quaternion.identity, transform);
                 
@@ -154,7 +186,7 @@ public class RoomGeneration : MonoBehaviour
                 GameObject newDoor = Instantiate(door, new Vector3(x1, y, 0f), Quaternion.identity, transform);
                 newDoor.GetComponent<Door>().SetConnection(this.room, FindObjectOfType<GenerateLevel>().GetRoom(this.room.x - 1, this.room.y));
             }
-            if (Mathf.Abs(y) > doorSize * unitSize || !room.HasDoorRight)
+            if (Mathf.Abs(i - height / 2 + 0.5f) >= doorSize || !room.HasDoorRight)
             {
                 Instantiate(wall, new Vector3(x2, y, 0f), Quaternion.identity, transform);
             } else
