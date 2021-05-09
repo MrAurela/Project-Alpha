@@ -48,8 +48,8 @@ MonoBehaviour:
   character1Prefab: {fileID: 4065717727726724012, guid: 0d1c0c0c225b76045baae048500324b3, type: 3}
   character2Prefab: {fileID: 4065717727726724012, guid: 7ae62d0d87b475744857970ea4ab9459, type: 3}
   room: {fileID: 8571485781107144164, guid: 3de7864e54c9b7d4f9585e1acb8c6545, type: 3}
-  levelWidth: 4
-  levelHeight: 4
+  levelWidth: 2
+  levelHeight: 2
   verticalDE:
   - {fileID: 8571485781107144164, guid: 3ef6d10583f63c94ea7278c4f4ddea53, type: 3}
   horizontalDE:
@@ -77,6 +77,3 @@ MonoBehaviour:
   - {fileID: 8571485781107144164, guid: ad7a8e9770b881642b00f8c175aa6a74, type: 3}
   start:
   - {fileID: 8571485781107144164, guid: a5fbd2b12538e784089cbe9601f1d3b9, type: 3}
-  tilemap: {fileID: 0}
-  wallTile: {fileID: 11400000, guid: 262efc3755b05724180536c545937873, type: 2}
-  floorTile: {fileID: 0}

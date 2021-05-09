@@ -5,19 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    [SerializeField] QRand qrand;
+    //[SerializeField] QRand qrand;
+    public QRand qrand;
 
     // Start is called before the first frame update
-    void Start()
+    void Update()
     {
-        StartCoroutine(LoadQRand());
+        QRand qrand = FindObjectOfType<QRand>();
+        if (qrand)
+        {
+            StartCoroutine(LoadQRand());
+        }
         //
     }
 
     IEnumerator LoadQRand()
     {
         yield return StartCoroutine(qrand.InitQRand());
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        NextScene();
+    }
+
+    //Goes to next scene or first scene if in last scene
+    public void NextScene()
+    {
+        SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings);
     }
 
  

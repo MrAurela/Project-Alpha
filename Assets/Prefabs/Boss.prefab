@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 603582635}
   - component: {fileID: 603582636}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WeaponObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1775851868}
   - component: {fileID: 1775851869}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WeaponAxis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,6 +218,10 @@ PrefabInstance:
     - target: {fileID: 3514379594605898215, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_Name
       value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514379594605898215, guid: 4985346b799dbf945ae685f89456089c, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4985346b799dbf945ae685f89456089c, type: 3}
