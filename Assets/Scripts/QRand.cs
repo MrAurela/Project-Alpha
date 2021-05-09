@@ -138,6 +138,10 @@ public class QRand : MonoBehaviour
         return (int)(this.NextDouble() * maxValue);
     }
 
+    public double Range(int minValue = -1000, int maxValue = 1000) {
+        return (this.NextDouble()*(maxValue-minValue)) - ((maxValue+minValue)/2);
+    }
+
     /// <summary>
     /// Get the current time in milliseconds since Jan 1, 1970.
     /// </summary>
