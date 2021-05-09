@@ -70,4 +70,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            Debug.Log("Player hit for 5 dmg");
+            FindObjectOfType<PlayerSpirit>().GetComponent<Damageable>().Damage(5);
+        }
+    }
 }

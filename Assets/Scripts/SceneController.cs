@@ -10,4 +10,9 @@ public class SceneController : MonoBehaviour
     {
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings);
     }
+
+    public void GoToScene(string scene)
+    {
+        SceneManager.LoadScene(scene);
+    }
 }

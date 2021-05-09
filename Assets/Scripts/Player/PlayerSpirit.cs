@@ -7,6 +7,6 @@ public class PlayerSpirit : MonoBehaviour, IDamageable
 {
     public void Die()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Lose");
     }
 }
