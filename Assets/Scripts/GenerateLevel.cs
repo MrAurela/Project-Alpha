@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -60,20 +61,28 @@ public class GenerateLevel : MonoBehaviour
     //DEBUG: keys to change rooms quickly
     void Update()
     {
-        if (Input.GetKeyDown("t"))
+        try
         {
-            FindObjectOfType<GenerateLevel>().InstantiateRoom(locationX, locationY + 1);
-        } else if(Input.GetKeyDown("h"))
-        {
-            FindObjectOfType<GenerateLevel>().InstantiateRoom(locationX + 1, locationY);
-        } else if (Input.GetKeyDown("g"))
-        {
-            FindObjectOfType<GenerateLevel>().InstantiateRoom(locationX, locationY - 1);
+            if (Input.GetKeyDown("t"))
+            {
+                FindObjectOfType<GenerateLevel>().InstantiateRoom(locationX, locationY + 1);
+            } else if(Input.GetKeyDown("h"))
+            {
+                FindObjectOfType<GenerateLevel>().InstantiateRoom(locationX + 1, locationY);
+            } else if (Input.GetKeyDown("g"))
+            {
+                FindObjectOfType<GenerateLevel>().InstantiateRoom(locationX, locationY - 1);
+            }
+            else if (Input.GetKeyDown("f"))
+            {
+                FindObjectOfType<GenerateLevel>().InstantiateRoom(locationX - 1, locationY);
+            }
         }
-        else if (Input.GetKeyDown("f"))
+        catch (Exception e)
         {
-            FindObjectOfType<GenerateLevel>().InstantiateRoom(locationX - 1, locationY);
+            Debug.LogFormat("Likely out of bounds (maybe other error).\nException: {0}",e);
         }
+        
     }
 
     //Generates the main layout of the level
@@ -125,7 +134,7 @@ public class GenerateLevel : MonoBehaviour
             nextCoordinates = NeighbourCoordinates(selectedCoordinate, false,true);
 
 
-            Debug.Log(selectedCoordinate);
+            // Debug.Log(selectedCoordinate);
         }
 
         //The last room on the path will be the Boss room
@@ -313,7 +322,7 @@ public class GenerateLevel : MonoBehaviour
         else
         {
             //This should never happen!
-            Debug.Log(room.ToString());
+            Debug.LogFormat("This should not have happened.\n{0}",room.ToString());
             return null;
         }
 

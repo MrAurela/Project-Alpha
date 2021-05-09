@@ -61,7 +61,7 @@ public class Room
 
 
     //Textual representation of the room. Used for debugging purposes.
-    public string ToString()
+    public override string ToString()
     {
         if (IsX()) return "X";
         else if (IsTVertical()) return "T vertical";

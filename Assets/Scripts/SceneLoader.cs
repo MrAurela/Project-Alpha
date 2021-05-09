@@ -11,12 +11,13 @@ public class SceneLoader : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Scene loading begun.");
         QRand qrand = FindObjectOfType<QRand>();
         if (qrand)
         {
+            Debug.Log("Starting loadQRand() coroutine.");
             StartCoroutine(LoadQRand());
         }
-        //
     }
 
     IEnumerator LoadQRand()

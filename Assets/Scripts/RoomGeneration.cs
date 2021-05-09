@@ -52,7 +52,7 @@ public class RoomGeneration : MonoBehaviour
     public float RandomFloat(float f1, float f2)
     {
         float rand = qrand.NextFloat();
-        Debug.Log(rand);
+        // Debug.Log(rand);
         return rand*(f2-f1)+f1;
     }
     public int RandomFloat(int i1, int i2)
@@ -123,7 +123,7 @@ public class RoomGeneration : MonoBehaviour
     {
         Debug.Log("Called");
         GameObject levelLayout = transform.GetChild(2).gameObject;
-        for (int i = 0; i < levelLayout.transform.GetChildCount(); i++)
+        for (int i = 0; i < levelLayout.transform.childCount; i++)
         {
             GameObject child = levelLayout.transform.GetChild(i).gameObject;
             if (x) child.transform.position = new Vector3(-child.transform.position.x, child.transform.position.y, child.transform.position.z);

@@ -166,8 +166,12 @@ public class QRand : MonoBehaviour
     /// </summary>
     public IEnumerator InitQRand()
     {
+        // Re-initialize this.currentSeed to CurrentTimeMillis();
+        this.currentSeed = CurrentTimeMillis();
+        // Re-initialize this.countsList
+        this.countsList = OfflineCounts;
         yield return StartCoroutine(NextRegister_Coroutine());
-        Debug.Log("QRand fully initialized");
+        Debug.Log("QRand fully initialized.");
         // PrintCounts(this.countsList);
     }
 
@@ -178,12 +182,15 @@ public class QRand : MonoBehaviour
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get("https://quantum-seed-generator.herokuapp.com/get-seeds"))
         {
+            Debug.Log("Fetching quantum register from quantum-seed-generator.");
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
-
+            Debug.Log("Switch Statement");
             switch (webRequest.result)
             {
                 case UnityWebRequest.Result.ConnectionError:
+                    Debug.Log("Error fetching counts from server");
+                    break;
                 case UnityWebRequest.Result.DataProcessingError:
                     Debug.Log("Error fetching counts from server");
                     break;
@@ -191,8 +198,11 @@ public class QRand : MonoBehaviour
                     Debug.Log("Error fetching counts from server");
                     break;
                 case UnityWebRequest.Result.Success:
-                    Debug.Log("Fetching quantum register from quantum-seed-generator.");
+                    Debug.Log("Request recieved from quantum-seed-generator.");
                     this.countsList = CreateArray(webRequest.downloadHandler.text);
+                    break;
+                default:
+                    Debug.Log("Error fetching counts from server");
                     break;
             }
         }
