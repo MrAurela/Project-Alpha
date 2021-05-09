@@ -138,8 +138,18 @@ public class QRand : MonoBehaviour
         return (int)(this.NextDouble() * maxValue);
     }
 
-    public double Range(int minValue = -1000, int maxValue = 1000) {
-        return (this.NextDouble()*(maxValue-minValue)) - ((maxValue+minValue)/2);
+    /// <summary>
+    /// Computes and a new seed using a linear congruent classic PRNG and bitwise pseudo quantum error.
+    /// </summary>
+    /// <returns>Returns the computed seed as an int in the range (minValue,maxValue).</returns>
+    /// <param name="maxValue">The maximum value of the returned seed. 1000 by default.</param>
+    /// <param name="minValue">The minimum value of the returned seed. -1000 by default.</param>
+    public double Range(int minValue = -1000, int maxValue = 1000)
+    {
+        double maxRand = this.NextDouble() * maxValue;
+        double minRand = this.NextDouble()* minValue;
+
+        return (maxRand+minRand)/2;
     }
 
     /// <summary>
