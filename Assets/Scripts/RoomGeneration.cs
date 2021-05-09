@@ -22,6 +22,7 @@ public class RoomGeneration : MonoBehaviour
     public Room room;
 
     public int numberOfEnemies = 0; //public for testing only
+    private bool roomCleared = false;
     private QRand qrand;
 
     public void SetPlayerTo(GameObject character, int id)
@@ -113,8 +114,9 @@ public class RoomGeneration : MonoBehaviour
 
     void Update()
     {
-        if (this.numberOfEnemies <= 0)
+        if (this.numberOfEnemies <= 0 && !roomCleared)
         {
+            roomCleared = true;
             this.room.SetRoomCleared();
         }
     }
