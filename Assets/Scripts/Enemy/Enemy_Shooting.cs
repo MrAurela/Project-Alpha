@@ -16,6 +16,7 @@ public class Enemy_Shooting : MonoBehaviour
     private float FarDistance;
     private float CloseDistance;
     public float timer;
+    public bool isBoss;
     private float startTime;
     private bool active;
     private float secondsUntilActivate = 1; // how many seconds should the enemy wait after spawning to begin attacking the player
@@ -45,6 +46,11 @@ public class Enemy_Shooting : MonoBehaviour
                 {
                     Vector2 dir = positionOnScreen - playerOnScreen;
                     Fire(dir);
+                    if(this.isBoss)
+                    {
+                        Fire(Rotate(dir,3f));
+                        Fire(Rotate(dir,-3f));
+                    }
                     startTime = Time.time;
                 }
             }
@@ -77,11 +83,21 @@ public class Enemy_Shooting : MonoBehaviour
     private void Fire(Vector2 dir)
     {
         if(this.active)
-        {    
+        {
             GameObject bulletClone = (GameObject)Instantiate(bullet, transform.position, transform.rotation);
             bulletClone.transform.position += new Vector3(-dir.normalized.x, -dir.normalized.y, 0);
             bulletClone.GetComponent<Rigidbody2D>().velocity = -dir.normalized;
         }
+    }
+
+    public static Vector2 Rotate(Vector2 v, float delta)
+    {
+        float sin = Mathf.Sin(delta * Mathf.Deg2Rad);
+        float cos = Mathf.Cos(delta * Mathf.Deg2Rad);
+        
+        float tx = (cos * v.x) - (sin * v.y);
+        float ty = (sin * v.x) + (cos * v.y);
+        return new Vector2(tx,ty);
     }
 
 }

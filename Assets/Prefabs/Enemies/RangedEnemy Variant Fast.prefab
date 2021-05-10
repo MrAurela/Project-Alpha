@@ -231,7 +231,7 @@ PrefabInstance:
       objectReference: {fileID: 297761703447499198, guid: aad66296af45d5e49b4ca6e2f1c47b51, type: 3}
     - target: {fileID: 3514379594605897755, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.6954264
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605897755, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_Color.g
@@ -239,7 +239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605897755, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.4188679
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605897755, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_SortingOrder
@@ -251,7 +251,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: velocity
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: Far_distance
@@ -263,19 +263,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: FarDistanceMax
-      value: 12
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: FarDistanceMin
-      value: 8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: CloseDistanceMax
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: CloseDistanceMin
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898213, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_Constraints
@@ -303,7 +303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898215, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_Name
-      value: RangedEnemy Variant
+      value: RangedEnemy Variant Fast
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898215, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_Layer
