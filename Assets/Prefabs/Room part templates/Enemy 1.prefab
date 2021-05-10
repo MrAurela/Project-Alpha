@@ -87,8 +87,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9145520572116170975, guid: 294ed78e59ab53248b35d436a3ec2a90, type: 3}
+      propertyPath: enemyTypes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9145520572116170975, guid: 294ed78e59ab53248b35d436a3ec2a90, type: 3}
+      propertyPath: enemyTypes.Array.data[0]
+      value: 
+      objectReference: {fileID: 8602497043285895090, guid: f611c01cd60c03047abd493e228e031e, type: 3}
+    - target: {fileID: 9145520572116170975, guid: 294ed78e59ab53248b35d436a3ec2a90, type: 3}
+      propertyPath: enemyTypes.Array.data[1]
+      value: 
+      objectReference: {fileID: 8602497043285895090, guid: 32b3d6e59870fad4abb08785e67bff29, type: 3}
+    - target: {fileID: 9145520572116170975, guid: 294ed78e59ab53248b35d436a3ec2a90, type: 3}
+      propertyPath: probabilities.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9145520572116170975, guid: 294ed78e59ab53248b35d436a3ec2a90, type: 3}
       propertyPath: probabilities.Array.data[0]
-      value: 0.5
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 9145520572116170975, guid: 294ed78e59ab53248b35d436a3ec2a90, type: 3}
+      propertyPath: probabilities.Array.data[1]
+      value: 0.45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 294ed78e59ab53248b35d436a3ec2a90, type: 3}
