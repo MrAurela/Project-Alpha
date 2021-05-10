@@ -104,7 +104,7 @@ public class GenerateLevel : MonoBehaviour
                 roomStructure[y][x].Seed = qrand.NextInt(10000000);
                 Debug.LogFormat("LevelLayout Seed: {0}",qrand.GetCurrentSeedInt());
 
-                Debug.Log("Room created at: " + x + ", " + y);
+                //Debug.Log("Room created at: " + x + ", " + y);
             }
         }
 
@@ -140,7 +140,7 @@ public class GenerateLevel : MonoBehaviour
 
         //The last room on the path will be the Boss room
         roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].IsBossRoom = true;
-        Debug.Log("Boss: " + selectedCoordinate.x + ", " + selectedCoordinate.y);
+        //Debug.Log("Boss: " + selectedCoordinate.x + ", " + selectedCoordinate.y);
 
 
         //Create doors to rooms that are not part of the main path and add some random extra doors between rooms
@@ -268,8 +268,8 @@ public class GenerateLevel : MonoBehaviour
             return;
         }
 
-        Debug.Log("Instantiating room " + x + ", " + y);
-        Debug.Log("Room object: " + this.roomStructure[y][x]);
+        //Debug.Log("Instantiating room " + x + ", " + y);
+        //Debug.Log("Room object: " + this.roomStructure[y][x]);
 
         if (room1) Destroy(room1);
         if (room2) Destroy(room2);
@@ -278,12 +278,12 @@ public class GenerateLevel : MonoBehaviour
         GameObject roomTemplate = SelectRoomTemplate(room);
 
         room1 = Instantiate(roomTemplate, world1Origin, Quaternion.identity);
-        Debug.Log(roomTemplate);
-        Debug.Log(room1);
-        Debug.Log(room1.GetComponent<RoomGeneration>());
-        Debug.Log(room1.GetComponent<RoomGeneration>().room);
+        //Debug.Log(roomTemplate);
+        //Debug.Log(room1);
+        //Debug.Log(room1.GetComponent<RoomGeneration>());
+        //Debug.Log(room1.GetComponent<RoomGeneration>().room);
         room1.GetComponent<RoomGeneration>().room = room;
-        Debug.Log(room1.GetComponent<RoomGeneration>().room);
+        //Debug.Log(room1.GetComponent<RoomGeneration>().room);
 
         room2 = Instantiate(roomTemplate, world2Origin, Quaternion.identity);
         room2.GetComponent<RoomGeneration>().room = room;
