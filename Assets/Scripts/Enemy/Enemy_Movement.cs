@@ -4,35 +4,50 @@ using UnityEngine;
 
 public class Enemy_Movement : MonoBehaviour
 {
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
     public Rigidbody2D Player;
     public Rigidbody2D Enemy;
     public int velocity = 1;
     private Vector2 moveDirection;
-    public int Close_distance;
-    public int Far_distance;
+    private Vector2 playerGhost;
+    public float FarDistanceMax;
+    public float FarDistanceMin;
+    public float CloseDistanceMax;
+    public float CloseDistanceMin;
+    private float FarDistance;
+    private float CloseDistance;
+    // Start is called before the first frame update
+    void Start()
+    {
+        FarDistance = Random.Range(FarDistanceMin, FarDistanceMax);
+        CloseDistance = Random.Range(CloseDistanceMin, CloseDistanceMax);
+        playerGhost = Enemy.position;
+    }  
     // Update is called once per frame
     void Update()
     {
         if (Player != null)
         {
-            if (CloseToPlayer())
+            if (Sees_player())
             {
-                MoveAway();
-            }
-            else if (FarFromPlayer())
-            {
-                MoveCloser();
+                playerGhost = Player.position;
+                if (CloseToPlayer())
+                {
+                    MoveAway();
+                }
+                else if (FarFromPlayer())
+                {
+                    MoveCloser();
+                }
+                else
+                {
+                    Attack();
+                }
             }
             else
             {
-                Attack();
+                MoveToGhost();
             }
+            
         }
         
     }
@@ -41,7 +56,7 @@ public class Enemy_Movement : MonoBehaviour
         float X = Player.position.x - Enemy.position.x;
         float Y = Player.position.y - Enemy.position.y;
         Vector2 distanceVector = new Vector2(X, Y);
-        if (distanceVector.magnitude < Close_distance)
+        if (distanceVector.magnitude < CloseDistance)
         {
             return true;
         }
@@ -55,7 +70,7 @@ public class Enemy_Movement : MonoBehaviour
         float X = Player.position.x - Enemy.position.x;
         float Y = Player.position.y - Enemy.position.y;
         Vector2 distanceVector = new Vector2(X, Y);
-        if (distanceVector.magnitude > Far_distance)
+        if (distanceVector.magnitude > FarDistance)
         {
             return true;
         }
@@ -66,7 +81,17 @@ public class Enemy_Movement : MonoBehaviour
     }
     bool Sees_player()
     {
-        return true;
+        
+        LayerMask mask = LayerMask.GetMask("Wall");
+        RaycastHit2D raycastHit2D = Physics2D.Linecast(Enemy.position, Player.position, mask);
+        if (raycastHit2D == false)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     void MoveAway()
     {
@@ -79,6 +104,13 @@ public class Enemy_Movement : MonoBehaviour
     {
         float moveX = Player.position.x - Enemy.position.x;
         float moveY = Player.position.y - Enemy.position.y;
+        moveDirection = new Vector2(moveX, moveY).normalized;
+        Enemy.velocity = new Vector2(moveDirection.x * velocity, moveDirection.y * velocity);
+    }
+    void MoveToGhost()
+    {
+        float moveX = playerGhost.x - Enemy.position.x;
+        float moveY = playerGhost.y - Enemy.position.y;
         moveDirection = new Vector2(moveX, moveY).normalized;
         Enemy.velocity = new Vector2(moveDirection.x * velocity, moveDirection.y * velocity);
     }

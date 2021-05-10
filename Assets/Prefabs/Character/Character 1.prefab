@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1960754555494019985}
   - component: {fileID: 235934529429201606}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WeaponAxis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 5042930527306191315}
   - component: {fileID: 6833828448116276575}
   - component: {fileID: 2788306778721623801}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Character 1
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8443948427213386662}
   - component: {fileID: 8169083677654854334}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WeaponObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,6 +341,10 @@ PrefabInstance:
     - target: {fileID: 7501791112764932997, guid: 592dce0ce08f84d4d9494c0841820597, type: 3}
       propertyPath: m_Name
       value: Camera 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7501791112764932997, guid: 592dce0ce08f84d4d9494c0841820597, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7501791112764932999, guid: 592dce0ce08f84d4d9494c0841820597, type: 3}
       propertyPath: orthographic size
