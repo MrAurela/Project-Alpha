@@ -78,7 +78,7 @@ public class QRand : MonoBehaviour
     /// Returns the current seed's scaled value as an int.
     /// </summary>
     /// <returns>Returns the current seed's scaled value as an int.</returns>
-    public int GetCurrentSeedInt(int maxValue = 1000)
+    public int GetCurrentSeedInt(double maxValue = 1000)
     {
         return (int)(maxValue*this.currentSeed/PRNGModulus);
     }
@@ -167,7 +167,7 @@ public class QRand : MonoBehaviour
     public IEnumerator InitQRand()
     {
         // Re-initialize this.currentSeed to CurrentTimeMillis();
-        this.currentSeed = CurrentTimeMillis();
+        this.currentSeed = CurrentTimeMillis()&0xFFFFF;
         // Re-initialize this.countsList
         this.countsList = OfflineCounts;
         yield return StartCoroutine(NextRegister_Coroutine());
@@ -266,11 +266,15 @@ public class QRand : MonoBehaviour
         // Apply quantum bit error to n bitwise
         for (int i = 0; i < 32; i++)
         {
+            // affect a bit
             long bit = 1&((long)num)>>(31-i);
             retval |= QuantumBitError(bit,d)<<i;
+            // update d
+            d*=10;
+            d%=1;
         }
         // Return int value of modified bit sequence adding back the lost decimals
-        return retval;
+        return retval+d;
     }
 
     /// <summary>

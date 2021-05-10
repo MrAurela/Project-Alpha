@@ -111,6 +111,7 @@ public class GenerateLevel : MonoBehaviour
                 roomStructure[y][x].x = x;
                 roomStructure[y][x].y = y;
                 roomStructure[y][x].Seed = qrand.NextInt(10000000);
+                Debug.LogFormat("LevelLayout Seed: {0}",qrand.GetCurrentSeedInt());
 
                 //Debug.Log("Room created at: " + x + ", " + y);
             }
