@@ -277,6 +277,10 @@ PrefabInstance:
       propertyPath: CloseDistanceMin
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 3514379594605898213, guid: 4985346b799dbf945ae685f89456089c, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898214, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 2.6666667
