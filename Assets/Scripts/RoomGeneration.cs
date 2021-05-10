@@ -53,13 +53,13 @@ public class RoomGeneration : MonoBehaviour
     public float RandomFloat(float f1, float f2)
     {
         float rand = qrand.NextFloat();
-        // Debug.Log(rand);
+        Debug.Log(rand);
         return rand*(f2-f1)+f1;
     }
-    public int RandomFloat(int i1, int i2)
+   /* public int RandomFloat(int i1, int i2)
     {
         return Random.Range(i1, i2);
-    }
+    }*/
 
     public void IncreaseNumberOfEnemies()
     {
