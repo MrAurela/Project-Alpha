@@ -43,7 +43,7 @@ public class AudioPlayer : MonoBehaviour
         if (!ambient)
         {
             ambient = true;
-            StartCoroutine(Fade(bg1, 1.5f));
+            StartCoroutine(Fade(bg1, 0.5f));
         }
     }
 
