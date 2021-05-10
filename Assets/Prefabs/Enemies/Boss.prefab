@@ -126,14 +126,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf7c12cb3f530f24ba911faba336eb7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 1513296735412195338, guid: 219387a78be46c44db4813a3668aa5bc, type: 3}
+  bullet: {fileID: 1949555957978316934, guid: 8f301ee2a2946d04f8b56e6ecddfd9cc, type: 3}
   enemy: {fileID: 8602497043285895088}
   Player: {fileID: 0}
-  FarDistanceMax: 0
-  FarDistanceMin: 0
+  FarDistanceMax: 16
+  FarDistanceMin: 12
   CloseDistanceMax: 0
   CloseDistanceMin: 0
-  timer: 0
+  timer: 2
+  isBoss: 1
+--- !u!95 &3340501720812980013
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8602497043285895090}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bddab6164b9752d4b834402bcdf865fd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &-606769942535992357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,11 +180,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605897754, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.5
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605897754, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.5
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605897754, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -229,6 +249,22 @@ PrefabInstance:
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: velocity
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
+      propertyPath: FarDistanceMax
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
+      propertyPath: FarDistanceMin
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
+      propertyPath: CloseDistanceMax
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
+      propertyPath: CloseDistanceMin
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898215, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_Name

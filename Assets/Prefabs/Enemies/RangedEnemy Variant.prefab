@@ -131,8 +131,8 @@ MonoBehaviour:
   Player: {fileID: 0}
   FarDistanceMax: 16
   FarDistanceMin: 12
-  CloseDistanceMax: 4
-  CloseDistanceMin: 3
+  CloseDistanceMax: 0
+  CloseDistanceMin: 0
   timer: 1
 --- !u!95 &2016154497629345696
 Animator:
