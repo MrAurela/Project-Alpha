@@ -64,10 +64,11 @@ public class PlayerController : MonoBehaviour
             facing = false;
         moveDirection = new Vector2(moveX, moveY).normalized;
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            FindObjectOfType<PlayerSpirit>().GetComponent<Damageable>().Damage(10f);
-        }
+        // for testing: hurts the player on rmb
+        // if (Input.GetMouseButtonDown(1))
+        // {
+        //     FindObjectOfType<PlayerSpirit>().GetComponent<Damageable>().Damage(10f);
+        // }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
