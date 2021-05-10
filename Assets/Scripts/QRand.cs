@@ -78,7 +78,7 @@ public class QRand : MonoBehaviour
     /// Returns the current seed's scaled value as an int.
     /// </summary>
     /// <returns>Returns the current seed's scaled value as an int.</returns>
-    public int GetCurrentSeedInt(int maxValue = 1000)
+    public int GetCurrentSeedInt(double maxValue = 1000)
     {
         return (int)(maxValue*this.currentSeed/PRNGModulus);
     }
@@ -103,7 +103,7 @@ public class QRand : MonoBehaviour
         // collect the decimals of stuff
         double d = retval%1;
         // preform bitwise pseudo quantum error
-        retval = ApplyQuantumError(retval) + d;
+        // retval = ApplyQuantumError(retval) + d;
         // update currentSeed
         this.currentSeed = retval;
         // return scaled seed
@@ -167,12 +167,16 @@ public class QRand : MonoBehaviour
     public IEnumerator InitQRand()
     {
         // Re-initialize this.currentSeed to CurrentTimeMillis();
-        this.currentSeed = CurrentTimeMillis();
+        this.currentSeed = CurrentTimeMillis()&0xFFFFF;
         // Re-initialize this.countsList
         this.countsList = OfflineCounts;
         yield return StartCoroutine(NextRegister_Coroutine());
         Debug.Log("QRand fully initialized.");
         // PrintCounts(this.countsList);
+        for(int i = 0; i < 100; i++)
+        {
+            Debug.Log(this.NextInt());
+        }
     }
 
     /// <summary>
@@ -270,7 +274,7 @@ public class QRand : MonoBehaviour
             retval |= QuantumBitError(bit,d)<<i;
         }
         // Return int value of modified bit sequence adding back the lost decimals
-        return retval;
+        return retval+d;
     }
 
     /// <summary>
