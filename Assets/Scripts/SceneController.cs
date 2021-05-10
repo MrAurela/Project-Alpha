@@ -13,6 +13,10 @@ public class SceneController : MonoBehaviour
 
     public void GoToScene(string scene)
     {
+        if(scene=="TitleScreen")
+        {
+            Destroy(GameObject.Find("QRandom"));
+        }
         SceneManager.LoadScene(scene);
     }
 }

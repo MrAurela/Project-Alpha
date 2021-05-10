@@ -129,10 +129,15 @@ MonoBehaviour:
   bullet: {fileID: 1949555957978316934, guid: 8f301ee2a2946d04f8b56e6ecddfd9cc, type: 3}
   enemy: {fileID: 8602497043285895088}
   Player: {fileID: 0}
+<<<<<<< HEAD
   FarDistanceMax: 16
   FarDistanceMin: 12
   CloseDistanceMax: 4
   CloseDistanceMin: 3
+=======
+  FarDistance: 20
+  CloseDistance: 0
+>>>>>>> 449dfef18d80281249fe8222c6fb7bb1f21a4bc3
   timer: 1
 --- !u!114 &-6981858717156939911
 MonoBehaviour:
