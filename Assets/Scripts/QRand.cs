@@ -103,7 +103,7 @@ public class QRand : MonoBehaviour
         // collect the decimals of stuff
         double d = retval%1;
         // preform bitwise pseudo quantum error
-        // retval = ApplyQuantumError(retval) + d;
+        retval = ApplyQuantumError(retval) + d;
         // update currentSeed
         this.currentSeed = retval;
         // return scaled seed
@@ -173,10 +173,6 @@ public class QRand : MonoBehaviour
         yield return StartCoroutine(NextRegister_Coroutine());
         Debug.Log("QRand fully initialized.");
         // PrintCounts(this.countsList);
-        for(int i = 0; i < 100; i++)
-        {
-            Debug.Log(this.NextInt());
-        }
     }
 
     /// <summary>
@@ -270,8 +266,12 @@ public class QRand : MonoBehaviour
         // Apply quantum bit error to n bitwise
         for (int i = 0; i < 32; i++)
         {
+            // affect a bit
             long bit = 1&((long)num)>>(31-i);
             retval |= QuantumBitError(bit,d)<<i;
+            // update d
+            d*=10;
+            d%=1;
         }
         // Return int value of modified bit sequence adding back the lost decimals
         return retval+d;
