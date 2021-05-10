@@ -123,22 +123,12 @@ public class RoomGeneration : MonoBehaviour
 
     private void mirror(bool x, bool y)
     {
-        Debug.Log("Called");
         GameObject levelLayout = transform.GetChild(2).gameObject;
         for (int i = 0; i < levelLayout.transform.childCount; i++)
         {
             GameObject child = levelLayout.transform.GetChild(i).gameObject;
-            if (x) child.transform.position = new Vector3(-child.transform.position.x, child.transform.position.y, child.transform.position.z);
-            if (y) child.transform.position = new Vector3(child.transform.position.x, -child.transform.position.y, child.transform.position.z);
-
-            //QUick fix:
-            //if (child.transform.position.x < -1500f)
-            //{
-            //    Debug.Log("Quick fix Called: ", this);
-            //    child.transform.position += new Vector3(3000f, 0f, 0f);
-            //}
-
-            Debug.Log(child);
+            if (x) child.transform.localPosition = new Vector3(-child.transform.localPosition.x, child.transform.localPosition.y, child.transform.localPosition.z);
+            if (y) child.transform.localPosition = new Vector3(child.transform.localPosition.x, -child.transform.localPosition.y, child.transform.localPosition.z);
         }
     }
 

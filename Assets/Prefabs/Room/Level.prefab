@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   world1Origin: {x: 0, y: 0, z: 0}
-  world2Origin: {x: 1000, y: 0, z: 0}
+  world2Origin: {x: 100, y: 0, z: 0}
   character1Prefab: {fileID: 4065717727726724012, guid: 0d1c0c0c225b76045baae048500324b3, type: 3}
   character2Prefab: {fileID: 4065717727726724012, guid: 7ae62d0d87b475744857970ea4ab9459, type: 3}
   room: {fileID: 8571485781107144164, guid: 3de7864e54c9b7d4f9585e1acb8c6545, type: 3}
