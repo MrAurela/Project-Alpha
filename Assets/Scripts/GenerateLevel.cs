@@ -61,6 +61,15 @@ public class GenerateLevel : MonoBehaviour
     //DEBUG: keys to change rooms quickly
     void Update()
     {
+
+        if (roomStructure[locationY][locationX].IsCleared())
+        {
+            FindObjectOfType<AudioPlayer>().SetAmbientMusicOn();
+        } else
+        {
+            FindObjectOfType<AudioPlayer>().SetFightMusicOn();
+        }
+
         try
         {
             if (Input.GetKeyDown("t"))
