@@ -49,6 +49,7 @@ public class GenerateLevel : MonoBehaviour
         //locationY = Random.Range(0,levelHeight);
         locationX = qrand.NextInt(levelWidth);
         locationY = qrand.NextInt(levelHeight);
+        Debug.LogFormat("Spawned in room [{0},{1}]",locationX,locationY);
 
         //Connections of the rooms will be generated. Rooms are saved to roomStructure variable
         roomStructure = new Room[levelHeight][];
@@ -148,7 +149,7 @@ public class GenerateLevel : MonoBehaviour
 
         //The last room on the path will be the Boss room
         roomStructure[(int)selectedCoordinate.y][(int)selectedCoordinate.x].IsBossRoom = true;
-        //Debug.Log("Boss: " + selectedCoordinate.x + ", " + selectedCoordinate.y);
+        Debug.Log("Boss room: " + selectedCoordinate.x + ", " + selectedCoordinate.y);
 
 
         //Create doors to rooms that are not part of the main path and add some random extra doors between rooms

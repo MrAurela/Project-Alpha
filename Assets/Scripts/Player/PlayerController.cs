@@ -75,7 +75,6 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Bullet")
         {
-            Debug.Log("Player hit for 5 dmg");
             FindObjectOfType<PlayerSpirit>().GetComponent<Damageable>().Damage(5);
         }
     }
