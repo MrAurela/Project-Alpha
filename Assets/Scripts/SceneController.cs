@@ -16,6 +16,7 @@ public class SceneController : MonoBehaviour
         if(scene=="TitleScreen")
         {
             Destroy(GameObject.Find("QRandom"));
+            Destroy(GameObject.Find("Sounds"));
         }
         SceneManager.LoadScene(scene);
     }
