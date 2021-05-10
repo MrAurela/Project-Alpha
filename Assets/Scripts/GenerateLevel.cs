@@ -70,7 +70,7 @@ public class GenerateLevel : MonoBehaviour
             FindObjectOfType<AudioPlayer>().SetFightMusicOn();
         }
 
-        try
+        /*try
         {
             if (Input.GetKeyDown("t"))
             {
@@ -90,7 +90,7 @@ public class GenerateLevel : MonoBehaviour
         catch (Exception e)
         {
             Debug.LogFormat("Likely out of bounds (maybe other error).\nException: {0}",e);
-        }
+        }*/
         
     }
 

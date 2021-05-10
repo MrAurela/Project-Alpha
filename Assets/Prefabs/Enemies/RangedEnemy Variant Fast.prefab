@@ -134,6 +134,7 @@ MonoBehaviour:
   CloseDistanceMax: 0
   CloseDistanceMin: 0
   timer: 1
+  isBoss: 0
 --- !u!95 &2016154497629345696
 Animator:
   serializedVersion: 3
@@ -251,7 +252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: velocity
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: Far_distance
