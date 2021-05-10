@@ -15,12 +15,18 @@ public class Enemy_Movement : MonoBehaviour
     public float CloseDistanceMin;
     private float FarDistance;
     private float CloseDistance;
+    private bool facing = true; // 1 = right, 0 = left
+    private Animator anim;
     // Start is called before the first frame update
     void Start()
     {
         FarDistance = Random.Range(FarDistanceMin, FarDistanceMax);
         CloseDistance = Random.Range(CloseDistanceMin, CloseDistanceMax);
         playerGhost = Enemy.position;
+
+        // Animation
+        anim = gameObject.GetComponent<Animator>();
+        anim.Play("Idle_Right");
     }  
     // Update is called once per frame
     void Update()
@@ -41,6 +47,13 @@ public class Enemy_Movement : MonoBehaviour
                 else
                 {
                     Attack();
+
+                    {
+                        if (facing)
+                            anim.Play("IdleRight");
+                        else
+                            anim.Play("IdleLeft");
+                    }
                 }
             }
             else
@@ -49,7 +62,23 @@ public class Enemy_Movement : MonoBehaviour
             }
             
         }
-        
+        // Movement animation
+        if (Enemy.velocity.x > 0)
+        {
+            anim.Play("MoveRight");
+        }
+        else if (Enemy.velocity.x < 0)
+        {
+            anim.Play("MoveLeft");
+        }
+        else if (Enemy.velocity.y != 0)
+        {
+            if (facing)
+                anim.Play("MoveRight");
+            else
+                anim.Play("MoveLeft");
+        }
+
     }
     bool CloseToPlayer()
     {
