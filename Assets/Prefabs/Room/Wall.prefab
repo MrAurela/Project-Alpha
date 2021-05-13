@@ -162,6 +162,7 @@ MonoBehaviour:
   - {fileID: 3400160013776356846, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
   - {fileID: -6813189574185817458, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
   downRightSprite: {fileID: 8490642196906846815, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
+  overDoorSprite: {fileID: 7179352014698049699, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
   up: 0
   right: 0
   down: 0

@@ -6,6 +6,7 @@ public class SpriteSelector : MonoBehaviour
 {
     [SerializeField] Sprite[] sprites;
     [SerializeField] Sprite downRightSprite;
+    [SerializeField] Sprite overDoorSprite;
 
     public bool up = false;
     public bool right = false;
@@ -42,6 +43,10 @@ public class SpriteSelector : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().sprite = downRightSprite;
         }*/
+
+        if (HasObjectInDirection("Door", Vector2.down)) {
+            GetComponent<SpriteRenderer>().sprite = overDoorSprite;
+        }
     }
 
 
