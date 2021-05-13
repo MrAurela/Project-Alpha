@@ -16,22 +16,22 @@ public class SpriteSelector : MonoBehaviour
     void Update()
     {
         int spriteIndex = 0;
-        if (HasObjectInDirection(gameObject.tag, Vector2.up))
+        if (!HasObjectInDirection("Floor", Vector2.up))
         {
             spriteIndex += 1;
             up = true;
         }
-        if (HasObjectInDirection(gameObject.tag, Vector2.right))
+        if (!HasObjectInDirection("Floor", Vector2.right))
         {
             spriteIndex += 2;
             right = true;
         }
-        if (HasObjectInDirection(gameObject.tag, Vector2.down))
+        if (!HasObjectInDirection("Floor", Vector2.down))
         {
             spriteIndex += 4;
             down = true;
         }
-        if (HasObjectInDirection(gameObject.tag, Vector2.left))
+        if (!HasObjectInDirection("Floor", Vector2.left))
         {
             spriteIndex += 8;
             left = true;

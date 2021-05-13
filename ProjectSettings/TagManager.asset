@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - Wall
   - Door
+  - Floor
   layers:
   - Default
   - TransparentFX
