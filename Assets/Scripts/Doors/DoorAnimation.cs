@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorAnimation : MonoBehaviour
+public class DoorScript : MonoBehaviour
 {
     private Animator anim;
     public bool HorizontalDoor = false;
