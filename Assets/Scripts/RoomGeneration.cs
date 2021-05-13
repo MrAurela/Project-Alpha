@@ -12,7 +12,8 @@ public class RoomGeneration : MonoBehaviour
     [SerializeField] GameObject origin;
     [SerializeField] GameObject wall;
     [SerializeField] GameObject floor;
-    [SerializeField] GameObject door;
+    [SerializeField] GameObject doorHorizontal;
+    [SerializeField] GameObject doorVertical;
     [SerializeField] GameObject bossPrefab;
     [SerializeField] GameObject enemyPrefab;
     //[SerializeField] Tilemap tilemap;
@@ -138,26 +139,70 @@ public class RoomGeneration : MonoBehaviour
         //GameObject tileSystem = Instantiate(tileSystem, new Vector3(0f, 0f, 0f), Quaternion.identity);
         //tilemap.SetTile(new Vector3Int(0, 0, 0), wallTile);
 
-        for (int i = 0; i < width; i++)
+        Vector3 position = new Vector3(origin.transform.position.x, origin.transform.position.y + height / 2 - 0.5f, 0f);
+        if (room.HasDoorLeft)
+        {
+            GameObject newDoor = Instantiate(doorVertical, position, Quaternion.identity, transform);
+            newDoor.GetComponent<Door>().SetConnection(this.room, FindObjectOfType<GenerateLevel>().GetRoom(this.room.x - 1, this.room.y));
+        } else {
+            Instantiate(wall, position + new Vector3(0f, 0.5f, 0f), Quaternion.identity, transform);
+            Instantiate(wall, position + new Vector3(0f, -0.5f, 0f), Quaternion.identity, transform);
+        }
+
+        position = new Vector3(origin.transform.position.x + (width - 1) * unitSize, origin.transform.position.y + height / 2 - 0.5f, 0f);
+        if (room.HasDoorRight)
+        {
+            GameObject newDoor = Instantiate(doorVertical, position, Quaternion.identity, transform);
+            newDoor.GetComponent<Door>().SetConnection(this.room, FindObjectOfType<GenerateLevel>().GetRoom(this.room.x + 1, this.room.y));
+        } else
+        {
+            Instantiate(wall, position + new Vector3(0f, 0.5f, 0f), Quaternion.identity, transform);
+            Instantiate(wall, position + new Vector3(0f, -0.5f, 0f), Quaternion.identity, transform);
+        }
+
+        position = new Vector3(origin.transform.position.x + width / 2 - 0.5f, origin.transform.position.y, 0f);
+        if (room.HasDoorDown)
+        {
+            GameObject newDoor = Instantiate(doorHorizontal, position, Quaternion.identity, transform);
+            newDoor.GetComponent<Door>().SetConnection(this.room, FindObjectOfType<GenerateLevel>().GetRoom(this.room.x, this.room.y - 1));
+        } else
+        {
+            Instantiate(wall, position + new Vector3(0.5f, 0f, 0f), Quaternion.identity, transform);
+            Instantiate(wall, position + new Vector3(-0.5f, 0f, 0f), Quaternion.identity, transform);
+        }
+
+        position = new Vector3(origin.transform.position.x + width / 2 - 0.5f, origin.transform.position.y + (height - 1) * unitSize, 0f);
+        if (room.HasDoorUp)
+        {
+            GameObject newDoor = Instantiate(doorHorizontal, position, Quaternion.identity, transform);
+            newDoor.GetComponent<Door>().SetConnection(this.room, FindObjectOfType<GenerateLevel>().GetRoom(this.room.x, this.room.y + 1));
+        } else
+        {
+            Instantiate(wall, position + new Vector3(0.5f, 0f, 0f), Quaternion.identity, transform);
+            Instantiate(wall, position + new Vector3(-0.5f, 0f, 0f), Quaternion.identity, transform);
+        }
+
+
+        /*for (int i = 0; i < width; i++)
         {
             float x = origin.transform.position.x + unitSize * i;
             float y1 = origin.transform.position.y;
             float y2 = origin.transform.position.y + (height-1) * unitSize;
             
-            if (Mathf.Abs(i - width/2 + 0.5f) >= doorSize || !room.HasDoorDown)
+            if (Mathf.Abs(i - width/2) >= doorSize || !room.HasDoorDown)
             {
-                Instantiate(wall, new Vector3(x, y1, 0f), Quaternion.identity, transform);
+                //Instantiate(wall, new Vector3(x, y1, 0f), Quaternion.identity, transform);
             } else
             {
-                GameObject newDoor = Instantiate(door, new Vector3(x, y1, 0f), Quaternion.identity, transform);
+                GameObject newDoor = Instantiate(doorHorizontal, new Vector3(x-0.5f, y1, 0f), Quaternion.identity, transform);
                 newDoor.GetComponent<Door>().SetConnection(this.room, FindObjectOfType<GenerateLevel>().GetRoom(this.room.x, this.room.y - 1));
             }
-            if (Mathf.Abs(i - width / 2 + 0.5f) >= doorSize || !room.HasDoorUp)
+            if (Mathf.Abs(i - width / 2) >= doorSize || !room.HasDoorUp)
             {
-                Instantiate(wall, new Vector3(x, y2, 0f), Quaternion.identity, transform);
+                //Instantiate(wall, new Vector3(x, y2, 0f), Quaternion.identity, transform);
             } else
             {
-                GameObject newDoor = Instantiate(door, new Vector3(x, y2, 0f), Quaternion.identity, transform);
+                GameObject newDoor = Instantiate(doorHorizontal, new Vector3(x - 0.5f, y2, 0f), Quaternion.identity, transform);
                 newDoor.GetComponent<Door>().SetConnection(this.room, FindObjectOfType<GenerateLevel>().GetRoom(this.room.x, this.room.y + 1));
             }
         }
@@ -168,24 +213,24 @@ public class RoomGeneration : MonoBehaviour
             float y = origin.transform.position.y + unitSize * i;
             float x1 = origin.transform.position.x;
             float x2 = origin.transform.position.x + (width-1) * unitSize;
-            if (Mathf.Abs(i - height / 2 + 0.5f) >= doorSize || !room.HasDoorLeft)
+            if (Mathf.Abs(i - height / 2) >= doorSize || !room.HasDoorLeft)
             {
-                Instantiate(wall, new Vector3(x1, y, 0f), Quaternion.identity, transform);
+                //Instantiate(wall, new Vector3(x1, y, 0f), Quaternion.identity, transform);
                 
             } else
             {
-                GameObject newDoor = Instantiate(door, new Vector3(x1, y, 0f), Quaternion.identity, transform);
+                GameObject newDoor = Instantiate(doorVertical, new Vector3(x1, y-0.5f, 0f), Quaternion.identity, transform);
                 newDoor.GetComponent<Door>().SetConnection(this.room, FindObjectOfType<GenerateLevel>().GetRoom(this.room.x - 1, this.room.y));
             }
-            if (Mathf.Abs(i - height / 2 + 0.5f) >= doorSize || !room.HasDoorRight)
+            if (Mathf.Abs(i - height / 2) >= doorSize || !room.HasDoorRight)
             {
-                Instantiate(wall, new Vector3(x2, y, 0f), Quaternion.identity, transform);
+                //Instantiate(wall, new Vector3(x2, y, 0f), Quaternion.identity, transform);
             } else
             {
-                GameObject newDoor = Instantiate(door, new Vector3(x2, y, 0f), Quaternion.identity, transform);
+                GameObject newDoor = Instantiate(doorVertical, new Vector3(x2, y-0.5f, 0f), Quaternion.identity, transform);
                 newDoor.GetComponent<Door>().SetConnection(this.room, FindObjectOfType<GenerateLevel>().GetRoom(this.room.x + 1, this.room.y));
             }
-        }
+        }*/
 
         for (int i = 0; i < height - 1; i++)
         {

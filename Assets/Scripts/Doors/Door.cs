@@ -11,15 +11,24 @@ public class Door : MonoBehaviour
 
     private Room currentRoom;   //Room this door object is located at
     private Room connectedRoom; //Room that can be accessed trough this door
-   
+
+    private bool locked=true;
+
     void Update()
     {
         if (IsLocked())
         {
             GetComponent<SpriteRenderer>().color = colorClosed;
-        } else
+            locked = true;
+        }
+        else
         {
             GetComponent<SpriteRenderer>().color = colorOpen;
+            if (locked)
+            {
+                GetComponent<DoorAnimation>().OpenDoor();
+                locked = false;
+            }
         }
     }
 
@@ -39,12 +48,11 @@ public class Door : MonoBehaviour
             if (this.currentRoom.IsBossRoom)
             {
                 SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings);
-            } else
+            }
+            else
             {
                 FindObjectOfType<GenerateLevel>().InstantiateRoom(connectedRoom.x, connectedRoom.y);
             }
-            
-            
         }
     }
 

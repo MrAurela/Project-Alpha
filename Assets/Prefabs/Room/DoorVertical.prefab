@@ -94,7 +94,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 3772045091602254440, guid: eddf2f9a07fd34747b780eb8feb75432, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -180,5 +180,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockedUntilEnimiesKilled: 1
-  colorOpen: {r: 0, g: 0, b: 0, a: 0}
-  colorClosed: {r: 0, g: 0, b: 0, a: 0}
+  colorOpen: {r: 1, g: 1, b: 1, a: 1}
+  colorClosed: {r: 1, g: 1, b: 1, a: 1}

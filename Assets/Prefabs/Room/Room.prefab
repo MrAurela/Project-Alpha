@@ -81,7 +81,9 @@ MonoBehaviour:
   origin: {fileID: 8571485780181517691}
   wall: {fileID: 4065717727726724012, guid: 92c93ca79f84e934db1781180e477b79, type: 3}
   floor: {fileID: 2119339763441317259, guid: 1ff9fff168152f94881b1d2f722f725c, type: 3}
-  door: {fileID: 4065717727726724012, guid: 09418f97e6b9dcd4bbe1eb22c1b6d020, type: 3}
+  doorHorizontal: {fileID: 2744567604115920401, guid: 00ffd1542a032824a8ddb4b92330218d, type: 3}
+  doorVertical: {fileID: 4950191395790424049, guid: 6cf891c3084cb3e459b478ffb5117627, type: 3}
   bossPrefab: {fileID: 4065717727726724012, guid: 14c12f960e6d0744784fc1e28e23d21a, type: 3}
   enemyPrefab: {fileID: 0}
   playerPrefab: {fileID: 0}
+  numberOfEnemies: 0
