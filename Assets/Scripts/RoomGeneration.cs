@@ -174,6 +174,7 @@ public class RoomGeneration : MonoBehaviour
         position = new Vector3(origin.transform.position.x + width / 2 - 0.5f, origin.transform.position.y + (height - 1) * unitSize, 0f);
         if (room.HasDoorUp)
         {
+            
             GameObject newDoor = Instantiate(doorHorizontal, position, Quaternion.identity, transform);
             newDoor.GetComponent<Door>().SetConnection(this.room, FindObjectOfType<GenerateLevel>().GetRoom(this.room.x, this.room.y + 1));
         } else

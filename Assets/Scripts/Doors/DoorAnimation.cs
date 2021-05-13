@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorScript : MonoBehaviour
+public class DoorAnimation : MonoBehaviour
 {
     private Animator anim;
     public bool HorizontalDoor = false;
     public bool DebugOpen = false;
 
-    void Start()
+    void Awake() //For some reason putting this on Start gives errors when returning already visited room  
     {
         anim = gameObject.GetComponent<Animator>();
         if (DebugOpen)
