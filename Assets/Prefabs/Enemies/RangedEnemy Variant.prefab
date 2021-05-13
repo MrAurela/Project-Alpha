@@ -134,6 +134,7 @@ MonoBehaviour:
   CloseDistanceMax: 0
   CloseDistanceMin: 0
   timer: 1
+  isBoss: 0
 --- !u!95 &2016154497629345696
 Animator:
   serializedVersion: 3
@@ -166,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maximumHealth: 10
+  hitSoundName: beautiful_wave_1
 --- !u!1001 &5163272401336323669
 PrefabInstance:
   m_ObjectHideFlags: 0

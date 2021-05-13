@@ -14,11 +14,18 @@ public class Damageable : MonoBehaviour
 
     private float health;
     private float currentMaximumHealth;
+    private AudioSource hitSound;
+    public string hitSoundName = null;
 
     void Start()
     {
         this.health = maximumHealth;
         this.currentMaximumHealth = maximumHealth;
+        hitSound = gameObject.AddComponent<AudioSource>();
+        if (hitSoundName != null)
+            hitSound.clip = Resources.Load(hitSoundName) as AudioClip;
+        else
+            hitSound.clip = Resources.Load("hit") as AudioClip;
     }
 
     public float GetHealth()
@@ -34,6 +41,7 @@ public class Damageable : MonoBehaviour
     //Can be used to Heal with negative value;
     public void Damage(float damageTaken)
     {
+        hitSound.Play();
         SetHealth(this.health - damageTaken);
         if (this.health <= 0f)
         {

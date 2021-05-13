@@ -7,11 +7,15 @@ public class WeaponController : MonoBehaviour
     public Camera cam;
     public GameObject bullet;
     public float bulletSpawnDistance;
+    private AudioSource shootSound;
 
 
     private void Start()
     {
         sprite = GetComponentsInChildren<SpriteRenderer>()[0];
+        shootSound = gameObject.AddComponent<AudioSource>();
+        shootSound.clip = Resources.Load("shooting_1") as AudioClip;
+
     }
 
     private void Update()
@@ -39,6 +43,7 @@ public class WeaponController : MonoBehaviour
 
     private void Fire(Vector2 dir)
     {
+        shootSound.Play();
         GameObject bulletClone = (GameObject) Instantiate(bullet, transform.position, transform.rotation);
         bulletClone.transform.position += new Vector3(-dir.normalized.x, -dir.normalized.y, 0) * bulletSpawnDistance;
         bulletClone.GetComponent<Rigidbody2D>().velocity = -dir.normalized;
