@@ -13,11 +13,20 @@ public class SceneController : MonoBehaviour
 
     public void GoToScene(string scene)
     {
-        if(scene=="TitleScreen")
+        /*if(scene=="Menu")
         {
             Destroy(GameObject.Find("QRandom"));
             Destroy(GameObject.Find("Sounds"));
-        }
+        }*/
         SceneManager.LoadScene(scene);
+    }
+
+    public void OpenMainMenu()
+    {
+        Destroy(GameObject.Find("QRandom"));
+        //Destroy(GameObject.Find("Sounds"));
+        SceneManager.LoadScene("Menu");
+
+        FindObjectOfType<AudioPlayer>().InCombat(false);
     }
 }

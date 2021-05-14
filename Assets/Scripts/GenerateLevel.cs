@@ -65,10 +65,10 @@ public class GenerateLevel : MonoBehaviour
 
         if (roomStructure[locationY][locationX].IsCleared())
         {
-            FindObjectOfType<AudioPlayer>().SetAmbientMusicOn();
+            FindObjectOfType<AudioPlayer>().InCombat(false);    
         } else
         {
-            FindObjectOfType<AudioPlayer>().SetFightMusicOn();
+            FindObjectOfType<AudioPlayer>().InCombat(true);
         }
 
         /*try
