@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7767370527019337790}
   - component: {fileID: 4172397672857158979}
   - component: {fileID: -4041240566121984082}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DoorHorizontal
   m_TagString: Door
   m_Icon: {fileID: 0}
@@ -195,6 +195,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2119339763441317259, guid: 1ff9fff168152f94881b1d2f722f725c, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2376044667965926568, guid: 1ff9fff168152f94881b1d2f722f725c, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -256,6 +260,10 @@ PrefabInstance:
     - target: {fileID: 2119339763441317259, guid: 1ff9fff168152f94881b1d2f722f725c, type: 3}
       propertyPath: m_Name
       value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 2119339763441317259, guid: 1ff9fff168152f94881b1d2f722f725c, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2376044667965926568, guid: 1ff9fff168152f94881b1d2f722f725c, type: 3}
       propertyPath: m_RootOrder
