@@ -161,9 +161,25 @@ MonoBehaviour:
   - {fileID: -8717017754119436831, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
   - {fileID: 3400160013776356846, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
   - {fileID: -6813189574185817458, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 1873917168148291061, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
+  - {fileID: 8490642196906846815, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
+  - {fileID: 2311664880600967918, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   downRightSprite: {fileID: 8490642196906846815, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
   overDoorSprite: {fileID: 7179352014698049699, guid: cb8747e9889727f4a8967891635f10e9, type: 3}
-  up: 0
-  right: 0
-  down: 0
-  left: 0
+  wallUp: 0
+  wallRight: 0
+  wallDown: 0
+  wallLeft: 0
+  floorUp: 0
+  floorRight: 0
+  floorDown: 0
+  floorLeft: 0
+  wallLeftDown: 0
+  wallRightDown: 0
+  doorDown: 0

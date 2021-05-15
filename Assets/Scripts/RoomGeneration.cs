@@ -147,6 +147,7 @@ public class RoomGeneration : MonoBehaviour
         } else {
             Instantiate(wall, position + new Vector3(0f, 0.5f, 0f), Quaternion.identity, transform);
             Instantiate(wall, position + new Vector3(0f, -0.5f, 0f), Quaternion.identity, transform);
+            Instantiate(wall, position + new Vector3(-1f, -0.5f, 0f), Quaternion.identity, transform);
         }
 
         position = new Vector3(origin.transform.position.x + (width - 1) * unitSize, origin.transform.position.y + height / 2 - 0.5f, 0f);
@@ -158,6 +159,7 @@ public class RoomGeneration : MonoBehaviour
         {
             Instantiate(wall, position + new Vector3(0f, 0.5f, 0f), Quaternion.identity, transform);
             Instantiate(wall, position + new Vector3(0f, -0.5f, 0f), Quaternion.identity, transform);
+            Instantiate(wall, position + new Vector3(1f, -0.5f, 0f), Quaternion.identity, transform);
         }
 
         position = new Vector3(origin.transform.position.x + width / 2 - 0.5f, origin.transform.position.y, 0f);
@@ -169,6 +171,8 @@ public class RoomGeneration : MonoBehaviour
         {
             Instantiate(wall, position + new Vector3(0.5f, 0f, 0f), Quaternion.identity, transform);
             Instantiate(wall, position + new Vector3(-0.5f, 0f, 0f), Quaternion.identity, transform);
+            Instantiate(wall, position + new Vector3(0.5f, -1f, 0f), Quaternion.identity, transform);
+            Instantiate(wall, position + new Vector3(-0.5f, -1f, 0f), Quaternion.identity, transform);
         }
 
         position = new Vector3(origin.transform.position.x + width / 2 - 0.5f, origin.transform.position.y + (height - 1) * unitSize, 0f);
@@ -181,6 +185,8 @@ public class RoomGeneration : MonoBehaviour
         {
             Instantiate(wall, position + new Vector3(0.5f, 0f, 0f), Quaternion.identity, transform);
             Instantiate(wall, position + new Vector3(-0.5f, 0f, 0f), Quaternion.identity, transform);
+            Instantiate(wall, position + new Vector3(0.5f, 1f, 0f), Quaternion.identity, transform);
+            Instantiate(wall, position + new Vector3(-0.5f, 1f, 0f), Quaternion.identity, transform);
         }
 
 

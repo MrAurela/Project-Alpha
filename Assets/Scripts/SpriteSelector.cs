@@ -8,57 +8,109 @@ public class SpriteSelector : MonoBehaviour
     [SerializeField] Sprite downRightSprite;
     [SerializeField] Sprite overDoorSprite;
 
-    public bool up = false;
-    public bool right = false;
-    public bool down = false;
-    public bool left = false;
+    public bool wallUp = false;
+    public bool wallRight = false;
+    public bool wallDown = false;
+    public bool wallLeft = false;
 
-    public string upS;
-    public string rightS;
-    public string downS;
-    public string leftS;
+    public bool floorUp = false;
+    public bool floorRight = false;
+    public bool floorDown = false;
+    public bool floorLeft = false;
+    public bool wallLeftDown = false;
+    public bool wallRightDown = false;
+
+    public bool doorDown = false;
 
     void Update()
     {
-        int spriteIndex = 0;
-        if (!HasObjectInDirection("Floor", "Default", Vector2.up) || HasObjectInDirection("Wall", "Wall", Vector2.up))
+        wallUp = false;
+        wallRight = false;
+        wallDown = false;
+        wallLeft = false;
+
+        floorUp = false;
+        floorRight = false;
+        floorDown = false;
+        floorLeft = false;
+        wallRightDown = false;
+        wallLeftDown = false;
+
+        doorDown = false;
+
+        /*if (!HasObjectInDirection("Floor", "Default", Vector2.up) || HasObjectInDirection("Wall", "Wall", Vector2.up))
         {
-            spriteIndex += 1;
             up = true;
         }
         if (!HasObjectInDirection("Floor", "Default", Vector2.right) || HasObjectInDirection("Wall", "Wall", Vector2.right))
         {
-            spriteIndex += 2;
             right = true;
         }
         if (!HasObjectInDirection("Floor", "Default", Vector2.down) || HasObjectInDirection("Wall", "Wall", Vector2.down))
         {
-            spriteIndex += 4;
             down = true;
         }
         if (!HasObjectInDirection("Floor", "Default", Vector2.left) || HasObjectInDirection("Wall", "Wall", Vector2.left))
         {
-            spriteIndex += 8;
             left = true;
-        }
-
-        upS = ObjectInDirection(Vector2.up);
-        rightS = ObjectInDirection(Vector2.right);
-        downS = ObjectInDirection(Vector2.down);
-        leftS = ObjectInDirection(Vector2.left);
-
-        GetComponent<SpriteRenderer>().sprite = sprites[spriteIndex];
-
-        /*if (spriteIndex == 14 && !NeighbourHasObjectInDirection(Vector2.right, 2)) //Object on down-right
-        {
-            GetComponent<SpriteRenderer>().sprite = downRightSprite;
         }*/
 
-        if (HasObjectInDirection("Door", "Door", Vector2.down)) {
+        if (HasObjectInDirection("Wall", "Wall", Vector2.up)) wallUp = true;
+        if (HasObjectInDirection("Wall", "Wall", Vector2.right)) wallRight = true;
+        if (HasObjectInDirection("Wall", "Wall", Vector2.down)) wallDown = true;
+        if (HasObjectInDirection("Wall", "Wall", Vector2.left)) wallLeft = true;
+        if (NeighbourHasWallInDirection(Vector2.right, 2)) wallRightDown = true;
+        if (NeighbourHasWallInDirection(Vector2.left, 2)) wallLeftDown = true;
+
+        if (HasObjectInDirection("Floor", "Default", Vector2.up)) floorUp = true;
+        if (HasObjectInDirection("Floor", "Default", Vector2.right)) floorRight = true;
+        if (HasObjectInDirection("Floor", "Default", Vector2.down)) floorDown = true;
+        if (HasObjectInDirection("Floor", "Default", Vector2.left)) floorLeft = true;
+        
+
+        if (HasObjectInDirection("Door", "Door", Vector2.down)) doorDown = true;
+
+        GetComponent<SpriteRenderer>().sprite = sprites[GetSpriteIndex()];
+
+
+       /* if (HasObjectInDirection("Door", "Door", Vector2.down)) {
             GetComponent<SpriteRenderer>().sprite = overDoorSprite;
-        }
+        }*/
+
     }
 
+    private int GetSpriteIndex()
+    {
+        int si = 0;
+        if (this.wallUp) si += 1;
+        if (this.wallRight) {
+            /*if (this.wallDown && !this.wallRightDown)
+            {
+                si += 16;
+            } else
+            {
+                si += 2;
+            }*/
+            si += 2;
+        }
+        if (this.wallDown || this.doorDown) si += 4;
+        if (this.wallLeft) {
+            /*if (this.wallDown && !this.wallLeftDown) {
+                si += 32;
+            } else
+            {
+                si += 8;
+            }*/
+            si += 8;
+        }
+
+        if ((si == 14 || si == 15) && !this.wallLeftDown) si = 20;
+        if ((si == 14 || si == 15) && !this.wallRightDown) si = 21;
+        if (si == 15 && !this.wallRightDown && !this.wallLeftDown) si = 22;
+
+
+        return si;
+    }
 
     private bool HasObjectInDirection(string tag, string layer, Vector2 direction)
     {
@@ -66,7 +118,7 @@ public class SpriteSelector : MonoBehaviour
         return hit.collider != null && hit.collider.gameObject.tag == tag;
     }
 
-    private string ObjectInDirection(Vector2 direction)
+   /*private string ObjectInDirection(Vector2 direction)
     {
         RaycastHit2D hit = Physics2D.Raycast(this.gameObject.transform.position, direction, 1f);
         if (hit.collider)
@@ -76,26 +128,26 @@ public class SpriteSelector : MonoBehaviour
         {
             return "";
         }
-    }
+    }*/
 
-    public bool HasObjectInDirection(int directionId)
+    public bool HasWallInDirection(int directionId)
     {
-        if (directionId == 0) return this.up;
-        else if (directionId == 1) return this.right;
-        else if (directionId == 2) return this.down;
-        else if (directionId == 3) return this.left;
+        if (directionId == 0) return this.wallUp;
+        else if (directionId == 1) return this.wallRight;
+        else if (directionId == 2) return this.wallDown;
+        else if (directionId == 3) return this.wallLeft;
         else return false;
     }
 
-    private bool NeighbourHasObjectInDirection(Vector2 neighbourDirection, int directionId)
+    private bool NeighbourHasWallInDirection(Vector2 neighbourDirection, int directionId)
     {
-        RaycastHit2D hit = Physics2D.Raycast(this.gameObject.transform.position, neighbourDirection, 1f);
+        RaycastHit2D hit = Physics2D.Raycast(this.gameObject.transform.position, neighbourDirection, 1f, LayerMask.GetMask("Wall"));
         if (hit)
         {
             SpriteSelector selector = hit.collider.gameObject.GetComponent<SpriteSelector>();
             if (selector)
             {
-                return selector.HasObjectInDirection(directionId);
+                return selector.HasWallInDirection(directionId);
             }
         }
         return false;
