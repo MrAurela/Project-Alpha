@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 public class Door : MonoBehaviour
 {
     [SerializeField] bool lockedUntilEnimiesKilled = true;
-    [SerializeField] Color colorOpen;
-    [SerializeField] Color colorClosed;
 
     private Room currentRoom;   //Room this door object is located at
     private Room connectedRoom; //Room that can be accessed trough this door
@@ -16,19 +14,13 @@ public class Door : MonoBehaviour
 
     void Update()
     {
-        if (IsLocked())
+        if (IsLocked()) //Locked 
         {
-            GetComponent<SpriteRenderer>().color = colorClosed;
             locked = true;
-        }
-        else
+        }  else if (locked) //First Update call after door unlocking
         {
-            GetComponent<SpriteRenderer>().color = colorOpen;
-            if (locked)
-            {
-                GetComponent<DoorAnimation>().OpenDoor();
-                locked = false;
-            }
+            GetComponent<DoorAnimation>().OpenDoor();
+            locked = false;
         }
     }
 
@@ -44,7 +36,6 @@ public class Door : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" && !IsLocked())
         {
-            //currentRoom.IsCleared = true;
             if (this.currentRoom.IsBossRoom)
             {
                 SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings);

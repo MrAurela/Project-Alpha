@@ -123,7 +123,7 @@ public class RoomGeneration : MonoBehaviour
 
     private void mirror(bool x, bool y)
     {
-        GameObject levelLayout = transform.GetChild(2).gameObject;
+        GameObject levelLayout = transform.Find("Layout").gameObject;
         for (int i = 0; i < levelLayout.transform.childCount; i++)
         {
             GameObject child = levelLayout.transform.GetChild(i).gameObject;
