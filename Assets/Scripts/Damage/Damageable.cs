@@ -11,21 +11,29 @@ public interface IDamageable
 public class Damageable : MonoBehaviour
 {
     [SerializeField] float maximumHealth;
+    [SerializeField] AudioClip damageSound;
+    [SerializeField] AudioClip healSound;
+    [SerializeField] AudioClip deathSound;
 
     private float health;
     private float currentMaximumHealth;
-    private AudioSource hitSound;
-    public string hitSoundName = null;
+    private AudioPlayer audioPlayer;
+
+    //public string hitSoundName = null;
 
     void Start()
     {
         this.health = maximumHealth;
         this.currentMaximumHealth = maximumHealth;
-        hitSound = gameObject.AddComponent<AudioSource>();
+
+
+        /*hitSound = gameObject.AddComponent<AudioSource>();
         if (hitSoundName != null)
             hitSound.clip = Resources.Load(hitSoundName) as AudioClip;
         else
-            hitSound.clip = Resources.Load("hit") as AudioClip;
+            hitSound.clip = Resources.Load("hit") as AudioClip;*/
+
+        audioPlayer = FindObjectOfType<AudioPlayer>();
     }
 
     public float GetHealth()
@@ -38,25 +46,28 @@ public class Damageable : MonoBehaviour
         return this.health/this.currentMaximumHealth;
     }
 
-    //Can be used to Heal with negative value;
     public void Damage(float damageTaken)
     {
-        hitSound.Play();
+        audioPlayer.PlayClip(damageSound);
         SetHealth(this.health - damageTaken);
         if (this.health <= 0f)
         {
+            audioPlayer.PlayClip(deathSound);
             GetComponent<IDamageable>().Die();
         }
+    }
+
+    public void Heal(float amountToHeal)
+    {
+        audioPlayer.PlayClip(healSound);
+        SetHealth(this.health + amountToHeal);
     }
 
     //Can be used to Increase with negative value;
     public void DecreaseMaximumHealth(float decrease)
     {
         SetMaximumHealth(this.currentMaximumHealth - decrease);
-        if (this.currentMaximumHealth <= 0f)
-        {
-            GetComponent<IDamageable>();
-        }
+        SetHealth(this.health); //ensures the health does not go over range;
     }
 
     public void SetHealth(float newAmount)

@@ -44,6 +44,11 @@ public class AudioPlayer : MonoBehaviour
         inCombat = value;
     }
 
+    public void PlayClip(AudioClip clip, float volume = 1f)
+    {
+        if (clip) AudioSource.PlayClipAtPoint(clip, transform.position, volume);
+    }
+
     
     /*public void SetFightMusicOn()
     {

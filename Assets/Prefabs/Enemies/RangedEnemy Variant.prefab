@@ -166,8 +166,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca4a1685a30245b45971159c9296395e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximumHealth: 10
-  hitSoundName: beautiful_wave_1
+  maximumHealth: 30
+  damageSound: {fileID: 8300000, guid: 69b103b009e1da44487d2fb72f9509e6, type: 3}
+  healSound: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: ffcf17c7e45f09145a16d74c048981e4, type: 3}
 --- !u!1001 &5163272401336323669
 PrefabInstance:
   m_ObjectHideFlags: 0
