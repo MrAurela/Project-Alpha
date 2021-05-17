@@ -2,9 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
 public class SceneController : MonoBehaviour
 {
+    void Start()
+    {
+        StartCoroutine(PingServerToWake());
+    }
+
+    IEnumerator PingServerToWake()
+    {
+        using (UnityWebRequest webRequest = UnityWebRequest.Get("https://quantum-seed-generator.herokuapp.com/ping"))
+        {
+            yield return webRequest.SendWebRequest();
+        }
+    }
+
     //Goes to next scene or first scene if in last scene
     public void NextScene()
     {
