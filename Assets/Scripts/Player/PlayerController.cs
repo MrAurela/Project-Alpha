@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
 
     private Animator anim;
+    private SpriteRenderer renderer;
     private Vector2 moveDirection;
     private bool facing = true; // 1 = right, 0 = left
     
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     {
         anim = gameObject.GetComponent<Animator>();
         anim.Play("Idle_Right");
+
     }
 
     void Update()

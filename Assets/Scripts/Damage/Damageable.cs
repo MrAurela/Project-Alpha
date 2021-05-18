@@ -14,24 +14,17 @@ public class Damageable : MonoBehaviour
     [SerializeField] AudioClip damageSound;
     [SerializeField] AudioClip healSound;
     [SerializeField] AudioClip deathSound;
+    
+    public SpriteRenderer whiteRenderer = null;
 
     private float health;
     private float currentMaximumHealth;
     private AudioPlayer audioPlayer;
 
-    //public string hitSoundName = null;
-
     void Start()
     {
         this.health = maximumHealth;
         this.currentMaximumHealth = maximumHealth;
-
-
-        /*hitSound = gameObject.AddComponent<AudioSource>();
-        if (hitSoundName != null)
-            hitSound.clip = Resources.Load(hitSoundName) as AudioClip;
-        else
-            hitSound.clip = Resources.Load("hit") as AudioClip;*/
 
         audioPlayer = FindObjectOfType<AudioPlayer>();
     }
@@ -49,6 +42,8 @@ public class Damageable : MonoBehaviour
     public void Damage(float damageTaken)
     {
         audioPlayer.PlayClip(damageSound);
+        if (whiteRenderer != null)
+            StartCoroutine(flashWhite());
         SetHealth(this.health - damageTaken);
         if (this.health <= 0f)
         {
@@ -80,4 +75,12 @@ public class Damageable : MonoBehaviour
         this.currentMaximumHealth = Mathf.Clamp(newAmount, 0, this.currentMaximumHealth);
     }
 
+    IEnumerator flashWhite()
+    {
+        whiteRenderer.material.SetFloat("_FlashAmount", 1.0f);
+        whiteRenderer.material.SetFloat("_SelfIllum", 1.0f);
+        yield return new WaitForSeconds(0.3f);
+        whiteRenderer.material.SetFloat("_FlashAmount", 0.0f);
+        whiteRenderer.material.SetFloat("_SelfIllum", 0.0f);
+    }
 }
