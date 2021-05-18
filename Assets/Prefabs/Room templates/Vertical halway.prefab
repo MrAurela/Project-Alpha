@@ -876,6 +876,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -2051110202928444043, guid: 9df2755dc9aa9f64c9f4dc50750b2e62, type: 3}
+      propertyPath: flipProbabilities.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2051110202928444043, guid: 9df2755dc9aa9f64c9f4dc50750b2e62, type: 3}
       propertyPath: flipProbabilities.Array.data[1]
       value: 0.5
       objectReference: {fileID: 0}
@@ -6129,7 +6133,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2051110202928444043, guid: 9df2755dc9aa9f64c9f4dc50750b2e62, type: 3}
       propertyPath: flipProbabilities.Array.data[1]
-      value: 0.5
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2051110202928444043, guid: 9df2755dc9aa9f64c9f4dc50750b2e62, type: 3}
+      propertyPath: flipProbabilities.Array.data[2]
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5388344826525244008, guid: 9df2755dc9aa9f64c9f4dc50750b2e62, type: 3}
       propertyPath: m_RootOrder
@@ -8881,7 +8889,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2051110202928444043, guid: 9df2755dc9aa9f64c9f4dc50750b2e62, type: 3}
       propertyPath: flipProbabilities.Array.data[1]
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5388344826525244008, guid: 9df2755dc9aa9f64c9f4dc50750b2e62, type: 3}
       propertyPath: m_RootOrder
