@@ -5,38 +5,55 @@ using UnityEngine;
 public class Enemy_Melee_Attack : MonoBehaviour
 {
     // Ref to child sprite renderer to set color later
-    SpriteRenderer sprite;
+    public GameObject bullet;
     public Rigidbody2D enemy;
-    public Rigidbody2D Player;
-
+    public Transform Gun1;
+    public Transform Gun2;
+    public Transform Gun3;
+    public Transform Gun4;
+    public float angle;
+    
     private void Start()
     {
-        sprite = GetComponentsInChildren<SpriteRenderer>()[0];
+
+        
     }
     //Sorry, I just stole the code from the player, but it works fine here :D
     private void Update()
     {
-
-        Vector2 positionOnScreen = enemy.position;
-        Vector2 playerOnScreen = Player.position;
-
-        float angle = Mathf.Atan2(positionOnScreen.y - playerOnScreen.y, positionOnScreen.x - playerOnScreen.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
-
-        // Color weapon red if mouse pressed
-        if (Input.GetMouseButtonDown(0))
-        {
-            
-            Attack();
-        }
-        else
-        {
-            sprite.color = new Color(1, 1, 1, 1);
-        }
+        transform.Rotate(0f, 0f, angle);
+        Fire();
     }
-
-    private void Attack()
+    
+    void Fire()
     {
-        sprite.color = new Color(1,0,0,1);
+        
+        Vector2 positionOnScreen = enemy.position;
+        Vector2 gunOnScreen = Gun1.position;
+        Vector2 dir = positionOnScreen - gunOnScreen;
+        GameObject bulletClone = (GameObject)Instantiate(bullet, transform.position, transform.rotation);
+        bulletClone.transform.position += new Vector3(-dir.normalized.x, -dir.normalized.y, 0);
+        bulletClone.GetComponent<Rigidbody2D>().velocity = -dir.normalized;
+
+        gunOnScreen = Gun2.position;
+        dir = positionOnScreen - gunOnScreen;
+        bulletClone = (GameObject)Instantiate(bullet, transform.position, transform.rotation);
+        bulletClone.transform.position += new Vector3(-dir.normalized.x, -dir.normalized.y, 0);
+        bulletClone.GetComponent<Rigidbody2D>().velocity = -dir.normalized;
+
+        gunOnScreen = Gun3.position;
+        dir = positionOnScreen - gunOnScreen;
+        bulletClone = (GameObject)Instantiate(bullet, transform.position, transform.rotation);
+        bulletClone.transform.position += new Vector3(-dir.normalized.x, -dir.normalized.y, 0);
+        bulletClone.GetComponent<Rigidbody2D>().velocity = -dir.normalized;
+
+        gunOnScreen = Gun4.position;
+        dir = positionOnScreen - gunOnScreen;
+        bulletClone = (GameObject)Instantiate(bullet, transform.position, transform.rotation);
+        bulletClone.transform.position += new Vector3(-dir.normalized.x, -dir.normalized.y, 0);
+        bulletClone.GetComponent<Rigidbody2D>().velocity = -dir.normalized;
+
     }
+
+
 }
