@@ -75,8 +75,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 073342e7db04d5640afaefdd6c26cb3d, type: 3}
-  m_Color: {r: 0.6981132, g: 0.34043702, b: 0.17386968, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 0ceb0efa77707514cb02117e37237da2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,18 +99,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0014815927, y: 0.00592649}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.6944444, y: 0.8611111}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6710794, y: 0.83998466}
   m_EdgeRadius: 0
 --- !u!50 &76992503837623598
 Rigidbody2D:
@@ -158,4 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maximumHealth: 0
-  hitSoundName: 
+  damageSound: {fileID: 0}
+  healSound: {fileID: 0}
+  deathSound: {fileID: 0}
+  flashWhite: 0
