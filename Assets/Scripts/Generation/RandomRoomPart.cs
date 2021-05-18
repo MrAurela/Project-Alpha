@@ -7,8 +7,7 @@ public class RandomRoomPart : MonoBehaviour
 {
     [SerializeField] GameObject[] roomParts;
     [SerializeField] float[] probabilities;
-
-    [SerializeField] float horizontalFlipProbability = 0.5f; float verticalFlipProbability = 0.5f;
+    [SerializeField] float[] flipProbabilities; //x, y, both, otherwise no flip
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +15,7 @@ public class RandomRoomPart : MonoBehaviour
         RoomGeneration roomGenerator = transform.root.GetComponent<RoomGeneration>();
         Room room = roomGenerator.room;
         QRand qrand = FindObjectOfType<QRand>();
-        qrand.InitState(room.Seed + (int)transform.position.x * 10000000 + (int)transform.position.y * 1000000000); //Change the seed based on the location
+        qrand.InitState(room.Seed); //Change the seed based on the location
         float random = qrand.NextFloat();
 
         //Random.InitState(room.Seed); //TODO something addition to make new combinations
@@ -31,17 +30,40 @@ public class RandomRoomPart : MonoBehaviour
             {
                 GameObject roomPart = Instantiate(roomParts[i], transform.position, Quaternion.identity, transform.parent);
                 //roomPart.transform.parent = roomGenerator.transform.Find("Layout").transform;
+                roomPart.transform.parent = gameObject.transform;
                 break;
             }
         }
 
-        /*for (int i = 0; i < gameObject.transform.childCount; i++)
+        random = qrand.NextFloat();
+        cumulativeProbability = 0f;
+        bool x = false;
+        bool y = false;
+        for (int i = 0; i < flipProbabilities.Length; i++)
         {
-            GameObject child = gameObject.transform.GetChild(i).gameObject;
-            if (x) child.transform.localPosition = new Vector3(-child.transform.localPosition.x, child.transform.localPosition.y, child.transform.localPosition.z);
-            if (y) child.transform.localPosition = new Vector3(child.transform.localPosition.x, -child.transform.localPosition.y, child.transform.localPosition.z);
-            child.transform.parent = roomGenerator.transform.Find("Layout").transform;
-        }*/
+            cumulativeProbability += flipProbabilities[i];
+            if (cumulativeProbability >= random)
+            {
+                if (i == 0 || i == 2) x = true;
+                if (i == 1 || i == 2) y = true;
+                Debug.Log("Probs: "+i);
+            }
+        }
+
+        Debug.Log(x + ", " + y);
+
+        int j = 0;
+        if (transform.childCount > 0) {
+            foreach (Transform child in transform.GetChild(0))
+            {
+                if (x) child.localPosition = new Vector3(-child.localPosition.x, child.localPosition.y, child.localPosition.z);
+                if (y) child.localPosition = new Vector3(child.localPosition.x, -child.localPosition.y, child.localPosition.z);
+                child.parent = roomGenerator.transform.Find("Layout").transform;
+                Debug.Log("Childs: " + j);
+                j += 1;
+            }
+        }
+        
 
         //This game object is not neede anymore
         Destroy(gameObject);

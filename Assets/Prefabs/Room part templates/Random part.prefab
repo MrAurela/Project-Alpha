@@ -45,3 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomParts: []
   probabilities: []
+  flipProbabilities:
+  - 0
+  - 0
+  - 0
