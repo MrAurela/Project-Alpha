@@ -7,11 +7,16 @@ public class SceneLoader : MonoBehaviour
 {
     //[SerializeField] QRand qrand;
     public QRand qrand;
+    bool qrandDone;
+    bool waitDone;
 
     // Start is called before the first frame update
     void Start()
     {
+        qrandDone = false;
+        waitDone = false;
         Debug.Log("Scene loading begun.");
+        StartCoroutine(TimedDelay(7f));
         QRand qrand = FindObjectOfType<QRand>();
         if (qrand)
         {
@@ -20,10 +25,24 @@ public class SceneLoader : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if(qrandDone && waitDone)
+        {
+            NextScene();
+        }
+    }
+
     IEnumerator LoadQRand()
     {
         yield return StartCoroutine(qrand.InitQRand());
-        NextScene();
+        qrandDone = true;
+    }
+
+    private IEnumerator TimedDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        waitDone = true;
     }
 
     //Goes to next scene or first scene if in last scene
