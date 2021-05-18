@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Hit : MonoBehaviour, IDamageable
 {
+    [SerializeField] int damage = 10;
 
     public void Die()
     {
@@ -15,7 +16,7 @@ public class Hit : MonoBehaviour, IDamageable
     {
         if (collision.gameObject.tag == "Bullet")
         {
-            gameObject.GetComponent<Damageable>().Damage(10);
+            gameObject.GetComponent<Damageable>().Damage(damage);
         }
     }
 }
