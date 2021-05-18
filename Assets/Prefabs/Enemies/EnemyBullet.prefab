@@ -148,7 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmg: 1
   timeToLive: 2
-  projectileSpeed: 5
+  projectileSpeed: 4
 --- !u!114 &6015484844452260992
 MonoBehaviour:
   m_ObjectHideFlags: 0
