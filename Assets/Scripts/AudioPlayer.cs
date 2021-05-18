@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AudioPlayer : MonoBehaviour
 {
+    [SerializeField] float masterVolume = 1f; //modifier multiplied with the volume of every sound effect & background music
+
     [SerializeField] AudioSource combatBG;
     [SerializeField] AudioSource exploreBG;
 
@@ -22,15 +24,6 @@ public class AudioPlayer : MonoBehaviour
         }
     }
 
-    /*void Start()
-    {
-        //GetComponent<AudioSource>().clip = bg1;
-        //GetComponent<AudioSource>().Play();
-
-        exploreBG.Play();
-        combatBG.Stop();
-    }*/
-
     void Update()
     {
         if (inCombat && exploreBG.isPlaying) exploreBG.Stop();
@@ -46,34 +39,8 @@ public class AudioPlayer : MonoBehaviour
 
     public void PlayClip(AudioClip clip, float volume = 1f)
     {
-        if (clip) AudioSource.PlayClipAtPoint(clip, transform.position, volume);
+        if (clip) AudioSource.PlayClipAtPoint(clip, transform.position, volume * masterVolume);
     }
-
-    
-    /*public void SetFightMusicOn()
-    {
-        if (!combatBG.isPlaying || fadingOut)
-        {
-            combatBG.Play();
-        }
-        if (exploreBG.isPlaying) exploreBG.Stop();
-    }
-
-    public void SetAmbientMusicOn(bool fade = true)
-    {
-        if (!exploreBG.isPlaying) exploreBG.Play();
-
-        if (combatBG.isPlaying && fade && !combatFading)
-        {
-            
-            StartCoroutine(FadeOut(combatBG, 2.5f));
-        } else if (combatBG.isPlaying && !fade)
-        {
-            combatBG.Stop();
-        } 
-        
-    }*/
-
 
     //Fades away the combat music so that there is no silence before the ambient music "kicks in". 
     //Constant 2.5 was selected as the fade duration simply by testing what sounds the best
