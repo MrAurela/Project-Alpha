@@ -49,7 +49,7 @@ MonoBehaviour:
   character2Prefab: {fileID: 4065717727726724012, guid: 7ae62d0d87b475744857970ea4ab9459, type: 3}
   room: {fileID: 8571485781107144164, guid: 3de7864e54c9b7d4f9585e1acb8c6545, type: 3}
   levelWidth: 1
-  levelHeight: 3
+  levelHeight: 10
   verticalDE:
   - {fileID: 8571485781107144164, guid: 3ef6d10583f63c94ea7278c4f4ddea53, type: 3}
   horizontalDE:

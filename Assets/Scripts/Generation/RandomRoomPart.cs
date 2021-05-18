@@ -7,8 +7,7 @@ public class RandomRoomPart : MonoBehaviour
 {
     [SerializeField] GameObject[] roomParts;
     [SerializeField] float[] probabilities;
-
-    [SerializeField] float horizontalFlipProbability = 0.5f; float verticalFlipProbability = 0.5f;
+    [SerializeField] float[] flipProbabilities; //x, y, both, otherwise no flip
 
     // Start is called before the first frame update
     void Start()
@@ -35,13 +34,27 @@ public class RandomRoomPart : MonoBehaviour
             }
         }
 
-        /*for (int i = 0; i < gameObject.transform.childCount; i++)
+        random = qrand.NextFloat();
+        cumulativeProbability = 0f;
+        bool x = false;
+        bool y = false;
+        for (int i = 0; i < flipProbabilities.Length; i++)
+        {
+            cumulativeProbability += flipProbabilities[i];
+            if (cumulativeProbability >= random)
+            {
+                if (i == 0 || i == 2) x = true;
+                if (i == 1 || i == 2) y = true;
+            }
+        }
+
+        for (int i = 0; i < gameObject.transform.childCount; i++)
         {
             GameObject child = gameObject.transform.GetChild(i).gameObject;
             if (x) child.transform.localPosition = new Vector3(-child.transform.localPosition.x, child.transform.localPosition.y, child.transform.localPosition.z);
             if (y) child.transform.localPosition = new Vector3(child.transform.localPosition.x, -child.transform.localPosition.y, child.transform.localPosition.z);
             child.transform.parent = roomGenerator.transform.Find("Layout").transform;
-        }*/
+        }
 
         //This game object is not neede anymore
         Destroy(gameObject);
