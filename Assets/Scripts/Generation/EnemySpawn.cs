@@ -30,7 +30,7 @@ public class EnemySpawn : MonoBehaviour
             if (enemy != null)
             {
                 GameObject instantiatedEnemy = Instantiate(enemy, transform.position, Quaternion.identity);
-                instantiatedEnemy.transform.parent = this.roomGenerator.transform.GetChild(2).transform; //Put enemies under Layout so they are moved with the room when the room if flipped
+                instantiatedEnemy.transform.parent = this.roomGenerator.transform.Find("Layout").transform; //Put enemies under Layout so they are moved with the room when the room if flipped
 
                 //Set references to correct character object in Enemy_Movement and Enemy_Shooting scripts
                 instantiatedEnemy.GetComponent<Enemy_Movement>().Player = this.roomGenerator.playerPrefab.GetComponent<Rigidbody2D>();

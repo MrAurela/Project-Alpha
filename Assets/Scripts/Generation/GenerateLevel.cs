@@ -49,7 +49,7 @@ public class GenerateLevel : MonoBehaviour
         //locationY = Random.Range(0,levelHeight);
         locationX = qrand.NextInt(levelWidth);
         locationY = qrand.NextInt(levelHeight);
-        Debug.LogFormat("Spawned in room [{0},{1}]",locationX,locationY);
+        Debug.LogFormat("Spawned in room [x={0},y={1}]",locationX,locationY);
 
         //Connections of the rooms will be generated. Rooms are saved to roomStructure variable
         roomStructure = new Room[levelHeight][];
@@ -102,11 +102,11 @@ public class GenerateLevel : MonoBehaviour
 
         //Room object are created and placed at roomStructure variabel
         int[][] path = new int[levelHeight][];
-        for (int y = 0; y < levelWidth; y++)
+        for (int y = 0; y < levelHeight; y++)
         {
             roomStructure[y] = new Room[levelWidth];
             path[y] = new int[levelWidth];
-            for (int x = 0; x < levelHeight; x++)
+            for (int x = 0; x < levelWidth; x++)
             {
                 roomStructure[y][x] = new Room();
                 roomStructure[y][x].x = x;
@@ -153,9 +153,9 @@ public class GenerateLevel : MonoBehaviour
 
 
         //Create doors to rooms that are not part of the main path and add some random extra doors between rooms
-        for (int y = 0; y < levelWidth; y++)
+        for (int y = 0; y < levelHeight; y++)
         {
-            for (int x = 0; x < levelHeight; x++)
+            for (int x = 0; x < levelWidth; x++)
             {
                 Vector2 coordinate = new Vector2(x, y);
                 if (path[y][x] == 0) //If room was not found in previous step, combine it to some found room
