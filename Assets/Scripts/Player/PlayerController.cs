@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
 
     private Animator anim;
-    private SpriteRenderer renderer;
+    private SpriteRenderer spriteRenderer;
     private Vector2 moveDirection;
     private bool facing = true; // 1 = right, 0 = left
     private bool invincible = false;
@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     {
         anim = gameObject.GetComponent<Animator>();
         anim.Play("Idle_Right");
-        renderer = gameObject.GetComponent<SpriteRenderer>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -86,11 +86,11 @@ public class PlayerController : MonoBehaviour
     IEnumerator flashWhite()
     {
         invincible = true;
-        renderer.material.SetFloat("_FlashAmount", 1.0f);
-        renderer.material.SetFloat("_SelfIllum", 1.0f);
+        spriteRenderer.material.SetFloat("_FlashAmount", 1.0f);
+        spriteRenderer.material.SetFloat("_SelfIllum", 1.0f);
         yield return new WaitForSeconds(0.1f);
         invincible = false;
-        renderer.material.SetFloat("_FlashAmount", 0.0f);
-        renderer.material.SetFloat("_SelfIllum", 1.0f);
+        spriteRenderer.material.SetFloat("_FlashAmount", 0.0f);
+        spriteRenderer.material.SetFloat("_SelfIllum", 1.0f);
     }
 }
