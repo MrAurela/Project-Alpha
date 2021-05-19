@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmg: 1
-  timeToLive: 0
+  timeToLive: 0.2
   projectileSpeed: 7
 --- !u!114 &6478408439555033528
 MonoBehaviour:

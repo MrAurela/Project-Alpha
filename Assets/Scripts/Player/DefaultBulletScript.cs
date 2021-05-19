@@ -5,7 +5,7 @@ using UnityEngine;
 public class DefaultBulletScript : MonoBehaviour
 {
     public int dmg = 1;
-    public int timeToLive = 5;
+    public float timeToLive = 5;
     public float projectileSpeed = 15;
     private Rigidbody2D _rb;
 
