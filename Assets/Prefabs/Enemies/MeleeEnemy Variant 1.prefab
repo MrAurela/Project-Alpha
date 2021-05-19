@@ -267,10 +267,10 @@ MonoBehaviour:
   Player: {fileID: 0}
   Enemy: {fileID: 6940033692038690691}
   velocity: 4
-  FarDistanceMax: 0
-  FarDistanceMin: 0
-  CloseDistanceMax: 0
-  CloseDistanceMin: 0
+  FarDistanceMax: 6
+  FarDistanceMin: 4
+  CloseDistanceMax: 2
+  CloseDistanceMin: 4
 --- !u!50 &6940033692038690691
 Rigidbody2D:
   serializedVersion: 4
@@ -330,6 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 669be3c00af5d8942b9a6d4934f68aa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 10
 --- !u!114 &4567526884621132060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,6 +347,7 @@ MonoBehaviour:
   damageSound: {fileID: 0}
   healSound: {fileID: 0}
   deathSound: {fileID: 0}
+  whiteRenderer: {fileID: 0}
 --- !u!1 &7683371816316015391
 GameObject:
   m_ObjectHideFlags: 0

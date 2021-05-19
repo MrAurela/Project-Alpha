@@ -1354,7 +1354,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Mark Berta:'
+  m_Text: 'Marc Berta:'
 --- !u!222 &1603262974
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1434,7 +1434,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Leo Pelota:'
+  m_Text: 'Leo Peltola:'
 --- !u!222 &1675964084
 CanvasRenderer:
   m_ObjectHideFlags: 0
