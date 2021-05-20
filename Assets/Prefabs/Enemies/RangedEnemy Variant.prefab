@@ -182,6 +182,14 @@ PrefabInstance:
       propertyPath: damage
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: -1176879346434655329, guid: 4985346b799dbf945ae685f89456089c, type: 3}
+      propertyPath: dropItem
+      value: 
+      objectReference: {fileID: 9061062047970527160, guid: a8772fa5f61376841af459beca5502ee, type: 3}
+    - target: {fileID: -1176879346434655329, guid: 4985346b799dbf945ae685f89456089c, type: 3}
+      propertyPath: dropProbability
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3514379594605897754, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_RootOrder
       value: 0

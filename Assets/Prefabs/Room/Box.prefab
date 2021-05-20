@@ -75,12 +75,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0ceb0efa77707514cb02117e37237da2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7f7b8f09bdde4e543806013464678487, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.25, y: 0.31}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -103,8 +103,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.6944444, y: 0.8611111}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 0.78125, y: 0.96875}
+    newSize: {x: 0.25, y: 0.31}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -120,7 +120,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1417341495098153953}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -145,6 +145,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 669be3c00af5d8942b9a6d4934f68aa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 10
+  dropItem: {fileID: 9061062047970527160, guid: a8772fa5f61376841af459beca5502ee, type: 3}
+  dropProbability: 0.8
 --- !u!114 &-1855903343236688205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,7 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maximumHealth: 0
-  damageSound: {fileID: 0}
+  damageSound: {fileID: 8300000, guid: 69b103b009e1da44487d2fb72f9509e6, type: 3}
   healSound: {fileID: 0}
-  deathSound: {fileID: 0}
-  flashWhite: 0
+  deathSound: {fileID: 8300000, guid: ffcf17c7e45f09145a16d74c048981e4, type: 3}
+  whiteRenderer: {fileID: 0}
