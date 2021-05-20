@@ -54,7 +54,6 @@ Shader "Sprites/FlashWhite"
          void surf (Input IN, inout SurfaceOutput o)
          {
              fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * IN.color;
-             // o.Albedo = lerp(c.rgb,float3(1.0,1.0,1.0),_FlashAmount);
              o.Albedo = lerp(c.rgb,float3(1.0,1.0,1.0),_FlashAmount);
              o.Emission = lerp(c.rgb,float3(1.0,1.0,1.0),_FlashAmount) * _SelfIllum;
              o.Alpha = c.a;

@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d9e396bf1dfd34cb5fa9a7ba9deb6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShootingSoundName: shooting_1
   cam: {fileID: 1204248742435873710}
   bullet: {fileID: 1513296735412195338, guid: 219387a78be46c44db4813a3668aa5bc, type: 3}
   bulletSpawnDistance: 0.6
