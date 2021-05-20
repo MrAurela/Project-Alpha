@@ -5,10 +5,17 @@ using UnityEngine;
 public class Hit : MonoBehaviour, IDamageable
 {
     [SerializeField] int damage = 10;
+    [SerializeField] GameObject dropItem;
+    [SerializeField] float dropProbability;
 
     public void Die()
     {
         transform.root.GetComponent<RoomGeneration>().DecreaseNumberOfEnemies();
+        float random = transform.root.GetComponent<RoomGeneration>().RandomFloat(0f, 1f);
+        if (random <= dropProbability)
+        {
+            Instantiate(dropItem, transform.position, Quaternion.identity);
+        }
         Destroy(gameObject);
     }
 

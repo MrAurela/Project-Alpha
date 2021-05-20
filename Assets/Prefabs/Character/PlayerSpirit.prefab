@@ -57,6 +57,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maximumHealth: 100
-  damageSound: {fileID: 8300000, guid: 69b103b009e1da44487d2fb72f9509e6, type: 3}
-  healSound: {fileID: 0}
-  deathSound: {fileID: 8300000, guid: d78a0003b300fcb42b8e4429b760e7f1, type: 3}
+  damageSound: {fileID: 8300000, guid: 64868bc24b3bab2499d922b8d07a7642, type: 3}
+  healSound: {fileID: 8300000, guid: a3cfa4abc2abdf84788a0e285dc83ed9, type: 3}
+  deathSound: {fileID: 0}
+  whiteRenderer: {fileID: 0}

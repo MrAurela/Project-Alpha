@@ -42,7 +42,7 @@ public class QRand : MonoBehaviour
     void Start()
     {
         // Initialize this.currentSeed to CurrentTimeMillis();
-        this.currentSeed = CurrentTimeMillis();
+        this.InitState(CurrentTimeMillis());
         // Initialize this.countsList
         this.countsList = OfflineCounts;
     }
@@ -50,10 +50,10 @@ public class QRand : MonoBehaviour
     /// <summary>
     /// Sets the starting seed so that the same QPRNG sequence can be repeated.
     /// </summary>
-    /// <param name="startingSeed">Int value which the QRand starting seed will be set to.</param>
-    public void InitState(int startingSeed)
+    /// <param name="startingSeed">Int value which the QRand starting seed will be set to (scaled to the PRNGModulus).</param>
+    public void InitState(double startingSeed)
     {
-        this.currentSeed = startingSeed;
+        this.currentSeed = startingSeed%PRNGModulus;
     }
 
     /// <summary>
@@ -99,15 +99,13 @@ public class QRand : MonoBehaviour
     public double NextSeed()
     {
         // preform linear congruent classic calculation
-        double retval = (PRNGMultiplier * this.currentSeed + PRNGConstant) % PRNGModulus;
+        double seed = (PRNGMultiplier * this.currentSeed + PRNGConstant) % PRNGModulus;
         // collect the decimals of stuff
-        double d = retval%1;
-        // preform bitwise pseudo quantum error
-        retval = ApplyQuantumError(retval) + d;
-        // update currentSeed
-        this.currentSeed = retval;
-        // return scaled seed
-        return retval;
+        double d = seed%1;
+        // preform bitwise pseudo quantum error and update currentSeed
+        this.currentSeed = ApplyQuantumError(seed) + d;
+        // return seed
+        return seed;
     }
 
     /// <summary>
@@ -125,7 +123,8 @@ public class QRand : MonoBehaviour
     /// <returns>Returns the computed seed as a float in the range [0,1).</returns>
     public float NextFloat()
     {
-        return (float)this.NextDouble();
+        float retval = (float)this.NextDouble();
+        return retval;
     }
 
     /// <summary>
@@ -135,7 +134,8 @@ public class QRand : MonoBehaviour
     /// <param name="maxValue">The maximum value of the returned seed. 1000 by default.</param>
     public int NextInt(int maxValue = 1000)
     {
-        return (int)(this.NextDouble() * maxValue);
+        int retval = (int)(this.NextDouble() * maxValue);
+        return retval;
     }
 
     /// <summary>
@@ -156,7 +156,7 @@ public class QRand : MonoBehaviour
     /// Get the current time in milliseconds since Jan 1, 1970.
     /// </summary>
     /// <returns>Current time in milliseconds since Jan 1, 1970.</returns>
-    static long CurrentTimeMillis()
+    public static long CurrentTimeMillis()
     {
         return (long)(System.DateTime.UtcNow - new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc)).TotalMilliseconds;
     }
