@@ -3,10 +3,11 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     // Ref to child sprite renderer to set color later
-    SpriteRenderer sprite;
+    [SerializeField] private string ShootingSoundName = "shooting_1";
     public Camera cam;
     public GameObject bullet;
     public float bulletSpawnDistance;
+    private SpriteRenderer sprite;
     private AudioSource shootSound;
 
 
@@ -14,7 +15,7 @@ public class WeaponController : MonoBehaviour
     {
         sprite = GetComponentsInChildren<SpriteRenderer>()[0];
         shootSound = gameObject.AddComponent<AudioSource>();
-        shootSound.clip = Resources.Load("shooting_1") as AudioClip;
+        shootSound.clip = Resources.Load(ShootingSoundName) as AudioClip;
 
     }
 
