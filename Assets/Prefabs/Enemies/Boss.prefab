@@ -170,7 +170,7 @@ MonoBehaviour:
   damageSound: {fileID: 0}
   healSound: {fileID: 0}
   deathSound: {fileID: 0}
-  whiteRenderer: {fileID: 0}
+  whiteRenderer: {fileID: 8602497043285894734}
 --- !u!1001 &5163272401336323669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -288,6 +288,11 @@ GameObject:
 --- !u!4 &8602497043285894735 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3514379594605897754, guid: 4985346b799dbf945ae685f89456089c, type: 3}
+  m_PrefabInstance: {fileID: 5163272401336323669}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &8602497043285894734 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3514379594605897755, guid: 4985346b799dbf945ae685f89456089c, type: 3}
   m_PrefabInstance: {fileID: 5163272401336323669}
   m_PrefabAsset: {fileID: 0}
 --- !u!50 &8602497043285895088 stripped
