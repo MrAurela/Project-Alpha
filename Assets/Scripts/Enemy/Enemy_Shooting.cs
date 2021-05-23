@@ -90,7 +90,9 @@ public class Enemy_Shooting : MonoBehaviour
         {
             FindObjectOfType<AudioPlayer>().PlayClip(shootingSound, shootingSoundVolume);
 
-            GameObject bulletClone = (GameObject)Instantiate(bullet, transform.position, transform.rotation);
+            //GameObject bulletClone = (GameObject)Instantiate(bullet, transform.position, transform.rotation);
+            GameObject bulletClone = FindObjectOfType<InstantiatedObjects>().Instantiate(bullet, transform.position);
+
             bulletClone.transform.position += new Vector3(-dir.normalized.x, -dir.normalized.y, 0);
             bulletClone.GetComponent<Rigidbody2D>().velocity = -dir.normalized;
         }

@@ -14,7 +14,7 @@ public class Hit : MonoBehaviour, IDamageable
         float random = transform.root.GetComponent<RoomGeneration>().RandomFloat(0f, 1f);
         if (random <= dropProbability)
         {
-            Instantiate(dropItem, transform.position, Quaternion.identity);
+            FindObjectOfType<InstantiatedObjects>().Instantiate(dropItem, transform.position);
         }
         Destroy(gameObject);
     }

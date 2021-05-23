@@ -283,6 +283,8 @@ public class GenerateLevel : MonoBehaviour
         if (room1) Destroy(room1);
         if (room2) Destroy(room2);
 
+        FindObjectOfType<InstantiatedObjects>().RemoveAll();
+
         Room room = roomStructure[y][x];
         GameObject roomTemplate = SelectRoomTemplate(room);
 
