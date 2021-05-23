@@ -133,6 +133,8 @@ MonoBehaviour:
   FarDistanceMin: 12
   CloseDistanceMax: 0
   CloseDistanceMin: 0
+  shootingSound: {fileID: 8300000, guid: 39a44a4d73a18bf43ae21237290ed193, type: 3}
+  shootingSoundVolume: 1
   timer: 2
   isBoss: 1
 --- !u!95 &3340501720812980013
@@ -167,9 +169,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maximumHealth: 200
-  damageSound: {fileID: 0}
+  damageSound: {fileID: 8300000, guid: 64868bc24b3bab2499d922b8d07a7642, type: 3}
   healSound: {fileID: 0}
-  deathSound: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: d78a0003b300fcb42b8e4429b760e7f1, type: 3}
   whiteRenderer: {fileID: 8602497043285894734}
 --- !u!1001 &5163272401336323669
 PrefabInstance:

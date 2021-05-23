@@ -133,6 +133,8 @@ MonoBehaviour:
   FarDistanceMin: 12
   CloseDistanceMax: 0
   CloseDistanceMin: 0
+  shootingSound: {fileID: 8300000, guid: 2d8316b6f73eb8047ba136d65d5b0940, type: 3}
+  shootingSoundVolume: 1
   timer: 1
   isBoss: 0
 --- !u!95 &2016154497629345696

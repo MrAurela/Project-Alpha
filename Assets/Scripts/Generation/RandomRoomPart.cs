@@ -15,13 +15,13 @@ public class RandomRoomPart : MonoBehaviour
         RoomGeneration roomGenerator = transform.root.GetComponent<RoomGeneration>();
         Room room = roomGenerator.room;
         QRand qrand = FindObjectOfType<QRand>();
-        qrand.InitState(room.Seed); //Change the seed based on the location
+       // qrand.InitState(room.Seed); //Change the seed based on the location
         float random = qrand.NextFloat();
 
         //Random.InitState(room.Seed); //TODO something addition to make new combinations
         //float random = Random.value;
 
-        Debug.Log(random);
+        //Debug.Log(random);
         float cumulativeProbability = 0f;
         for (int i = 0; i < probabilities.Length; i++)
         {

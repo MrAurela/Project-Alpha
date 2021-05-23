@@ -3,19 +3,22 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     // Ref to child sprite renderer to set color later
-    [SerializeField] private string ShootingSoundName = "shooting_1";
+    //[SerializeField] private string ShootingSoundName = "shooting_1";
+    [SerializeField] AudioClip shootingSound;
+    [SerializeField] float shootingSoundVolume = 1f;
+
     public Camera cam;
     public GameObject bullet;
     public float bulletSpawnDistance;
     private SpriteRenderer sprite;
-    private AudioSource shootSound;
+    //private AudioSource shootSound;
 
 
     private void Start()
     {
         sprite = GetComponentsInChildren<SpriteRenderer>()[0];
-        shootSound = gameObject.AddComponent<AudioSource>();
-        shootSound.clip = Resources.Load(ShootingSoundName) as AudioClip;
+       // shootSound = gameObject.AddComponent<AudioSource>();
+        //shootSound.clip = Resources.Load(ShootingSoundName) as AudioClip;
 
     }
 
@@ -44,7 +47,9 @@ public class WeaponController : MonoBehaviour
 
     private void Fire(Vector2 dir)
     {
-        shootSound.Play();
+        //shootSound.Play();
+        FindObjectOfType<AudioPlayer>().PlayClip(shootingSound, shootingSoundVolume);
+
         GameObject bulletClone = (GameObject) Instantiate(bullet, transform.position, transform.rotation);
         bulletClone.transform.position += new Vector3(-dir.normalized.x, -dir.normalized.y, 0) * bulletSpawnDistance;
         bulletClone.GetComponent<Rigidbody2D>().velocity = -dir.normalized;

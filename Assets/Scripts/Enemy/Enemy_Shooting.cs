@@ -13,6 +13,9 @@ public class Enemy_Shooting : MonoBehaviour
     public float FarDistanceMin;
     public float CloseDistanceMax;
     public float CloseDistanceMin;
+    [SerializeField] AudioClip shootingSound;
+    [SerializeField] float shootingSoundVolume = 1f;
+
     private float FarDistance;
     private float CloseDistance;
     public float timer;
@@ -20,6 +23,7 @@ public class Enemy_Shooting : MonoBehaviour
     private float startTime;
     private bool active;
     private float secondsUntilActivate = 1; // how many seconds should the enemy wait after spawning to begin attacking the player
+
     private void Start()
     {
         FarDistance = Random.Range(FarDistanceMin, FarDistanceMax);
@@ -84,6 +88,8 @@ public class Enemy_Shooting : MonoBehaviour
     {
         if(this.active)
         {
+            FindObjectOfType<AudioPlayer>().PlayClip(shootingSound, shootingSoundVolume);
+
             GameObject bulletClone = (GameObject)Instantiate(bullet, transform.position, transform.rotation);
             bulletClone.transform.position += new Vector3(-dir.normalized.x, -dir.normalized.y, 0);
             bulletClone.GetComponent<Rigidbody2D>().velocity = -dir.normalized;
