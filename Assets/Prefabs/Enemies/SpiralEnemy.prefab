@@ -79,7 +79,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &3782787555806979404
@@ -161,7 +161,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &6940033692038690689
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 4548781000589338105}
   - component: {fileID: 4567526884621132060}
   m_Layer: 6
-  m_Name: MeleeEnemy Variant 1
+  m_Name: SpiralEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -264,6 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c81713849d938214a865630f92a1c2b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBoss: 0
   Player: {fileID: 0}
   Enemy: {fileID: 6940033692038690691}
   velocity: 4
@@ -331,6 +332,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  dropItem: {fileID: 0}
+  dropProbability: 0
 --- !u!114 &4567526884621132060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,7 +430,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &8314677782319152435
@@ -509,7 +512,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &9036863646986671725

@@ -5,17 +5,26 @@ using UnityEngine;
 public class Enemy_Movement : MonoBehaviour
 {
     public bool isBoss = false;
+    public bool isExplodingEnemy = false;
+    [SerializeField] GameObject dropItem;
+    private bool startExploding = false;
+
     public Rigidbody2D Player;
     public Rigidbody2D Enemy;
     public int velocity = 1;
     private Vector2 moveDirection;
     private Vector2 playerGhost;
+
     public float FarDistanceMax;
     public float FarDistanceMin;
     public float CloseDistanceMax;
     public float CloseDistanceMin;
     private float FarDistance;
     private float CloseDistance;
+
+    public float timer;
+    private float startTime;
+    
     private bool facing = true; // 1 = right, 0 = left
     private Animator anim;
     // Start is called before the first frame update
@@ -37,8 +46,17 @@ public class Enemy_Movement : MonoBehaviour
     {
         if (Player != null)
         {
-            if (Sees_player())
+            if (startExploding)
             {
+                if (Time.time - startTime >= timer)
+                {
+                    FindObjectOfType<InstantiatedObjects>().Instantiate(dropItem, transform.position);
+                    Destroy(gameObject);
+                }
+            }
+            else if (Sees_player())
+            {
+                startTime = Time.time;
                 playerGhost = Player.position;
                 if (CloseToPlayer())
                 {
@@ -47,6 +65,10 @@ public class Enemy_Movement : MonoBehaviour
                 else if (FarFromPlayer())
                 {
                     MoveCloser();
+                }
+                else if (isExplodingEnemy)
+                {
+                    startExploding = true;
                 }
                 else
                 {
