@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy_Movement : MonoBehaviour
 {
+    public bool isBoss = false;
     public Rigidbody2D Player;
     public Rigidbody2D Enemy;
     public int velocity = 1;
@@ -26,7 +27,10 @@ public class Enemy_Movement : MonoBehaviour
 
         // Animation
         anim = gameObject.GetComponent<Animator>();
-        anim.Play("Idle_Right");
+        if (!isBoss)
+            anim.Play("IdleRight");
+        else
+            anim.Play("BossIdleRight");
     }  
     // Update is called once per frame
     void Update()
@@ -50,9 +54,15 @@ public class Enemy_Movement : MonoBehaviour
 
                     {
                         if (facing)
-                            anim.Play("IdleRight");
+                            if (!isBoss)
+                                anim.Play("IdleRight");
+                            else
+                                anim.Play("BossIdleRight");
                         else
-                            anim.Play("IdleLeft");
+                            if (!isBoss)
+                                anim.Play("IdleLeft");
+                            else
+                                anim.Play("BossIdleLeft");
                     }
                 }
             }
@@ -65,18 +75,30 @@ public class Enemy_Movement : MonoBehaviour
         // Movement animation
         if (Enemy.velocity.x > 0)
         {
-            anim.Play("MoveRight");
+            if (!isBoss)
+                anim.Play("MoveRight");
+            else
+                anim.Play("BossMoveRight");
         }
         else if (Enemy.velocity.x < 0)
         {
-            anim.Play("MoveLeft");
+            if (!isBoss)
+                anim.Play("MoveLeft");
+            else
+                anim.Play("BossMoveLeft");
         }
         else if (Enemy.velocity.y != 0)
         {
             if (facing)
-                anim.Play("MoveRight");
+                if (!isBoss)
+                    anim.Play("MoveRight");
+                else
+                    anim.Play("BossMoveRight");
             else
-                anim.Play("MoveLeft");
+                if (!isBoss)
+                    anim.Play("MoveLeft");
+            else
+                anim.Play("BossMoveLeft");
         }
 
     }

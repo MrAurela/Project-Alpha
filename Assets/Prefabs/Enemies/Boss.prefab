@@ -137,7 +137,7 @@ MonoBehaviour:
   shootingSoundVolume: 1
   timer: 2
   isBoss: 1
---- !u!95 &3340501720812980013
+--- !u!95 &8095237759027966520
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -147,7 +147,7 @@ Animator:
   m_GameObject: {fileID: 8602497043285895090}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bddab6164b9752d4b834402bcdf865fd, type: 2}
+  m_Controller: {fileID: 9100000, guid: 109b592145d2a214893cd1e8fa253ab5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -186,11 +186,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605897754, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.25
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605897754, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.25
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605897754, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -233,12 +233,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605897755, guid: 4985346b799dbf945ae685f89456089c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5425090088407980567, guid: 1ae836d41c6f00d47b3d741cc9fdc536, type: 3}
+    - target: {fileID: 3514379594605897755, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605897755, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_Color.g
-      value: 0.91874456
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605897755, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_Color.r
@@ -251,6 +255,10 @@ PrefabInstance:
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: Player
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
+      propertyPath: isBoss
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: velocity
@@ -271,6 +279,10 @@ PrefabInstance:
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: CloseDistanceMin
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514379594605898214, guid: 4985346b799dbf945ae685f89456089c, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 3.3333333
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898215, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_Name
