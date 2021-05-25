@@ -52,6 +52,7 @@ public class Enemy_Movement : MonoBehaviour
         {
             if (startExploding)
             {
+                Enemy.velocity = new Vector2(0, 0);
                 if (Time.time - startTime >= timer)
                 {
                     //FindObjectOfType<InstantiatedObjects>().Instantiate(dropItem, transform.position);
