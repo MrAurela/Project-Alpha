@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf7c12cb3f530f24ba911faba336eb7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 1949555957978316934, guid: 8f301ee2a2946d04f8b56e6ecddfd9cc, type: 3}
+  bullet: {fileID: 1625334254905150602, guid: 62639d0c9ef92f147a5f0d5e2df7b00b, type: 3}
   enemy: {fileID: 8602497043285895088}
   Player: {fileID: 0}
   FarDistanceMax: 16
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca4a1685a30245b45971159c9296395e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximumHealth: 30
+  maximumHealth: 10
   damageSound: {fileID: 8300000, guid: 69b103b009e1da44487d2fb72f9509e6, type: 3}
   healSound: {fileID: 0}
   deathSound: {fileID: 8300000, guid: ffcf17c7e45f09145a16d74c048981e4, type: 3}
@@ -180,10 +180,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -1176879346434655329, guid: 4985346b799dbf945ae685f89456089c, type: 3}
-      propertyPath: damage
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: -1176879346434655329, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: dropItem
       value: 
@@ -264,17 +260,13 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3514379594605897755, guid: 4985346b799dbf945ae685f89456089c, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 9e39b70254caab94d83569dd2c4ba15a, type: 2}
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: Player
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: velocity
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: Far_distance
@@ -286,19 +278,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: FarDistanceMax
-      value: 12
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: FarDistanceMin
-      value: 8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: CloseDistanceMax
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898212, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: CloseDistanceMin
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898213, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_Constraints
@@ -326,7 +318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898215, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_Name
-      value: RangedEnemy Variant
+      value: FastRangedEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898215, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_Layer

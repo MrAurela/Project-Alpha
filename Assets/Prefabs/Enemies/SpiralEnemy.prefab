@@ -265,13 +265,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBoss: 0
+  isExplodingEnemy: 0
+  dropItem: {fileID: 0}
   Player: {fileID: 0}
   Enemy: {fileID: 6940033692038690691}
-  velocity: 4
-  FarDistanceMax: 6
-  FarDistanceMin: 4
-  CloseDistanceMax: 2
-  CloseDistanceMin: 4
+  velocity: 3
+  FarDistanceMax: 1
+  FarDistanceMin: 1
+  CloseDistanceMax: 1
+  CloseDistanceMin: 0
+  timer: 1
 --- !u!50 &6940033692038690691
 Rigidbody2D:
   serializedVersion: 4
@@ -346,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca4a1685a30245b45971159c9296395e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximumHealth: 20
+  maximumHealth: 50
   damageSound: {fileID: 0}
   healSound: {fileID: 0}
   deathSound: {fileID: 0}
@@ -568,4 +571,4 @@ MonoBehaviour:
   Gun2: {fileID: 8314677782319152436}
   Gun3: {fileID: 4539980671796069693}
   Gun4: {fileID: 2053437374826098193}
-  angle: 2
+  angle: 5
