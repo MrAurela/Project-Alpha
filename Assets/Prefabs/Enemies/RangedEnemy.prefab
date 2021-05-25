@@ -189,6 +189,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9061062047970527160, guid: a8772fa5f61376841af459beca5502ee, type: 3}
     - target: {fileID: -1176879346434655329, guid: 4985346b799dbf945ae685f89456089c, type: 3}
+      propertyPath: deathObject
+      value: 
+      objectReference: {fileID: 6511497456946898080, guid: 8c70269fbaa5ef441885a4af1525f698, type: 3}
+    - target: {fileID: -1176879346434655329, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: dropProbability
       value: 0.2
       objectReference: {fileID: 0}
@@ -326,7 +330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898215, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_Name
-      value: RangedEnemy Variant
+      value: RangedEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 3514379594605898215, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_Layer

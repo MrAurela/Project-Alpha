@@ -7,6 +7,7 @@ public class Hit : MonoBehaviour, IDamageable
     [SerializeField] int damage = 10;
     [SerializeField] GameObject dropItem;
     [SerializeField] float dropProbability;
+    [SerializeField] GameObject deathObject = null;
 
     public void Die()
     {
@@ -16,6 +17,14 @@ public class Hit : MonoBehaviour, IDamageable
         {
             FindObjectOfType<InstantiatedObjects>().Instantiate(dropItem, transform.position);
         }
+
+        // enemy death animation
+        if (deathObject != null)
+        {
+            GameObject deathObjectInstance = FindObjectOfType<InstantiatedObjects>().Instantiate(deathObject, transform.position);
+
+        }
+
         Destroy(gameObject);
     }
 
