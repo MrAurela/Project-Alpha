@@ -54,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9e39b70254caab94d83569dd2c4ba15a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -164,4 +164,4 @@ MonoBehaviour:
   damageSound: {fileID: 8300000, guid: 69b103b009e1da44487d2fb72f9509e6, type: 3}
   healSound: {fileID: 0}
   deathSound: {fileID: 8300000, guid: ffcf17c7e45f09145a16d74c048981e4, type: 3}
-  whiteRenderer: {fileID: 0}
+  whiteRenderer: {fileID: 7755925893992606468}
