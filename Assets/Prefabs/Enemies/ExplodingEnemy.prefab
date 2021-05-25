@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBoss: 0
+  isFast: 0
   isExplodingEnemy: 1
   dropItem: {fileID: 7159940451574751725, guid: cccb5b2a1b24bca4c9b5d8e18a033fdd, type: 3}
   Player: {fileID: 0}
@@ -172,6 +173,7 @@ MonoBehaviour:
   damage: 10
   dropItem: {fileID: 7159940451574751725, guid: cccb5b2a1b24bca4c9b5d8e18a033fdd, type: 3}
   dropProbability: 0
+  deathObject: {fileID: 0}
 --- !u!114 &4889973201779108976
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -48,31 +48,44 @@ MonoBehaviour:
   character1Prefab: {fileID: 4065717727726724012, guid: 0d1c0c0c225b76045baae048500324b3, type: 3}
   character2Prefab: {fileID: 4065717727726724012, guid: 7ae62d0d87b475744857970ea4ab9459, type: 3}
   room: {fileID: 8571485781107144164, guid: 3de7864e54c9b7d4f9585e1acb8c6545, type: 3}
-  levelWidth: 1
-  levelHeight: 5
+  levelWidth: 4
+  levelHeight: 4
   verticalDE:
+  - {fileID: 8571485781107144164, guid: 836bfd55d7a41b94fbbbc533e967fb0b, type: 3}
   - {fileID: 8571485781107144164, guid: 3ef6d10583f63c94ea7278c4f4ddea53, type: 3}
+  - {fileID: 8571485781107144164, guid: a94173f66d2e62f46a400e2ab8d6150b, type: 3}
   horizontalDE:
+  - {fileID: 8571485781107144164, guid: cc5735e7d3c25d7439d60eec5e7fa19c, type: 3}
   - {fileID: 8571485781107144164, guid: 926634a3982abd640a5aa60f058a0a77, type: 3}
+  - {fileID: 8571485781107144164, guid: 17b2aecc4900e0b48bd94cf218d6e22b, type: 3}
   verticalI:
   - {fileID: 8571485781107144164, guid: 2fc3610d1affc5d49b05b3bc60b609f6, type: 3}
+  - {fileID: 8571485781107144164, guid: c8458ecce0fa52247816798bcdbe7d3f, type: 3}
+  - {fileID: 8571485781107144164, guid: 3e3724b7467573640bc8f8387c531c50, type: 3}
   horizontalI:
+  - {fileID: 8571485781107144164, guid: 4a584a9bc6703e5408559b699070a06e, type: 3}
+  - {fileID: 8571485781107144164, guid: 955b615d3df2544488c92078cecbb849, type: 3}
   - {fileID: 8571485781107144164, guid: 277d748e3d6cdba49bf92dd60d166c03, type: 3}
-  - {fileID: 8571485781107144164, guid: bb3aa1316f2f12f45a6641c677bd4997, type: 3}
-  - {fileID: 8571485781107144164, guid: 0128f6ddd740c02448eb92cb67000037, type: 3}
   L:
   - {fileID: 8571485781107144164, guid: 7ffbd3887d896f5468240977ef55e482, type: 3}
-  - {fileID: 8571485781107144164, guid: 0bdc64f8fc513d049ab2ee750be1ddac, type: 3}
-  - {fileID: 8571485781107144164, guid: 277d748e3d6cdba49bf92dd60d166c03, type: 3}
+  - {fileID: 8571485781107144164, guid: b0e9859303a4cc84bb14e87716879e77, type: 3}
+  - {fileID: 8571485781107144164, guid: a2f6b550d5d9b0a48ac0fbdf887e201b, type: 3}
   verticalT:
-  - {fileID: 8571485781107144164, guid: 0bdc64f8fc513d049ab2ee750be1ddac, type: 3}
   - {fileID: 8571485781107144164, guid: bb3aa1316f2f12f45a6641c677bd4997, type: 3}
-  horizontalT:
+  - {fileID: 8571485781107144164, guid: e9f053b2478a7494f84d93914ee47806, type: 3}
   - {fileID: 8571485781107144164, guid: 0bdc64f8fc513d049ab2ee750be1ddac, type: 3}
+  - {fileID: 8571485781107144164, guid: 41ef84def5e03fa4ba3bf81e10326b2f, type: 3}
+  horizontalT:
+  - {fileID: 8571485781107144164, guid: cc5735e7d3c25d7439d60eec5e7fa19c, type: 3}
   - {fileID: 8571485781107144164, guid: 926634a3982abd640a5aa60f058a0a77, type: 3}
+  - {fileID: 8571485781107144164, guid: 17b2aecc4900e0b48bd94cf218d6e22b, type: 3}
   X:
   - {fileID: 8571485781107144164, guid: bb3aa1316f2f12f45a6641c677bd4997, type: 3}
+  - {fileID: 8571485781107144164, guid: e9f053b2478a7494f84d93914ee47806, type: 3}
   - {fileID: 8571485781107144164, guid: 0bdc64f8fc513d049ab2ee750be1ddac, type: 3}
+  - {fileID: 8571485781107144164, guid: 41ef84def5e03fa4ba3bf81e10326b2f, type: 3}
+  - {fileID: 8571485781107144164, guid: 71c0287eb894ce94e92ac5b60b47166f, type: 3}
+  - {fileID: 8571485781107144164, guid: a0a378e3596a092408691cdc379f66f6, type: 3}
   - {fileID: 8571485781107144164, guid: 0128f6ddd740c02448eb92cb67000037, type: 3}
   boss:
   - {fileID: 8571485781107144164, guid: ad7a8e9770b881642b00f8c175aa6a74, type: 3}

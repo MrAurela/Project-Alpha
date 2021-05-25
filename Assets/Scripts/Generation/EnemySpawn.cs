@@ -34,7 +34,10 @@ public class EnemySpawn : MonoBehaviour
 
                 //Set references to correct character object in Enemy_Movement and Enemy_Shooting scripts
                 instantiatedEnemy.GetComponent<Enemy_Movement>().Player = this.roomGenerator.playerPrefab.GetComponent<Rigidbody2D>();
-                instantiatedEnemy.transform.GetChild(0).gameObject.GetComponent<Enemy_Shooting>().Player = this.roomGenerator.playerPrefab.GetComponent<Rigidbody2D>();
+                if (instantiatedEnemy.transform.childCount > 0) //Has weapon
+                {
+                    instantiatedEnemy.transform.GetChild(0).gameObject.GetComponent<Enemy_Shooting>().Player = this.roomGenerator.playerPrefab.GetComponent<Rigidbody2D>();
+                }
 
                 //Counts the number of enemies added to keep count how many are left in a room
                 roomGenerator.IncreaseNumberOfEnemies();

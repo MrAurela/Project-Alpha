@@ -265,6 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBoss: 0
+  isFast: 0
   isExplodingEnemy: 0
   dropItem: {fileID: 0}
   Player: {fileID: 0}
@@ -334,9 +335,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 669be3c00af5d8942b9a6d4934f68aa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  dropItem: {fileID: 0}
-  dropProbability: 0
+  damage: 50
+  dropItem: {fileID: 9061062047970527160, guid: a8772fa5f61376841af459beca5502ee, type: 3}
+  dropProbability: 0.5
+  deathObject: {fileID: 0}
 --- !u!114 &4567526884621132060
 MonoBehaviour:
   m_ObjectHideFlags: 0
