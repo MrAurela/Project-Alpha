@@ -54,8 +54,9 @@ public class Enemy_Movement : MonoBehaviour
             {
                 if (Time.time - startTime >= timer)
                 {
-                    FindObjectOfType<InstantiatedObjects>().Instantiate(dropItem, transform.position);
-                    Destroy(gameObject);
+                    //FindObjectOfType<InstantiatedObjects>().Instantiate(dropItem, transform.position);
+                    //Destroy(gameObject);
+                    GetComponent<Damageable>().Kill();
                 }
             }
             else if (Sees_player())

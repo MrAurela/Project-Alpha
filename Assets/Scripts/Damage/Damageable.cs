@@ -74,6 +74,13 @@ public class Damageable : MonoBehaviour
     {
         this.currentMaximumHealth = Mathf.Clamp(newAmount, 0, this.currentMaximumHealth);
     }
+
+    public void Kill()
+    {
+        this.Damage(this.GetHealth());
+    }
+
+
     IEnumerator flashWhite()
     {
         whiteRenderer.material.SetFloat("_FlashAmount", 1.0f);

@@ -11,7 +11,11 @@ public class Hit : MonoBehaviour, IDamageable
 
     public void Die()
     {
-        transform.root.GetComponent<RoomGeneration>().DecreaseNumberOfEnemies();
+        if (gameObject.tag == "Enemy")
+        {
+            transform.root.GetComponent<RoomGeneration>().DecreaseNumberOfEnemies();
+        }
+
         float random = transform.root.GetComponent<RoomGeneration>().RandomFloat(0f, 1f);
         if (random <= dropProbability)
         {
