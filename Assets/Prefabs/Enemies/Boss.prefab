@@ -183,7 +183,7 @@ PrefabInstance:
     - target: {fileID: -1176879346434655329, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: deathObject
       value: 
-      objectReference: {fileID: 6511497456946898080, guid: 8c70269fbaa5ef441885a4af1525f698, type: 3}
+      objectReference: {fileID: 7463250517908833207, guid: 13f984a5b4a6c6844b349eacd79fe606, type: 3}
     - target: {fileID: 3514379594605897754, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: m_RootOrder
       value: 0
