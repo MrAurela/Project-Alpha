@@ -356,7 +356,7 @@ MonoBehaviour:
   damageSound: {fileID: 8300000, guid: 69b103b009e1da44487d2fb72f9509e6, type: 3}
   healSound: {fileID: 0}
   deathSound: {fileID: 8300000, guid: ca5d6fd166d4db846a3325949248bd30, type: 3}
-  whiteRenderer: {fileID: 0}
+  whiteRenderer: {fileID: 6940033692038690429}
 --- !u!95 &-2054916818754120832
 Animator:
   serializedVersion: 3
