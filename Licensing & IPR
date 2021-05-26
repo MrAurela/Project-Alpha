@@ -1,0 +1,16 @@
+
+WORKING WITH AUDIO COMPONENTS
+
+https://learn.unity.com/tutorial/working-with-audio-components-2019-3#
+
+Unity’s audio system imports most standard audio file formats. It allows one 
+to mix and master in real time, and it can replicate 3D spatial sound effects like 
+echo, object movement (like the sound of a fast-moving car), and reverb. 
+In this file, we list the imported audio files, and add Audio Source and Audio Listener 
+components to our project. 
+
+In addition, one original laser gun sound was created by: sfxia by rxi / A tiny sound generator.
+
+
+1.)	 
+ 
