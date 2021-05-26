@@ -171,7 +171,7 @@ MonoBehaviour:
   maximumHealth: 10
   damageSound: {fileID: 8300000, guid: 69b103b009e1da44487d2fb72f9509e6, type: 3}
   healSound: {fileID: 0}
-  deathSound: {fileID: 8300000, guid: ffcf17c7e45f09145a16d74c048981e4, type: 3}
+  deathSound: {fileID: 8300000, guid: ca5d6fd166d4db846a3325949248bd30, type: 3}
   whiteRenderer: {fileID: 8602497043285894734}
 --- !u!1001 &5163272401336323669
 PrefabInstance:

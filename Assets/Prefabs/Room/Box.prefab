@@ -147,7 +147,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   dropItem: {fileID: 9061062047970527160, guid: a8772fa5f61376841af459beca5502ee, type: 3}
-  dropProbability: 0.8
+  dropProbability: 0.2
+  deathObject: {fileID: 0}
 --- !u!114 &-1855903343236688205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,5 +164,5 @@ MonoBehaviour:
   maximumHealth: 20
   damageSound: {fileID: 8300000, guid: 69b103b009e1da44487d2fb72f9509e6, type: 3}
   healSound: {fileID: 0}
-  deathSound: {fileID: 8300000, guid: ffcf17c7e45f09145a16d74c048981e4, type: 3}
+  deathSound: {fileID: 8300000, guid: ca5d6fd166d4db846a3325949248bd30, type: 3}
   whiteRenderer: {fileID: 7755925893992606468}

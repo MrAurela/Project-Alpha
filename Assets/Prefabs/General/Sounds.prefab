@@ -54,7 +54,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7eba838fa6de04dad7ad7b41ff8c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterVolume: 0.3
+  masterVolumeBackground: 0.5
+  masterVolumeEffects: 0.6
   combatBG: {fileID: 6687036829133062899}
   exploreBG: {fileID: 7375855019600076082}
 --- !u!1 &6869816339685687257
@@ -100,7 +101,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8688c63276def6c4c86f550ec3b5b08a, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -227,7 +228,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c4f7d5bad153e4743965c1b94cb8c663, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0

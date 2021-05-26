@@ -182,7 +182,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1176879346434655329, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: damage
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -1176879346434655329, guid: 4985346b799dbf945ae685f89456089c, type: 3}
       propertyPath: deathObject

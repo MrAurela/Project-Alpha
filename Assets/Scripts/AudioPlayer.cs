@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AudioPlayer : MonoBehaviour
 {
-    [SerializeField] float masterVolume = 1f; //modifier multiplied with the volume of every sound effect & background music
-
+    [SerializeField] float masterVolumeBackground = 1f; //modifier multiplied with the volume of background music
+    [SerializeField] float masterVolumeEffects = 1f; //modifier multiplied with every sound effect 
     [SerializeField] AudioSource combatBG;
     [SerializeField] AudioSource exploreBG;
 
@@ -24,6 +24,12 @@ public class AudioPlayer : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        exploreBG.volume = masterVolumeBackground;
+        combatBG.volume = masterVolumeBackground;
+    }
+
     void Update()
     {
         if (inCombat && exploreBG.isPlaying) exploreBG.Stop();
@@ -39,7 +45,7 @@ public class AudioPlayer : MonoBehaviour
 
     public void PlayClip(AudioClip clip, float volume = 1f)
     {
-        if (clip) AudioSource.PlayClipAtPoint(clip, transform.position, volume * masterVolume);
+        if (clip) AudioSource.PlayClipAtPoint(clip, transform.position, volume * masterVolumeEffects);
     }
 
     //Fades away the combat music so that there is no silence before the ambient music "kicks in". 
