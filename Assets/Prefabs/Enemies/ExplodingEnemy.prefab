@@ -111,7 +111,7 @@ MonoBehaviour:
   FarDistanceMin: 1
   CloseDistanceMax: 0
   CloseDistanceMin: 0
-  timer: 1
+  timer: 0.2
 --- !u!50 &4355857434616091893
 Rigidbody2D:
   serializedVersion: 4
