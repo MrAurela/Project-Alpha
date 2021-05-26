@@ -111,7 +111,7 @@ MonoBehaviour:
   FarDistanceMin: 1
   CloseDistanceMax: 0
   CloseDistanceMin: 0
-  timer: 0.2
+  timer: 0.3
 --- !u!50 &4355857434616091893
 Rigidbody2D:
   serializedVersion: 4
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca4a1685a30245b45971159c9296395e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximumHealth: 50
+  maximumHealth: 10
   damageSound: {fileID: 8300000, guid: 69b103b009e1da44487d2fb72f9509e6, type: 3}
   healSound: {fileID: 0}
   deathSound: {fileID: 8300000, guid: ca5d6fd166d4db846a3325949248bd30, type: 3}
